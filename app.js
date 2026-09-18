@@ -1,6 +1,6 @@
 /* =========================================================
    OSS DIGITAL CATALOG
-   FIRESTORE LIVE STOCK VERSION
+   FIRESTORE LIVE STOCK + WHATSAPP
 ========================================================= */
 
 
@@ -52,10 +52,17 @@ const db =
   getFirestore(firebaseApp);
 
 
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+const WA =
+  "919499806747";
+
 
 /* =========================================================
    MASTER PRODUCTS
-   DO NOT CHANGE ORDER / CODE / NAME / CATEGORY / IMAGE
+   ORDER / CODE / NAME / CATEGORY / IMAGE PRESERVED
 ========================================================= */
 
 const products = [
@@ -396,13 +403,9 @@ const products = [
 ];
 
 
-
 /* =========================================================
    VARIABLES
 ========================================================= */
-
-const WA =
-  "919499806747";
 
 let selected =
   new Set();
@@ -412,7 +415,6 @@ let filter =
 
 let cat =
   "All";
-
 
 
 /* =========================================================
@@ -436,7 +438,6 @@ const bar =
 
 const selectedCount =
   document.querySelector("#selectedCount");
-
 
 
 /* =========================================================
@@ -468,283 +469,128 @@ cats.innerHTML =
     .join("");
 
 
-
 /* =========================================================
    CATEGORY FILTER
 ========================================================= */
 
-cats.onclick =
-  e => {
+cats.addEventListener(
+  "click",
+  event => {
 
-    if(
-      e.target.dataset.cat
-    ){
+    const button =
+      event.target.closest(
+        "button[data-cat]"
+      );
 
-      cat =
-        e.target.dataset.cat;
+    if(!button) return;
 
-      cats
-        .querySelectorAll("button")
-        .forEach(
-          b =>
-            b.classList.toggle(
-              "active",
-              b.dataset.cat === cat
-            )
-        );
+    cat =
+      button.dataset.cat;
 
-      render();
+    cats
+      .querySelectorAll("button")
+      .forEach(
+        b => {
 
-    }
+          b.classList.toggle(
+            "active",
+            b.dataset.cat === cat
+          );
 
-  };
+        }
+      );
 
+    render();
+
+  }
+);
 
 
 /* =========================================================
    STOCK FILTER
 ========================================================= */
 
-document
-  .querySelector(".filters")
-  .onclick =
-  e => {
+const filters =
+  document.querySelector(".filters");
 
-    if(
-      e.target.dataset.filter
-    ){
 
-      filter =
-        e.target.dataset.filter;
+filters.addEventListener(
+  "click",
+  event => {
 
-      document
-        .querySelectorAll(
-          ".filters button"
-        )
-        .forEach(
-          b =>
-            b.classList.toggle(
-              "active",
-              b.dataset.filter === filter
-            )
-        );
+    const button =
+      event.target.closest(
+        "button[data-filter]"
+      );
 
-      render();
+    if(!button) return;
 
-    }
+    filter =
+      button.dataset.filter;
 
-  };
+    filters
+      .querySelectorAll("button")
+      .forEach(
+        b => {
 
+          b.classList.toggle(
+            "active",
+            b.dataset.filter === filter
+          );
+
+        }
+      );
+
+    render();
+
+  }
+);
 
 
 /* =========================================================
    SEARCH
 ========================================================= */
 
-search.oninput =
-  render;
-
-
-
-/* =========================================================
-   DEFAULT STOCK FILTER
-========================================================= */
-
-const allStockButton =
-  document.querySelector(
-    '.filters button[data-filter="All"]'
-  );
-
-if(allStockButton){
-
-  allStockButton.classList.add(
-    "active"
-  );
-
-}
-
+search.addEventListener(
+  "input",
+  render
+);
 
 
 /* =========================================================
-   SINGLE WHATSAPP
+   WHATSAPP SINGLE ENQUIRY
 ========================================================= */
 
-function waOne(p){
+function waOne(product){
 
-  const msg =
+  const message =
 `Hi ONE STOP SOLUTION (OSS),
 
-I'm interested in ${p.name} (${p.code}).
+I'm interested in ${product.name} (${product.code}).
 
 Please share details and rates.`;
 
-  location.href =
-    `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+
+  const url =
+    `https://wa.me/${WA}?text=${encodeURIComponent(message)}`;
+
+
+  /*
+    Open WhatsApp directly.
+    Works with WhatsApp app or WhatsApp Web.
+  */
+
+  window.location.href =
+    url;
 
 }
 
 
-
 /* =========================================================
-   RENDER
+   MULTIPLE SELECT
 ========================================================= */
 
-function render(){
-
-  const q =
-    search.value
-      .trim()
-      .toLowerCase();
-
-
-  const list =
-    products.filter(
-      p =>
-
-        (
-          filter === "All" ||
-          p.status === filter
-        )
-
-        &&
-
-        (
-          cat === "All" ||
-          p.category === cat
-        )
-
-        &&
-
-        (
-          !q ||
-
-          p.name
-            .toLowerCase()
-            .includes(q)
-
-          ||
-
-          p.code
-            .toLowerCase()
-            .includes(q)
-        )
-    );
-
-
-  count.textContent =
-    `${list.length} products`;
-
-
-  grid.innerHTML =
-    list
-      .map(
-        p => `
-
-          <article class="card">
-
-            <div class="photo">
-
-              <img
-                src="${p.image}"
-                alt="${p.name}"
-                loading="lazy"
-              >
-
-            </div>
-
-
-            <div class="body">
-
-              <div class="code">
-                ${p.code} · ${p.category}
-              </div>
-
-
-              <div class="name">
-                ${p.name}
-              </div>
-
-
-              <span
-                class="
-                  status
-                  ${
-                    p.status === "Out of Stock"
-                      ? "out"
-                      : p.status === "Coming Soon"
-                      ? "coming"
-                      : ""
-                  }
-                "
-              >
-                ${p.status}
-              </span>
-
-
-              <div class="moq">
-                ${p.moq}
-              </div>
-
-
-              <div class="actions">
-
-                <button
-                  class="
-                    wa
-                    ${
-                      p.status === "Out of Stock"
-                        ? "disabled"
-                        : ""
-                    }
-                  "
-                  ${
-                    p.status === "Out of Stock"
-                      ? "disabled"
-                      : ""
-                  }
-                  onclick='waOne(${JSON.stringify(p)})'
-                >
-                  WhatsApp Enquiry
-                </button>
-
-
-                <button
-                  class="
-                    plus
-                    ${
-                      selected.has(p.code)
-                        ? "selected"
-                        : ""
-                    }
-                  "
-                  onclick="toggle('${p.code}')"
-                >
-                  ${
-                    selected.has(p.code)
-                      ? "✓"
-                      : "+"
-                  }
-                </button>
-
-              </div>
-
-            </div>
-
-          </article>
-
-        `
-      )
-      .join("");
-
-}
-
-
-
-/* =========================================================
-   MULTI SELECT
-========================================================= */
-
-function toggle(code){
+function toggleProduct(code){
 
   if(
     selected.has(code)
@@ -759,13 +605,11 @@ function toggle(code){
 
   }
 
-
   updateBar();
 
   render();
 
 }
-
 
 
 /* =========================================================
@@ -785,43 +629,280 @@ function updateBar(){
 }
 
 
-
 /* =========================================================
    MULTIPLE WHATSAPP
 ========================================================= */
 
-document
-  .querySelector("#multi")
-  .onclick =
-  () => {
+function sendMultipleEnquiry(){
 
-    const list =
-      products.filter(
-        p =>
-          selected.has(p.code)
-      );
+  const list =
+    products.filter(
+      product =>
+        selected.has(
+          product.code
+        )
+    );
 
 
-    const msg =
+  if(
+    list.length === 0
+  ){
+
+    return;
+
+  }
+
+
+  const message =
 `Hi ONE STOP SOLUTION (OSS),
 
 I'm interested in the following products:
 
 ${list
   .map(
-    (p,i) =>
-      `${i+1}. ${p.name} (${p.code})`
+    (product,index) =>
+      `${index + 1}. ${product.name} (${product.code})`
   )
   .join("\n")}
 
 Please share details and rates.`;
 
 
-    location.href =
-      `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+  const url =
+    `https://wa.me/${WA}?text=${encodeURIComponent(message)}`;
 
-  };
 
+  window.location.href =
+    url;
+
+}
+
+
+/* =========================================================
+   RENDER PRODUCTS
+========================================================= */
+
+function render(){
+
+  const q =
+    search.value
+      .trim()
+      .toLowerCase();
+
+
+  const list =
+    products.filter(
+      product =>
+
+        (
+          filter === "All" ||
+          product.status === filter
+        )
+
+        &&
+
+        (
+          cat === "All" ||
+          product.category === cat
+        )
+
+        &&
+
+        (
+          !q ||
+
+          product.name
+            .toLowerCase()
+            .includes(q)
+
+          ||
+
+          product.code
+            .toLowerCase()
+            .includes(q)
+        )
+
+    );
+
+
+  count.textContent =
+    `${list.length} products`;
+
+
+  grid.innerHTML =
+    list
+      .map(
+        product => `
+
+          <article class="card">
+
+            <div class="photo">
+
+              <img
+                src="${product.image}"
+                alt="${product.name}"
+                loading="lazy"
+              >
+
+            </div>
+
+
+            <div class="body">
+
+              <div class="code">
+                ${product.code} · ${product.category}
+              </div>
+
+
+              <div class="name">
+                ${product.name}
+              </div>
+
+
+              <span
+                class="
+                  status
+                  ${
+                    product.status === "Out of Stock"
+                      ? "out"
+                      : product.status === "Coming Soon"
+                      ? "coming"
+                      : ""
+                  }
+                "
+              >
+                ${product.status}
+              </span>
+
+
+              <div class="moq">
+                ${product.moq}
+              </div>
+
+
+              <div class="actions">
+
+                <button
+                  class="wa"
+                  data-wa-code="${product.code}"
+                  ${
+                    product.status === "Out of Stock"
+                      ? "disabled"
+                      : ""
+                  }
+                >
+                  WhatsApp Enquiry
+                </button>
+
+
+                <button
+                  class="
+                    plus
+                    ${
+                      selected.has(product.code)
+                        ? "selected"
+                        : ""
+                    }
+                  "
+                  data-select-code="${product.code}"
+                >
+                  ${
+                    selected.has(product.code)
+                      ? "✓"
+                      : "+"
+                  }
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        `
+      )
+      .join("");
+
+
+  /*
+    Attach WhatsApp button events
+  */
+
+  grid
+    .querySelectorAll(
+      "[data-wa-code]"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const code =
+              button.dataset.waCode;
+
+            const product =
+              products.find(
+                p =>
+                  p.code === code
+              );
+
+            if(!product) return;
+
+            waOne(product);
+
+          }
+        );
+
+      }
+    );
+
+
+  /*
+    Attach plus button events
+  */
+
+  grid
+    .querySelectorAll(
+      "[data-select-code]"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            toggleProduct(
+              button.dataset.selectCode
+            );
+
+          }
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   MULTIPLE ENQUIRY BUTTON
+========================================================= */
+
+const multiButton =
+  document.querySelector("#multi");
+
+
+if(multiButton){
+
+  multiButton.addEventListener(
+    "click",
+    sendMultipleEnquiry
+  );
+
+}
 
 
 /* =========================================================
@@ -831,16 +912,20 @@ Please share details and rates.`;
 render();
 
 
-
 /* =========================================================
    FIRESTORE LIVE STOCK SYNC
 =========================================================
 
-   IMPORTANT:
-   Firestore is used ONLY for stock/status.
+   Firestore changes ONLY product status.
 
-   Code / Name / Category / Image / MOQ
-   always remain from the master list above.
+   Product order
+   Product code
+   Product name
+   Category
+   Image
+   MOQ
+
+   remain controlled by the master list above.
 ========================================================= */
 
 onSnapshot(
@@ -886,17 +971,23 @@ onSnapshot(
     );
 
 
-    /* Update ONLY stock status */
+    /*
+      Update only stock status
+    */
 
     products.forEach(
       product => {
 
         if(
-          stockMap[product.code]
+          stockMap[
+            product.code
+          ]
         ){
 
           product.status =
-            stockMap[product.code];
+            stockMap[
+              product.code
+            ];
 
         }
 
@@ -904,24 +995,21 @@ onSnapshot(
     );
 
 
-    /* Re-render catalogue */
+    /*
+      Re-render immediately
+    */
 
     render();
 
   },
 
+
   error => {
 
     console.error(
-      "Firestore live sync error:",
+      "Firestore Live Sync Error:",
       error
     );
-
-    /*
-      If Firestore is temporarily unavailable,
-      catalogue continues using its normal
-      In Stock fallback data.
-    */
 
   }
 
