@@ -81,6 +81,30 @@ Instagram: @onestopsolution4325
 
 </div>
 
+<!-- Firebase -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBY7FpGggnMnv-IsqG81rjY1ofCWRm48wk",
+  authDomain: "oss-digital-catalog.firebaseapp.com",
+  projectId: "oss-digital-catalog",
+  storageBucket: "oss-digital-catalog.firebasestorage.app",
+  messagingSenderId: "294933773409",
+  appId: "1:294933773409:web:3a62fc14daaa9d344cfe20",
+  measurementId: "G-GT8YNKQJ5K"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.firebaseApp = app;
+window.firebaseDB = db;
+
+</script>
+
 <script src="app.js"></script>
 
 </body>
