@@ -1,12 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
 
 <title>OSS Admin Panel</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -20,113 +27,107 @@ body{
 
 header{
   background:#101c3a;
-  color:white;
-  padding:16px;
+  color:#fff;
+  padding:18px;
   display:flex;
   align-items:center;
   gap:14px;
 }
 
 header img{
-  width:55px;
-  height:55px;
+  width:58px;
+  height:58px;
   object-fit:contain;
   border-radius:50%;
-  background:white;
+  background:#fff;
 }
 
 header h1{
   margin:0;
-  font-size:21px;
+  font-size:20px;
 }
 
 header p{
-  margin:4px 0 0;
-  font-size:12px;
+  margin:5px 0 0;
+  font-size:13px;
 }
 
 .container{
   max-width:1100px;
   margin:auto;
-  padding:18px;
+  padding:20px;
 }
 
 .card{
-  background:white;
-  padding:20px;
-  border-radius:14px;
-  margin-bottom:18px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
-}
-
-.login{
-  max-width:420px;
-  margin:60px auto;
+  background:#fff;
+  border-radius:18px;
+  padding:24px;
+  margin-bottom:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
 h2{
-  color:#101c3a;
+  margin-top:0;
+  color:#14213d;
 }
 
 label{
   display:block;
   font-weight:bold;
-  margin-bottom:6px;
-}
-
-input,
-select,
-button{
-  width:100%;
-  padding:12px;
-  border-radius:8px;
-  border:1px solid #ccd3dd;
-  font-size:15px;
+  margin:15px 0 7px;
 }
 
 input,
 select{
-  margin-bottom:14px;
+  width:100%;
+  padding:14px;
+  border:1px solid #ccd2da;
+  border-radius:10px;
+  font-size:16px;
+  background:#fff;
 }
 
 button{
   border:0;
-  background:#101c3a;
-  color:white;
+  border-radius:10px;
+  padding:13px 18px;
+  font-size:16px;
   font-weight:bold;
   cursor:pointer;
 }
 
-button:disabled{
-  opacity:.6;
+.primary{
+  background:#14213d;
+  color:#fff;
+  width:100%;
+  margin-top:20px;
 }
 
-.message{
-  display:none;
-  margin-top:12px;
-  padding:12px;
-  border-radius:8px;
-  font-weight:bold;
-  word-break:break-word;
+.green{
+  background:#168a4a;
+  color:#fff;
 }
 
-.error{
-  background:#ffebee;
-  color:#b71c1c;
-}
-
-.success{
-  background:#e8f5e9;
-  color:#1b5e20;
-}
-
-.logout{
-  width:auto;
+.red{
   background:#c62828;
-  padding:10px 18px;
+  color:#fff;
 }
 
-.top{
+.gray{
+  background:#e8ebef;
+  color:#172033;
+}
+
+.login{
+  max-width:500px;
+  margin:80px auto;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.topbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -134,68 +135,105 @@ button:disabled{
   flex-wrap:wrap;
 }
 
-.product-list{
+.message{
+  padding:14px;
+  border-radius:10px;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+.success{
+  background:#e5f5e9;
+  color:#216b36;
+}
+
+.error{
+  background:#fde8e8;
+  color:#a32020;
+}
+
+.product-preview{
+  margin-top:15px;
+  display:flex;
+  gap:15px;
+  align-items:center;
+  padding:15px;
+  background:#f7f8fa;
+  border-radius:12px;
+}
+
+.product-preview img{
+  width:100px;
+  height:100px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:10px;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
+.actions button{
+  flex:1;
+  min-width:130px;
+}
+
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:15px;
 }
 
-.product{
+.product-card{
   border:1px solid #ddd;
-  border-radius:12px;
+  border-radius:14px;
   overflow:hidden;
+  background:#fff;
 }
 
-.product img{
+.product-card img{
   width:100%;
-  height:210px;
+  height:180px;
   object-fit:contain;
   background:#f7f7f7;
 }
 
-.product-body{
-  padding:14px;
+.product-card .info{
+  padding:15px;
 }
 
-.code{
-  font-size:13px;
-  color:#687385;
-  font-weight:bold;
+.product-card h3{
+  margin:5px 0;
+  font-size:17px;
 }
 
-.name{
-  font-size:16px;
-  font-weight:bold;
+.product-card p{
   margin:6px 0;
+  font-size:14px;
 }
 
-.category{
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  background:#e7f6ec;
+  color:#19723b;
   font-size:13px;
-  color:#566171;
-  margin-bottom:8px;
-}
-
-.in{
-  color:#188038;
   font-weight:bold;
 }
 
-.coming{
-  color:#f29900;
-  font-weight:bold;
+.add-box{
+  border:2px dashed #b8c0cc;
+  background:#fafbfc;
 }
 
-.out{
-  color:#d93025;
-  font-weight:bold;
-}
-
-.edit{
-  margin-top:10px;
-}
-
-.hidden{
-  display:none!important;
+.small{
+  font-size:13px;
+  color:#687386;
 }
 
 @media(max-width:600px){
@@ -204,178 +242,436 @@ button:disabled{
     padding:12px;
   }
 
+  .card{
+    padding:18px;
+  }
+
+  header{
+    padding:14px;
+  }
+
+  header img{
+    width:48px;
+    height:48px;
+  }
+
   header h1{
     font-size:17px;
   }
 
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
-<img src="538820.jpg" alt="OSS">
+  <img
+    src="538820.jpg"
+    alt="OSS"
+  >
 
-<div>
-<h1>ONE STOP SOLUTION (OSS)</h1>
-<p>EVERY PROBLEM ONE SOLUTION — ADMIN PANEL</p>
-</div>
+  <div>
+
+    <h1>
+      ONE STOP SOLUTION (OSS)
+    </h1>
+
+    <p>
+      EVERY PROBLEM ONE SOLUTION — ADMIN PANEL
+    </p>
+
+  </div>
 
 </header>
 
 
-<!-- LOGIN -->
 
-<section id="loginSection" class="container">
+<!-- =========================
+     LOGIN
+========================= -->
 
-<div class="card login">
-
-<h2>Admin Login</h2>
-
-<label>Email</label>
-
-<input
-  type="email"
-  id="email"
-  placeholder="Enter admin email"
+<section
+  id="loginSection"
+  class="container"
 >
 
-<label>Password</label>
+  <div class="card login">
 
-<input
-  type="password"
-  id="password"
-  placeholder="Enter password"
->
+    <h2>
+      Admin Login
+    </h2>
 
-<button id="loginBtn">
-Login
-</button>
+    <label>
+      Email
+    </label>
 
-<div id="loginMessage" class="message"></div>
+    <input
+      id="email"
+      type="email"
+      autocomplete="username"
+      placeholder="Admin Email"
+    >
 
-</div>
+
+    <label>
+      Password
+    </label>
+
+    <input
+      id="password"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Password"
+    >
+
+
+    <button
+      id="loginBtn"
+      class="primary"
+    >
+      Login
+    </button>
+
+
+    <div
+      id="loginMessage"
+    ></div>
+
+  </div>
 
 </section>
 
 
-<!-- ADMIN -->
 
-<section id="adminSection" class="container hidden">
+<!-- =========================
+     ADMIN PANEL
+========================= -->
 
-
-<div class="card">
-
-<div class="top">
-
-<div>
-<h2>OSS Product Management</h2>
-<p>37 Master Products</p>
-</div>
-
-<button
-  id="logoutBtn"
-  class="logout"
+<section
+  id="adminSection"
+  class="container hidden"
 >
-Logout
-</button>
-
-</div>
-
-<div id="adminMessage" class="message"></div>
-
-</div>
 
 
-<!-- EDIT -->
+  <!-- TOP -->
 
-<div class="card">
+  <div class="card">
 
-<h2>Edit Stock</h2>
+    <div class="topbar">
 
-<label>Select Product</label>
+      <div>
 
-<select id="productSelect">
+        <h2>
+          OSS Product Management
+        </h2>
 
-<option value="">
-Select Product
-</option>
+        <div
+          id="productCount"
+        >
+          Loading products...
+        </div>
 
-</select>
-
-
-<label>Product Code</label>
-
-<input id="editCode" readonly>
-
-
-<label>Product Name</label>
-
-<input id="editName" readonly>
+      </div>
 
 
-<label>Category</label>
+      <button
+        id="logoutBtn"
+        class="red"
+      >
+        Logout
+      </button>
 
-<input id="editCategory" readonly>
+    </div>
 
-
-<label>Image</label>
-
-<input id="editImage" readonly>
-
-
-<label>Stock Status</label>
-
-<select id="editStock">
-
-<option value="In Stock">
-In Stock
-</option>
-
-<option value="Coming Soon">
-Coming Soon
-</option>
-
-<option value="Out of Stock">
-Out of Stock
-</option>
-
-</select>
+  </div>
 
 
-<button id="saveBtn">
-Save Stock Status
-</button>
 
-<div id="saveMessage" class="message"></div>
+  <!-- =========================
+       EDIT PRODUCT
+  ========================= -->
 
-</div>
+  <div class="card">
+
+    <h2>
+      Edit Product
+    </h2>
 
 
-<!-- PRODUCTS -->
+    <label>
+      Select Product
+    </label>
 
-<div class="card">
+    <select
+      id="productSelect"
+    ></select>
 
-<h2>
-All Products
-<span id="productCount"></span>
-</h2>
 
-<div
-  id="loading"
-  style="padding:15px"
->
-Loading...
-</div>
+    <label>
+      Product Code
+    </label>
 
-<div
-  id="products"
-  class="product-list"
-></div>
+    <input
+      id="code"
+      type="text"
+    >
 
-</div>
+
+    <label>
+      Product Name
+    </label>
+
+    <input
+      id="name"
+      type="text"
+    >
+
+
+    <label>
+      Category
+    </label>
+
+    <input
+      id="category"
+      type="text"
+    >
+
+
+    <label>
+      Image Filename / URL
+    </label>
+
+    <input
+      id="image"
+      type="text"
+      placeholder="OSS_001.jpg or image URL"
+    >
+
+
+    <div
+      id="preview"
+      class="product-preview"
+    >
+
+      <img
+        id="previewImage"
+        src="538820.jpg"
+        alt=""
+      >
+
+      <div>
+
+        <b>
+          Image Preview
+        </b>
+
+        <div class="small">
+          Enter image filename or public image URL.
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <label>
+      Stock Status
+    </label>
+
+    <select
+      id="stock"
+    >
+
+      <option value="In Stock">
+        In Stock
+      </option>
+
+      <option value="Coming Soon">
+        Coming Soon
+      </option>
+
+      <option value="Out of Stock">
+        Out of Stock
+      </option>
+
+    </select>
+
+
+    <label>
+      MOQ
+    </label>
+
+    <input
+      id="moq"
+      type="text"
+      value="₹500 Minimum Order Quantity (MOQ)"
+    >
+
+
+    <div class="actions">
+
+      <button
+        id="saveBtn"
+        class="green"
+      >
+        Save Changes
+      </button>
+
+
+      <button
+        id="deleteBtn"
+        class="red"
+      >
+        Delete Product
+      </button>
+
+    </div>
+
+
+    <div
+      id="saveMessage"
+    ></div>
+
+  </div>
+
+
+
+  <!-- =========================
+       ADD NEW PRODUCT
+  ========================= -->
+
+  <div class="card add-box">
+
+    <h2>
+      ➕ Add New Product
+    </h2>
+
+    <p class="small">
+      નવા product માટે નીચેની વિગતો ભરો.
+    </p>
+
+
+    <label>
+      Product Code
+    </label>
+
+    <input
+      id="newCode"
+      type="text"
+      placeholder="Example: OSS_038"
+    >
+
+
+    <label>
+      Product Name
+    </label>
+
+    <input
+      id="newName"
+      type="text"
+      placeholder="Product Name"
+    >
+
+
+    <label>
+      Category
+    </label>
+
+    <input
+      id="newCategory"
+      type="text"
+      placeholder="Category"
+    >
+
+
+    <label>
+      Image Filename / URL
+    </label>
+
+    <input
+      id="newImage"
+      type="text"
+      placeholder="Example: OSS_038.jpg"
+    >
+
+
+    <label>
+      Stock Status
+    </label>
+
+    <select
+      id="newStock"
+    >
+
+      <option value="In Stock">
+        In Stock
+      </option>
+
+      <option value="Coming Soon">
+        Coming Soon
+      </option>
+
+      <option value="Out of Stock">
+        Out of Stock
+      </option>
+
+    </select>
+
+
+    <label>
+      MOQ
+    </label>
+
+    <input
+      id="newMoq"
+      type="text"
+      value="₹500 Minimum Order Quantity (MOQ)"
+    >
+
+
+    <button
+      id="addBtn"
+      class="primary"
+    >
+      Add New Product
+    </button>
+
+
+    <div
+      id="addMessage"
+    ></div>
+
+  </div>
+
+
+
+  <!-- =========================
+       ALL PRODUCTS
+  ========================= -->
+
+  <div class="card">
+
+    <h2>
+      All Products
+    </h2>
+
+    <div
+      id="productsGrid"
+      class="grid"
+    ></div>
+
+  </div>
+
 
 </section>
 
@@ -383,829 +679,645 @@ Loading...
 
 <script type="module">
 
+/* =========================================================
+   FIREBASE
+========================================================= */
+
 import {
   initializeApp
-} from
-"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut
-} from
-"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
   getFirestore,
   collection,
-  doc,
   getDocs,
   setDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
   onSnapshot
-} from
-"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-
-
-/* FIREBASE */
 
 const firebaseConfig = {
 
-apiKey:
-"AIzaSyBY7FpGggnMnv-IsqG81rjY1ofCWRm48wk",
+  apiKey:
+    "AIzaSyBY7FpGggnMnv-IsqG81rjY1ofCWRm48wk",
 
-authDomain:
-"oss-digital-catalog.firebaseapp.com",
+  authDomain:
+    "oss-digital-catalog.firebaseapp.com",
 
-projectId:
-"oss-digital-catalog",
+  projectId:
+    "oss-digital-catalog",
 
-storageBucket:
-"oss-digital-catalog.firebasestorage.app",
+  storageBucket:
+    "oss-digital-catalog.firebasestorage.app",
 
-messagingSenderId:
-"294933773409",
+  messagingSenderId:
+    "294933773409",
 
-appId:
-"1:294933773409:web:3a62fc14daaa9d344cfe20",
+  appId:
+    "1:294933773409:web:3a62fc14daaa9d344cfe20",
 
-measurementId:
-"G-GT8YNKQJ5K"
+  measurementId:
+    "G-GT8YNKQJ5K"
 
 };
 
 
 const app =
-initializeApp(firebaseConfig);
+  initializeApp(firebaseConfig);
 
 const auth =
-getAuth(app);
+  getAuth(app);
 
 const db =
-getFirestore(app);
+  getFirestore(app);
 
 
-/* ADMIN UID */
+
+/* =========================================================
+   ADMIN UID
+========================================================= */
 
 const ADMIN_UID =
-"NBaVvM86X9SqffFiWI7lA27Isnl1";
+  "NBaVvM86X9SqffFiWI7lA27Isnl1";
 
 
-/* MASTER PRODUCTS */
 
-const PRODUCTS = [
+/* =========================================================
+   MASTER 37 PRODUCTS
+========================================================= */
 
-["OSS_001","Bathroom Accessories","DOUBLE GRID SOAP BOX","OSS_001.jpg"],
+const MASTER_PRODUCTS = [
 
-["OSS_002","Home & Kitchen","MINI POPCORN MAKER","OSS_002.jpg"],
-
-["OSS_003","Water Bottle","2L MOTIVATIONAL WATTER BOTTLE","OSS_003.jpg"],
-
-["OSS_004","Home & Kitchen","5M OUTDOOR CLOTHESLINE","OSS_004.jpg"],
-
-["OSS_005","Home & Kitchen","10M OUTDOOR CLOTHESLINE","OSS_005.jpg"],
-
-["OSS_006","Toys","48PCS CAR CONTAINER","OSS_006.jpg"],
-
-["OSS_007","Water Bottle","3PCS MOTIVATION WATER BOTTLE","OSS_007.jpg"],
-
-["OSS_008","Water Bottle","HOT AND COLD DORI BOTTLE","OSS_008.webp"],
-
-["OSS_009","Water Bottle","1000ML STEEL WATER BOTTLE","OSS_009.jpg"],
-
-["OSS_010","Home & Kitchen","VACCUM FLASK SET WITH 3 CUPS","OSS_010.jpg"],
-
-["OSS_011","Electric & Smart Gadgets","PLUG MOSQUITO KILLER LAMP","OSS_011.webp"],
-
-["OSS_012","Electric & Smart Gadgets","ELECTRIC GAS LIGHTER","OSS_012.jpg"],
-
-["OSS_013","Car Accessories","PORTABLE CAR AIR MATTRESS","OSS_013.webp"],
-
-["OSS_014","Electric & Smart Gadgets","SOLAR RECHARGEABLE LED FLOOD LIGHT","OSS_014.jpg"],
-
-["OSS_015","Tools And Hardware","ANTI SLIP TAPE WITH GLOW IN DARK STRIPE","OSS_015.jpg"],
-
-["OSS_016","Folding Furniture","PORTABLE INFLATABLE BED","OSS_016.webp"],
-
-["OSS_017","Car Accessories","4PCS MAGNETIC CAR WINDOW CURTAIN","OSS_017.jpg"],
-
-["OSS_018","Home & Kitchen","CLOTH DRYING ROPE WITH 12 CLIPS","OSS_018.jpg"],
-
-["OSS_019","Health & Personal Care","PORTABLE MESH NEBULIZER MACHINE","OSS_019.jpg"],
-
-["OSS_020","Smart Stationery","30PCS SELF ADHESIVE TRANSPARENT BOOK COVER","OSS_020.webp"],
-
-["OSS_021","Gifts & Decor","7 INCH MOVING SAND ART","OSS_021.jpg"],
-
-["OSS_022","Smart Gadgets","ALL IN ONE 60W USB FAST CHARGING TRAVEL DATA CABLE SET","OSS_022.webp"],
-
-["OSS_023","Folding Furniture","PORTABLE FOLDING CHAIR","OSS_023.jpg"],
-
-["OSS_024","Multipurpose Cleaning Tool","SLIM FLOOR WIPER MOP WITH SILICONE BLADE & TELESCOPIC HANDLE","OSS_024.webp"],
-
-["OSS_025","Smart Gadgets","ANTI VIBRATION PADS","OSS_025.jpg"],
-
-["OSS_026","Toys","DANCING JELLYFISH TOY WITH MUSIC & MOVEMENT","OSS_026.jpg"],
-
-["OSS_027","Mobile Accessories","360°METAL DESKTOP MOBILE PHONE STAND","OSS_027.jpg"],
-
-["OSS_028","Health & Personal Care","ELECTRIC WATER HOT BAG","OSS_028.jpg"],
-
-["OSS_029","Folding Furniture","2.5×6 NON ADJUSTABLE FOLDING BED","OSS_029.jpg"],
-
-["OSS_030","Folding Furniture","2.5×6 ADJUSTABLE FOLDING BED","OSS_030.jpg"],
-
-["OSS_031","Water Bottle","HOT & COLD 1000ML STEEL WATER BOTTLE","OSS_031.jpg"],
-
-["OSS_032","Car Accessories","2PCS HD VISION DRIVING GLASSES","OSS_032.jpg"],
-
-["OSS_033","Travel Accessories","PORTABLE 2 IN 1 CAMPING GAS STOVE","OSS_033.jpg"],
-
-["OSS_034","Gifts & Decor","ELECTRIC KAPOOR DANI WITH NIGHT LAMP","OSS_034.jpg"],
-
-["OSS_035","Home & Kitchen","WATER-ABSORBING RUBBER DOORMAT","OSS_035.jpg"],
-
-["OSS_036","Smart Stationery","MAGIC PRACTICE COPYBOOK","OSS_036.jpg"],
-
-["OSS_037","Multipurpose Cleaning Cloth","40×40 MICROFIBER CLOTH (ONLY YELLOW)","OSS_037.jpg"]
+["OSS_001","DOUBLE GRID SOAP BOX","Bathroom Accessories","OSS_001.jpg"],
+["OSS_002","MINI POPCORN MAKER","Home & Kitchen","OSS_002.jpg"],
+["OSS_003","2L MOTIVATIONAL WATTER BOTTLE","Water Bottle","OSS_003.jpg"],
+["OSS_004","5M OUTDOOR CLOTHESLINE","Home & Kitchen","OSS_004.jpg"],
+["OSS_005","10M OUTDOOR CLOTHESLINE","Home & Kitchen","OSS_005.jpg"],
+["OSS_006","48PCS CAR CONTAINER","Toys","OSS_006.jpg"],
+["OSS_007","3PCS MOTIVATION WATER BOTTLE","Water Bottle","OSS_007.jpg"],
+["OSS_008","HOT AND COLD DORI BOTTLE","Water Bottle","OSS_008.jpg"],
+["OSS_009","1000ML STEEL WATER BOTTLE","Water Bottle","OSS_009.jpg"],
+["OSS_010","VACCUM FLASK SET WITH 3 CUPS","Home & Kitchen","OSS_010.jpg"],
+["OSS_011","PLUG MOSQUITO KILLER LAMP","Electric & Smart Gadgets","OSS_011.jpg"],
+["OSS_012","ELECTRIC GAS LIGHTER","Electric & Smart Gadgets","OSS_012.jpg"],
+["OSS_013","PORTABLE CAR AIR MATTRESS","Car Accessories","OSS_013.jpg"],
+["OSS_014","SOLAR RECHARGEABLE LED FLOOD LIGHT","Electric & Smart Gadgets","OSS_014.jpg"],
+["OSS_015","ANTI SLIP TAPE WITH GLOW IN DARK STRIPE","Tools And Hardware","OSS_015.jpg"],
+["OSS_016","PORTABLE INFLATABLE BED","Folding Furniture","OSS_016.jpg"],
+["OSS_017","4PCS MAGNETIC CAR WINDOW CURTAIN","Car Accessories","OSS_017.jpg"],
+["OSS_018","CLOTH DRYING ROPE WITH 12 CLIPS","Home & Kitchen","OSS_018.jpg"],
+["OSS_019","PORTABLE MESH NEBULIZER MACHINE","Health & Personal Care","OSS_019.jpg"],
+["OSS_020","30PCS SELF ADHESIVE TRANSPARENT BOOK COVER","Smart Stationery","OSS_020.jpg"],
+["OSS_021","7 INCH MOVING SAND ART","Gifts & Decor","OSS_021.jpg"],
+["OSS_022","ALL IN ONE 60W USB FAST CHARGING TRAVEL DATA CABLE SET","Smart Gadgets","OSS_022.jpg"],
+["OSS_023","PORTABLE FOLDING CHAIR","Folding Furniture","OSS_023.jpg"],
+["OSS_024","SLIM FLOOR WIPER MOP WITH SILICONE BLADE & TELESCOPIC HANDLE","Multipurpose Cleaning Tool","OSS_024.jpg"],
+["OSS_025","ANTI VIBRATION PADS","Smart Gadgets","OSS_025.jpg"],
+["OSS_026","DANCING JELLYFISH TOY WITH MUSIC & MOVEMENT","Toys","OSS_026.jpg"],
+["OSS_027","360°METAL DESKTOP MOBILE PHONE STAND","Mobile Accessories","OSS_027.jpg"],
+["OSS_028","ELECTRIC WATER HOT BAG","Health & Personal Care","OSS_028.jpg"],
+["OSS_029","2.5×6 NON ADJUSTABLE FOLDING BED","Folding Furniture","OSS_029.jpg"],
+["OSS_030","2.5×6 ADJUSTABLE FOLDING BED","Folding Furniture","OSS_030.jpg"],
+["OSS_031","HOT & COLD 1000ML STEEL WATER BOTTLE","Water Bottle","OSS_031.jpg"],
+["OSS_032","2PCS HD VISION DRIVING GLASSES","Car Accessories","OSS_032.jpg"],
+["OSS_033","PORTABLE 2 IN 1 CAMPING GAS STOVE","Travel Accessories","OSS_033.jpg"],
+["OSS_034","ELECTRIC KAPOOR DANI WITH NIGHT LAMP","Gifts & Decor","OSS_034.jpg"],
+["OSS_035","WATER-ABSORBING RUBBER DOORMAT","Home & Kitchen","OSS_035.jpg"],
+["OSS_036","MAGIC PRACTICE COPYBOOK","Smart Stationery","OSS_036.jpg"],
+["OSS_037","40×40 MICROFIBER CLOTH (ONLY YELLOW)","Multipurpose Cleaning Cloth","OSS_037.jpg"]
 
 ];
 
 
+const DEFAULT_MOQ =
+  "₹500 Minimum Order Quantity (MOQ)";
+
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
 const loginSection =
-document.getElementById("loginSection");
+  document.querySelector("#loginSection");
 
 const adminSection =
-document.getElementById("adminSection");
-
-const email =
-document.getElementById("email");
-
-const password =
-document.getElementById("password");
+  document.querySelector("#adminSection");
 
 const loginBtn =
-document.getElementById("loginBtn");
-
-const loginMessage =
-document.getElementById("loginMessage");
+  document.querySelector("#loginBtn");
 
 const logoutBtn =
-document.getElementById("logoutBtn");
+  document.querySelector("#logoutBtn");
 
-const productSelect =
-document.getElementById("productSelect");
+const email =
+  document.querySelector("#email");
 
-const editCode =
-document.getElementById("editCode");
+const password =
+  document.querySelector("#password");
 
-const editName =
-document.getElementById("editName");
-
-const editCategory =
-document.getElementById("editCategory");
-
-const editImage =
-document.getElementById("editImage");
-
-const editStock =
-document.getElementById("editStock");
-
-const saveBtn =
-document.getElementById("saveBtn");
+const loginMessage =
+  document.querySelector("#loginMessage");
 
 const saveMessage =
-document.getElementById("saveMessage");
+  document.querySelector("#saveMessage");
 
-const productsDiv =
-document.getElementById("products");
+const addMessage =
+  document.querySelector("#addMessage");
 
-const loading =
-document.getElementById("loading");
+const productSelect =
+  document.querySelector("#productSelect");
 
 const productCount =
-document.getElementById("productCount");
+  document.querySelector("#productCount");
+
+const productsGrid =
+  document.querySelector("#productsGrid");
 
 
-function message(
-element,
-text,
-type="error"
-){
 
-element.textContent =
-text;
-
-element.className =
-"message " + type;
-
-element.style.display =
-"block";
-
-}
-
-
-/* LOGIN */
-
-loginBtn.addEventListener(
-"click",
-async()=>{
-
-const mail =
-email.value.trim();
-
-const pass =
-password.value;
-
-if(!mail || !pass){
-
-message(
-loginMessage,
-"Email અને Password બંને નાખો."
-);
-
-return;
-
-}
-
-loginBtn.disabled =
-true;
-
-loginBtn.textContent =
-"Logging in...";
-
-try{
-
-const result =
-await signInWithEmailAndPassword(
-auth,
-mail,
-pass
-);
-
-if(
-result.user.uid !== ADMIN_UID
-){
-
-await signOut(auth);
-
-message(
-loginMessage,
-"આ account ને Admin access નથી."
-);
-
-return;
-
-}
-
-message(
-loginMessage,
-"Login successful.",
-"success"
-);
-
-}
-catch(error){
-
-console.error(error);
-
-let text =
-"Login Error: " +
-(error.message || error.code);
-
-if(
-error.code ===
-"auth/invalid-credential"
-){
-
-text =
-"Email અથવા Password ખોટો છે.";
-
-}
-
-message(
-loginMessage,
-text
-);
-
-}
-
-finally{
-
-loginBtn.disabled =
-false;
-
-loginBtn.textContent =
-"Login";
-
-}
-
-});
-
-
-/* LOGOUT */
-
-logoutBtn.addEventListener(
-"click",
-()=>signOut(auth)
-);
-
-
-/* PRODUCT SELECT */
-
-function createProductOptions(){
-
-productSelect.innerHTML =
-`<option value="">Select Product</option>`;
-
-PRODUCTS.forEach(
-p=>{
-
-const option =
-document.createElement("option");
-
-option.value =
-p[0];
-
-option.textContent =
-p[0] +
-" — " +
-p[2];
-
-productSelect.appendChild(
-option
-);
-
-});
-
-}
-
-
-/* SELECT */
-
-productSelect.addEventListener(
-"change",
-async()=>{
+/* =========================================================
+   FORM ELEMENTS
+========================================================= */
 
 const code =
-productSelect.value;
+  document.querySelector("#code");
 
-const product =
-PRODUCTS.find(
-p=>p[0]===code
+const name =
+  document.querySelector("#name");
+
+const category =
+  document.querySelector("#category");
+
+const image =
+  document.querySelector("#image");
+
+const stock =
+  document.querySelector("#stock");
+
+const moq =
+  document.querySelector("#moq");
+
+const previewImage =
+  document.querySelector("#previewImage");
+
+
+
+/* =========================================================
+   LOCAL DATA
+========================================================= */
+
+let allProducts = [];
+
+let currentProductId = "";
+
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+loginBtn.addEventListener(
+  "click",
+  async () => {
+
+    loginMessage.innerHTML = "";
+
+    const userEmail =
+      email.value.trim();
+
+    const userPassword =
+      password.value;
+
+
+    if(
+      !userEmail ||
+      !userPassword
+    ){
+
+      loginMessage.innerHTML =
+        `<div class="message error">
+          Email and password required.
+        </div>`;
+
+      return;
+
+    }
+
+
+    loginBtn.disabled =
+      true;
+
+    loginBtn.textContent =
+      "Logging in...";
+
+
+    try{
+
+      await signInWithEmailAndPassword(
+        auth,
+        userEmail,
+        userPassword
+      );
+
+    }
+    catch(error){
+
+      console.error(error);
+
+      loginMessage.innerHTML =
+        `<div class="message error">
+          Login failed: ${error.message}
+        </div>`;
+
+    }
+    finally{
+
+      loginBtn.disabled =
+        false;
+
+      loginBtn.textContent =
+        "Login";
+
+    }
+
+  }
 );
 
-if(!product){
 
-editCode.value="";
-editName.value="";
-editCategory.value="";
-editImage.value="";
 
-return;
+/* =========================================================
+   LOGOUT
+========================================================= */
 
-}
+logoutBtn.addEventListener(
+  "click",
+  () => {
 
-editCode.value =
-product[0];
+    signOut(auth);
 
-editCategory.value =
-product[1];
-
-editName.value =
-product[2];
-
-editImage.value =
-product[3];
-
-try{
-
-const snap =
-await getDocs(
-collection(
-db,
-"products"
-)
+  }
 );
 
-snap.forEach(
-item=>{
-
-if(item.id===code){
-
-const data =
-item.data();
-
-editStock.value =
-data.stock ||
-"In Stock";
-
-}
-
-});
-
-}
-catch(error){
-
-console.error(error);
-
-}
-
-});
 
 
-/* INITIALIZE */
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+onAuthStateChanged(
+  auth,
+  async user => {
+
+    if(
+      user &&
+      user.uid === ADMIN_UID
+    ){
+
+      loginSection.classList.add(
+        "hidden"
+      );
+
+      adminSection.classList.remove(
+        "hidden"
+      );
+
+      await initializeProducts();
+
+      listenProducts();
+
+    }
+
+    else{
+
+      loginSection.classList.remove(
+        "hidden"
+      );
+
+      adminSection.classList.add(
+        "hidden"
+      );
+
+    }
+
+  }
+);
+
+
+
+/* =========================================================
+   INITIALIZE MASTER PRODUCTS
+========================================================= */
 
 async function initializeProducts(){
 
-try{
+  try{
 
-const snap =
-await getDocs(
-collection(
-db,
-"products"
-)
+    const snapshot =
+      await getDocs(
+        collection(
+          db,
+          "products"
+        )
+      );
+
+
+    const existing =
+      new Map();
+
+
+    snapshot.forEach(
+      item => {
+
+        existing.set(
+          item.id,
+          item.data()
+        );
+
+      }
+    );
+
+
+    for(
+      const p of MASTER_PRODUCTS
+    ){
+
+      const [
+        pCode,
+        pName,
+        pCategory,
+        pImage
+      ] = p;
+
+
+      if(
+        !existing.has(pCode)
+      ){
+
+        await setDoc(
+          doc(
+            db,
+            "products",
+            pCode
+          ),
+          {
+
+            code:pCode,
+
+            name:pName,
+
+            category:pCategory,
+
+            image:pImage,
+
+            stock:"In Stock",
+
+            status:"In Stock",
+
+            moq:DEFAULT_MOQ
+
+          }
+        );
+
+      }
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "Initialization error:",
+      error
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   FIRESTORE LIVE LISTENER
+========================================================= */
+
+function listenProducts(){
+
+  onSnapshot(
+
+    collection(
+      db,
+      "products"
+    ),
+
+    snapshot => {
+
+      allProducts = [];
+
+
+      snapshot.forEach(
+        item => {
+
+          const data =
+            item.data();
+
+
+          allProducts.push({
+
+            id:item.id,
+
+            code:
+              data.code ||
+              item.id,
+
+            name:
+              data.name ||
+              "",
+
+            category:
+              data.category ||
+              "",
+
+            image:
+              data.image ||
+              "",
+
+            stock:
+              data.stock ||
+              data.status ||
+              "In Stock",
+
+            status:
+              data.status ||
+              data.stock ||
+              "In Stock",
+
+            moq:
+              data.moq ||
+              DEFAULT_MOQ
+
+          });
+
+        }
+      );
+
+
+      renderSelect();
+
+      renderAllProducts();
+
+      productCount.textContent =
+        `${allProducts.length} Products`;
+
+    },
+
+    error => {
+
+      console.error(
+        "Firestore error:",
+        error
+      );
+
+    }
+
+  );
+
+}
+
+
+
+/* =========================================================
+   PRODUCT SELECT
+========================================================= */
+
+function renderSelect(){
+
+  const oldValue =
+    currentProductId;
+
+
+  productSelect.innerHTML =
+    allProducts
+      .map(
+        p => `
+
+          <option
+            value="${escapeHtml(p.id)}"
+          >
+            ${escapeHtml(p.code)}
+            —
+            ${escapeHtml(p.name)}
+          </option>
+
+        `
+      )
+      .join("");
+
+
+  if(
+    oldValue &&
+    allProducts.some(
+      p =>
+        p.id === oldValue
+    )
+  ){
+
+    productSelect.value =
+      oldValue;
+
+  }
+
+
+  if(
+    !productSelect.value &&
+    allProducts.length
+  ){
+
+    productSelect.value =
+      allProducts[0].id;
+
+  }
+
+
+  loadSelectedProduct();
+
+}
+
+
+
+/* =========================================================
+   SELECT CHANGE
+========================================================= */
+
+productSelect.addEventListener(
+  "change",
+  loadSelectedProduct
 );
 
-const old = {};
-
-snap.forEach(
-item=>{
-old[item.id] =
-item.data();
-});
 
 
-for(
-const p of PRODUCTS
-){
+/* =========================================================
+   LOAD SELECTED PRODUCT
+========================================================= */
 
-await setDoc(
+function loadSelectedProduct(){
 
-doc(
-db,
-"products",
-p[0]
-),
+  const id =
+    productSelect.value;
 
-{
 
-code:p[0],
+  const product =
+    allProducts.find(
+      p =>
+        p.id === id
+    );
 
-category:p[1],
 
-name:p[2],
+  if(!product) return;
 
-image:p[3],
 
-moq:
-"₹500 Minimum Order Quantity (MOQ)",
+  currentProductId =
+    product.id;
 
-stock:
-old[p[0]]?.stock ||
-"In Stock",
 
-status:
-old[p[0]]?.stock ||
-"In Stock"
+  code.value =
+    product.code;
 
-},
+  name.value =
+    product.name;
 
-{
-merge:true
-}
+  category.value =
+    product.category;
 
-);
+  image.value =
+    product.image;
 
-}
+  stock.value =
+    product.stock;
 
-}
-catch(error){
+  moq.value =
+    product.moq;
 
-console.error(error);
 
-message(
-document.getElementById("adminMessage"),
-"Firestore Error: " +
-error.message
-);
+  updatePreview();
 
-}
+  saveMessage.innerHTML =
+    "";
 
 }
 
 
-/* SAVE */
 
-saveBtn.addEventListener(
-"click",
-async()=>{
-
-const code =
-editCode.value;
-
-if(!code){
-
-message(
-saveMessage,
-"પહેલા Product પસંદ કરો."
-);
-
-return;
-
-}
-
-const product =
-PRODUCTS.find(
-p=>p[0]===code
-);
-
-if(!product){
-
-return;
-
-}
-
-const stock =
-editStock.value;
-
-saveBtn.disabled =
-true;
-
-saveBtn.textContent =
-"Saving...";
-
-try{
-
-await setDoc(
-
-doc(
-db,
-"products",
-code
-),
-
-{
-
-code:product[0],
-
-category:product[1],
-
-name:product[2],
-
-image:product[3],
-
-moq:
-"₹500 Minimum Order Quantity (MOQ)",
-
-stock:stock,
-
-status:stock
-
-},
-
-{
-merge:true
-}
-
-);
-
-message(
-saveMessage,
-"Stock status updated successfully.",
-"success"
-);
-
-}
-catch(error){
-
-message(
-saveMessage,
-"Save Error: " +
-error.message
-);
-
-}
-
-finally{
-
-saveBtn.disabled =
-false;
-
-saveBtn.textContent =
-"Save Stock Status";
-
-}
-
-});
-
-
-/* RENDER */
-
-function renderProducts(list){
-
-productsDiv.innerHTML =
-"";
-
-PRODUCTS.forEach(
-master=>{
-
-const data =
-list.find(
-p=>p.code===master[0]
-) || {};
-
-const stock =
-data.stock ||
-"In Stock";
-
-let cls =
-"in";
-
-if(
-stock==="Coming Soon"
-) cls="coming";
-
-if(
-stock==="Out of Stock"
-) cls="out";
-
-
-const div =
-document.createElement("div");
-
-div.className =
-"product";
-
-div.innerHTML = `
-
-<img
-src="${master[3]}"
-alt="${master[2]}"
->
-
-<div class="product-body">
-
-<div class="code">
-${master[0]}
-</div>
-
-<div class="name">
-${master[2]}
-</div>
-
-<div class="category">
-${master[1]}
-</div>
-
-<div class="${cls}">
-● ${stock}
-</div>
-
-<button
-class="edit"
-data-code="${master[0]}"
->
-Edit Stock
-</button>
-
-</div>
-`;
-
-productsDiv.appendChild(div);
-
-});
-
-
-document
-.querySelectorAll(".edit")
-.forEach(
-btn=>{
-
-btn.addEventListener(
-"click",
-()=>{
-
-productSelect.value =
-btn.dataset.code;
-
-productSelect.dispatchEvent(
-new Event("change")
-);
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-});
-
-});
-
-
-productCount.textContent =
-" — " +
-PRODUCTS.length;
-
-}
-
-
-/* FIRESTORE LISTENER */
-
-function startListener(){
-
-onSnapshot(
-
-collection(
-db,
-"products"
-),
-
-snap=>{
-
-const list=[];
-
-snap.forEach(
-item=>{
-
-list.push({
-...item.data(),
-code:item.id
-});
-
-});
-
-renderProducts(list);
-
-loading.style.display =
-"none";
-
-},
-
-error=>{
-
-console.error(error);
-
-loading.textContent =
-"Firestore Error: " +
-error.message;
-
-});
-
-}
-
-
-/* AUTH */
-
-onAuthStateChanged(
-auth,
-async user=>{
-
-if(!user){
-
-loginSection.classList.remove(
-"hidden"
-);
-
-adminSection.classList.add(
-"hidden"
-);
-
-return;
-
-}
-
-
-if(
-user.uid !== ADMIN_UID
-){
-
-await signOut(auth);
-
-return;
-
-}
-
-
-loginSection.classList.add(
-"hidden"
-);
-
-adminSection.classList.remove(
-"hidden"
-);
-
-createProductOptions();
-
-await initializeProducts();
-
-startListener();
-
-});
-
-</script>
-
-</body>
-  </html>
+/* =========================================================
+   IMAGE PREVIEW
+=======
