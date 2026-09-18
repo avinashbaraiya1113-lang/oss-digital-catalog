@@ -37,3 +37,119 @@ const products = [
 {code:"OSS_036",name:"MAGIC PRACTICE COPYBOOK",category:"Smart Stationery",image:"OSS_036.jpg",status:"In Stock",moq:"₹500 Minimum Order Quantity (MOQ)"},
 {code:"OSS_037",name:"40×40 MICROFIBER CLOTH (ONLY YELLOW)",category:"Multipurpose Cleaning Cloth",image:"OSS_037.jpg",status:"In Stock",moq:"₹500 Minimum Order Quantity (MOQ)"}
 ];
+
+const WA="919499806747";
+let selected=new Set(),filter="All",cat="All";
+
+const grid=document.querySelector("#grid");
+const search=document.querySelector("#search");
+const count=document.querySelector("#count");
+const cats=document.querySelector("#cats");
+const bar=document.querySelector("#bar");
+const selectedCount=document.querySelector("#selectedCount");
+
+const catsList=["All",...new Set(products.map(p=>p.category))];
+
+cats.innerHTML=catsList.map(x=>`<button class="${x==="All"?"active":""}" data-cat="${x}">${x}</button>`).join("");
+
+cats.onclick=e=>{
+  if(e.target.dataset.cat){
+    cat=e.target.dataset.cat;
+    cats.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.cat===cat));
+    render();
+  }
+};
+
+document.querySelector(".filters").onclick=e=>{
+  if(e.target.dataset.filter){
+    filter=e.target.dataset.filter;
+    document.querySelectorAll(".filters button").forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));
+    render();
+  }
+};
+
+document.querySelector('.filters button[data-filter="All"]').classList.add("active");
+
+search.oninput=render;
+
+function waOne(p){
+  const msg=`Hi ONE STOP SOLUTION (OSS),
+
+I'm interested in ${p.name} (${p.code}).
+
+Please share details and rates.`;
+
+  location.href=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+}
+
+function render(){
+  const q=search.value.trim().toLowerCase();
+
+  const list=products.filter(p=>
+    (filter==="All"||p.status===filter)&&
+    (cat==="All"||p.category===cat)&&
+    (!q||p.name.toLowerCase().includes(q)||p.code.toLowerCase().includes(q))
+  );
+
+  count.textContent=`${list.length} products`;
+
+  grid.innerHTML=list.map(p=>`
+    <article class="card">
+      <div class="photo">
+        <img src="${p.image}" alt="${p.name}" loading="lazy">
+      </div>
+
+      <div class="body">
+        <div class="code">${p.code} · ${p.category}</div>
+
+        <div class="name">${p.name}</div>
+
+        <span class="status ${p.status==="Out of Stock"?"out":p.status==="Coming Soon"?"coming":""}">
+          ${p.status}
+        </span>
+
+        <div class="moq">${p.moq}</div>
+
+        <div class="actions">
+          <button class="wa ${p.status==="Out of Stock"?"disabled":""}"
+            ${p.status==="Out of Stock"?"disabled":""}
+            onclick='waOne(${JSON.stringify(p)})'>
+            WhatsApp Enquiry
+          </button>
+
+          <button class="plus ${selected.has(p.code)?"selected":""}"
+            onclick="toggle('${p.code}')">
+            ${selected.has(p.code)?"✓":"+"}
+          </button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function toggle(code){
+  selected.has(code)?selected.delete(code):selected.add(code);
+  updateBar();
+  render();
+}
+
+function updateBar(){
+  selectedCount.textContent=selected.size;
+  bar.classList.toggle("hidden",selected.size===0);
+}
+
+document.querySelector("#multi").onclick=()=>{
+  const list=products.filter(p=>selected.has(p.code));
+
+  const msg=`Hi ONE STOP SOLUTION (OSS),
+
+I'm interested in the following products:
+
+${list.map((p,i)=>`${i+1}. ${p.name} (${p.code})`).join("\n")}
+
+Please share details and rates.`;
+
+  location.href=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+};
+
+render();
