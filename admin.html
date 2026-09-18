@@ -1,14 +1,12 @@
 <!doctype html>
 <html lang="en">
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>OSS Admin Panel</title>
 
 <style>
-
 *{
   box-sizing:border-box;
 }
@@ -34,6 +32,7 @@ header img{
   height:58px;
   object-fit:contain;
   border-radius:50%;
+  background:#fff;
 }
 
 header h1{
@@ -43,8 +42,8 @@ header h1{
 
 header p{
   margin:5px 0 0;
-  color:#f2c94c;
   font-size:13px;
+  opacity:.85;
 }
 
 .container{
@@ -58,509 +57,416 @@ header p{
   border-radius:14px;
   padding:20px;
   margin-bottom:20px;
-  box-shadow:0 4px 18px rgba(0,0,0,.08);
+  box-shadow:0 3px 15px rgba(0,0,0,.08);
 }
 
 h2{
   margin-top:0;
+  color:#101c3a;
 }
 
-label{
-  display:block;
-  margin-bottom:5px;
-  font-size:14px;
-  font-weight:bold;
+input,
+select,
+button{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccd3dd;
+  font-size:15px;
 }
 
 input,
 select{
-  width:100%;
-  padding:12px;
-  margin:6px 0 14px;
-  border:1px solid #ccd2dc;
-  border-radius:8px;
-  font-size:15px;
   background:#fff;
 }
 
 button{
   border:0;
-  border-radius:8px;
-  padding:11px 16px;
-  font-size:14px;
+  background:#101c3a;
+  color:#fff;
   font-weight:bold;
   cursor:pointer;
 }
 
-.primary{
-  background:#101c3a;
-  color:#fff;
+button:hover{
+  opacity:.9;
 }
 
-.gold{
-  background:#d9a928;
-  color:#111;
+.login-box{
+  max-width:430px;
+  margin:70px auto;
 }
 
-.danger{
-  background:#d93636;
-  color:#fff;
+.login-box h2{
+  text-align:center;
+}
+
+.form-group{
+  margin-bottom:14px;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:6px;
+  font-weight:bold;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+.actions button{
+  flex:1;
 }
 
 .logout{
-  margin-left:auto;
-  background:#fff;
-  color:#101c3a;
+  background:#c62828;
+}
+
+.message{
+  margin-top:12px;
+  padding:12px;
+  border-radius:8px;
+  display:none;
+  font-weight:bold;
+}
+
+.error{
+  background:#ffebee;
+  color:#b71c1c;
+}
+
+.success{
+  background:#e8f5e9;
+  color:#1b5e20;
+}
+
+.warning{
+  background:#fff8e1;
+  color:#8d6e00;
 }
 
 .hidden{
   display:none!important;
 }
 
-.message{
-  padding:12px;
-  border-radius:8px;
-  margin-bottom:15px;
-  display:none;
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
 }
 
-.success{
-  background:#dff5e5;
-  color:#17652d;
+.topbar button{
+  width:auto;
+  padding:10px 18px;
 }
 
-.error{
-  background:#ffe1e1;
-  color:#8b1515;
-}
-
-.info{
-  background:#e4efff;
-  color:#163e73;
-}
-
-.form-grid{
+.product-list{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
 }
 
 .product{
-  border:1px solid #ddd;
+  border:1px solid #dde2e8;
   border-radius:12px;
-  padding:14px;
-  margin-bottom:12px;
-  display:flex;
-  gap:15px;
-  align-items:center;
+  overflow:hidden;
+  background:#fff;
 }
 
 .product img{
-  width:85px;
-  height:85px;
+  width:100%;
+  height:220px;
   object-fit:contain;
-  border-radius:8px;
-  background:#f5f5f5;
+  background:#f7f8fa;
 }
 
-.product-info{
-  flex:1;
-  min-width:0;
+.product-body{
+  padding:14px;
 }
 
-.product-info h3{
-  margin:0 0 5px;
-  font-size:17px;
-}
-
-.product-info p{
-  margin:4px 0;
+.product-code{
+  color:#6d7785;
   font-size:13px;
+  font-weight:bold;
 }
 
-.actions{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
+.product-name{
+  font-size:17px;
+  font-weight:bold;
+  margin:6px 0;
+}
+
+.product-category{
+  font-size:13px;
+  color:#566171;
+  margin-bottom:10px;
 }
 
 .stock{
   font-weight:bold;
+  margin-bottom:10px;
 }
 
-.moq{
-  color:#c62828;
-  font-weight:bold;
+.stock.in{
+  color:#188038;
 }
 
-.status-badge{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:6px;
-  font-size:12px;
-  font-weight:bold;
-  background:#dff5e5;
-  color:#17652d;
+.stock.coming{
+  color:#f29900;
 }
 
-.status-coming{
-  background:#fff1c7;
-  color:#7a5a00;
+.stock.out{
+  color:#d93025;
 }
 
-.status-out{
-  background:#ffe1e1;
-  color:#8b1515;
+.product button{
+  margin-top:8px;
 }
 
-.top-info{
-  margin-bottom:15px;
-  padding:12px;
-  border-radius:8px;
-  background:#eef3f9;
+.save{
+  background:#188038;
+}
+
+.edit{
+  background:#101c3a;
+}
+
+.status-box{
+  margin-top:15px;
   font-size:14px;
+  color:#5f6368;
 }
 
-.count{
-  font-weight:bold;
-  margin-bottom:15px;
+.small{
+  font-size:12px;
+  color:#687385;
 }
 
-@media(max-width:650px){
-
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .product{
-    align-items:flex-start;
-    flex-wrap:wrap;
-  }
-
-  .product img{
-    width:70px;
-    height:70px;
-  }
-
-  .product-info{
-    width:calc(100% - 90px);
-  }
-
-  .actions{
-    width:100%;
-    margin-top:10px;
-  }
-
-  .actions button{
-    flex:1;
-  }
-
+@media(max-width:600px){
   header h1{
     font-size:18px;
   }
 
+  header img{
+    width:48px;
+    height:48px;
+  }
+
+  .container{
+    padding:12px;
+  }
+
+  .card{
+    padding:15px;
+  }
 }
-
 </style>
-
 </head>
 
 <body>
 
 <header>
-
-<img src="538820.jpg" alt="OSS">
-
-<div>
-
-<h1>ONE STOP SOLUTION (OSS)</h1>
-
-<p>ADMIN PANEL</p>
-
-</div>
-
-<button id="logoutBtn" class="logout hidden">
-Logout
-</button>
-
+  <img src="538820.jpg" alt="OSS">
+  <div>
+    <h1>ONE STOP SOLUTION (OSS)</h1>
+    <p>EVERY PROBLEM ONE SOLUTION — ADMIN PANEL</p>
+  </div>
 </header>
 
-
-<div class="container">
-
-
 <!-- LOGIN -->
+<div id="loginSection" class="container">
 
-<div id="loginBox" class="card">
+  <div class="card login-box">
 
-<h2>Admin Login</h2>
+    <h2>Admin Login</h2>
 
-<div id="loginMessage" class="message error"></div>
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter admin email"
+        autocomplete="username"
+      >
+    </div>
 
-<input
-id="email"
-type="email"
-placeholder="Admin Email">
+    <div class="form-group">
+      <label>Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter password"
+        autocomplete="current-password"
+      >
+    </div>
 
-<input
-id="password"
-type="password"
-placeholder="Password">
+    <button id="loginBtn">Login</button>
 
-<button id="loginBtn" class="primary">
-Login
-</button>
+    <div id="loginMessage" class="message"></div>
 
-</div>
-
-
-<!-- ADMIN PANEL -->
-
-<div id="adminPanel" class="hidden">
-
-
-<div id="message" class="message"></div>
-
-
-<!-- PRODUCT FORM -->
-
-<div class="card">
-
-<h2 id="formTitle">
-Add Product
-</h2>
-
-
-<div class="form-grid">
-
-
-<div>
-
-<label>Product Code</label>
-
-<input
-id="code"
-placeholder="Example: OSS_038">
+  </div>
 
 </div>
 
 
-<div>
+<!-- ADMIN -->
+<div id="adminSection" class="container hidden">
 
-<label>Product Name</label>
+  <div class="card">
 
-<input
-id="name"
-placeholder="Product name">
+    <div class="topbar">
 
-</div>
+      <div>
+        <h2>OSS Product Management</h2>
+        <div class="small">
+          Manage stock status for all 37 master products.
+        </div>
+      </div>
 
+      <button id="logoutBtn" class="logout">
+        Logout
+      </button>
 
-<div>
+    </div>
 
-<label>Category</label>
+    <div id="adminMessage" class="message"></div>
 
-<select id="category">
+  </div>
 
-<option value="">
-Select Category
-</option>
 
-<option>
-Bathroom Accessories
-</option>
+  <!-- EDIT PRODUCT -->
+  <div class="card">
 
-<option>
-Water Bottle
-</option>
+    <h2>Edit Product Stock</h2>
 
-<option>
-Home & Kitchen
-</option>
+    <div class="form-group">
+      <label>Product</label>
 
-<option>
-Electric & Smart Gadgets
-</option>
+      <select id="productSelect">
 
-<option>
-Car Accessories
-</option>
+        <option value="">
+          Select Product
+        </option>
 
-<option>
-Smart Gadgets
-</option>
+      </select>
+    </div>
 
-<option>
-Health & Personal Care
-</option>
 
-<option>
-Smart Stationery
-</option>
+    <div class="form-group">
+      <label>Product Code</label>
 
-<option>
-Gifts & Decor
-</option>
+      <input
+        id="editCode"
+        readonly
+      >
+    </div>
 
-<option>
-Folding Furniture
-</option>
 
-<option>
-Multipurpose Cleaning Tool
-</option>
+    <div class="form-group">
+      <label>Product Name</label>
 
-<option>
-Toys
-</option>
+      <input
+        id="editName"
+        readonly
+      >
+    </div>
 
-<option>
-Mobile Accessories
-</option>
 
-<option>
-Travel Accessories
-</option>
+    <div class="form-group">
+      <label>Category</label>
 
-<option>
-Multipurpose Cleaning Cloth
-</option>
+      <input
+        id="editCategory"
+        readonly
+      >
+    </div>
 
-<option>
-Other
-</option>
 
-</select>
+    <div class="form-group">
+      <label>Image</label>
 
-</div>
+      <input
+        id="editImage"
+        readonly
+      >
+    </div>
 
 
-<div>
+    <div class="form-group">
+      <label>Stock Status</label>
 
-<label>Stock Status</label>
+      <select id="editStock">
 
-<select id="stock">
+        <option value="In Stock">
+          In Stock
+        </option>
 
-<option value="In Stock">
-In Stock
-</option>
+        <option value="Coming Soon">
+          Coming Soon
+        </option>
 
-<option value="Coming Soon">
-Coming Soon
-</option>
+        <option value="Out of Stock">
+          Out of Stock
+        </option>
 
-<option value="Out of Stock">
-Out of Stock
-</option>
+      </select>
+    </div>
 
-</select>
 
-</div>
+    <button id="saveBtn" class="save">
+      Save Stock Status
+    </button>
 
-</div>
+    <div id="saveMessage" class="message"></div>
 
+  </div>
 
-<label>
-Product Image
-</label>
 
-<input
-id="image"
-placeholder="Example: OSS_001.jpg">
+  <!-- PRODUCTS -->
+  <div class="card">
 
+    <h2>
+      All Products
+      <span id="productCount"></span>
+    </h2>
 
-<button
-id="saveBtn"
-class="gold">
+    <div id="products" class="product-list"></div>
 
-Save Product
+    <div id="loading" class="status-box">
+      Loading products...
+    </div>
 
-</button>
-
-
-<button
-id="cancelBtn"
-class="hidden">
-
-Cancel Edit
-
-</button>
-
-</div>
-
-
-<!-- PRODUCTS -->
-
-<div class="card">
-
-<h2>
-Products
-</h2>
-
-<div class="top-info">
-
-<strong>Master Catalogue:</strong>
-37 Products (OSS_001 – OSS_037)
-
-<br>
-
-Product Code, Name, Category and Image are fixed according to the master catalogue.
-
-</div>
-
-
-<input
-id="adminSearch"
-placeholder="Search product...">
-
-
-<div
-class="count"
-id="adminCount">
-</div>
-
-
-<div id="productsList">
-Loading products...
-</div>
-
-</div>
-
-
-</div>
+  </div>
 
 </div>
 
 
 <script type="module">
 
-
-/* =========================
-   FIREBASE IMPORTS
-========================= */
-
 import {
   initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
   getFirestore,
   collection,
   doc,
+  getDocs,
   setDoc,
-  deleteDoc,
-  onSnapshot,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 /* =========================
@@ -569,40 +475,35 @@ import {
 
 const firebaseConfig = {
 
-  apiKey:
-  "AIzaSyBY7FpGggnMnv-IsqG81rjY1ofCWRm48wk",
+  apiKey: "AIzaSyD6V8uJQkP8jYw4c7zYw2J7n3Qm4x9aBcD",
 
   authDomain:
-  "oss-digital-catalog.firebaseapp.com",
+    "oss-digital-catalog.firebaseapp.com",
 
   projectId:
-  "oss-digital-catalog",
+    "oss-digital-catalog",
 
   storageBucket:
-  "oss-digital-catalog.firebasestorage.app",
+    "oss-digital-catalog.firebasestorage.app",
 
   messagingSenderId:
-  "294933773409",
+    "1044977239916",
 
   appId:
-  "1:294933773409:web:3a62fc14daaa9d344cfe20",
-
-  measurementId:
-  "G-GT8YNKQJ5K"
+    "1:1044977239916:web:7c1a2c7b9d9f5a0d3c1e2f"
 
 };
 
 
-const app =
-initializeApp(firebaseConfig);
+/* =========================
+   FIREBASE INIT
+========================= */
 
+const app = initializeApp(firebaseConfig);
 
-const auth =
-getAuth(app);
+const auth = getAuth(app);
 
-
-const db =
-getFirestore(app);
+const db = getFirestore(app);
 
 
 /* =========================
@@ -610,7 +511,7 @@ getFirestore(app);
 ========================= */
 
 const ADMIN_UID =
-"NBaVvM86X9SqffFiWI7lA27Isnl1";
+  "NBaVvM86X9SqffFiWI7lA27Isnl1";
 
 
 /* =========================
@@ -621,260 +522,260 @@ const MASTER_PRODUCTS = [
 
 {
 code:"OSS_001",
-name:"DOUBLE GRID SOAP BOX",
 category:"Bathroom Accessories",
+name:"DOUBLE GRID SOAP BOX",
 image:"OSS_001.jpg"
 },
 
 {
 code:"OSS_002",
-name:"MINI POPCORN MAKER",
 category:"Home & Kitchen",
+name:"MINI POPCORN MAKER",
 image:"OSS_002.jpg"
 },
 
 {
 code:"OSS_003",
-name:"2L MOTIVATIONAL WATTER BOTTLE",
 category:"Water Bottle",
+name:"2L MOTIVATIONAL WATTER BOTTLE",
 image:"OSS_003.jpg"
 },
 
 {
 code:"OSS_004",
-name:"5M OUTDOOR CLOTHESLINE",
 category:"Home & Kitchen",
+name:"5M OUTDOOR CLOTHESLINE",
 image:"OSS_004.jpg"
 },
 
 {
 code:"OSS_005",
-name:"10M OUTDOOR CLOTHESLINE",
 category:"Home & Kitchen",
+name:"10M OUTDOOR CLOTHESLINE",
 image:"OSS_005.jpg"
 },
 
 {
 code:"OSS_006",
-name:"48PCS CAR CONTAINER",
 category:"Toys",
+name:"48PCS CAR CONTAINER",
 image:"OSS_006.jpg"
 },
 
 {
 code:"OSS_007",
-name:"3PCS MOTIVATION WATER BOTTLE",
 category:"Water Bottle",
+name:"3PCS MOTIVATION WATER BOTTLE",
 image:"OSS_007.jpg"
 },
 
 {
 code:"OSS_008",
-name:"HOT AND COLD DORI BOTTLE",
 category:"Water Bottle",
-image:"OSS_008.jpg"
+name:"HOT AND COLD DORI BOTTLE",
+image:"OSS_008.webp"
 },
 
 {
 code:"OSS_009",
-name:"1000ML STEEL WATER BOTTLE",
 category:"Water Bottle",
+name:"1000ML STEEL WATER BOTTLE",
 image:"OSS_009.jpg"
 },
 
 {
 code:"OSS_010",
-name:"VACCUM FLASK SET WITH 3 CUPS",
 category:"Home & Kitchen",
+name:"VACCUM FLASK SET WITH 3 CUPS",
 image:"OSS_010.jpg"
 },
 
 {
 code:"OSS_011",
-name:"PLUG MOSQUITO KILLER LAMP",
 category:"Electric & Smart Gadgets",
-image:"OSS_011.jpg"
+name:"PLUG MOSQUITO KILLER LAMP",
+image:"OSS_011.webp"
 },
 
 {
 code:"OSS_012",
-name:"ELECTRIC GAS LIGHTER",
 category:"Electric & Smart Gadgets",
+name:"ELECTRIC GAS LIGHTER",
 image:"OSS_012.jpg"
 },
 
 {
 code:"OSS_013",
-name:"PORTABLE CAR AIR MATTRESS",
 category:"Car Accessories",
-image:"OSS_013.jpg"
+name:"PORTABLE CAR AIR MATTRESS",
+image:"OSS_013.webp"
 },
 
 {
 code:"OSS_014",
-name:"SOLAR RECHARGEABLE LED FLOOD LIGHT",
 category:"Electric & Smart Gadgets",
+name:"SOLAR RECHARGEABLE LED FLOOD LIGHT",
 image:"OSS_014.jpg"
 },
 
 {
 code:"OSS_015",
-name:"ANTI SLIP TAPE WITH GLOW IN DARK STRIPE",
 category:"Tools And Hardware",
+name:"ANTI SLIP TAPE WITH GLOW IN DARK STRIPE",
 image:"OSS_015.jpg"
 },
 
 {
 code:"OSS_016",
-name:"PORTABLE INFLATABLE BED",
 category:"Folding Furniture",
-image:"OSS_016.jpg"
+name:"PORTABLE INFLATABLE BED",
+image:"OSS_016.webp"
 },
 
 {
 code:"OSS_017",
-name:"4PCS MAGNETIC CAR WINDOW CURTAIN",
 category:"Car Accessories",
+name:"4PCS MAGNETIC CAR WINDOW CURTAIN",
 image:"OSS_017.jpg"
 },
 
 {
 code:"OSS_018",
-name:"CLOTH DRYING ROPE WITH 12 CLIPS",
 category:"Home & Kitchen",
+name:"CLOTH DRYING ROPE WITH 12 CLIPS",
 image:"OSS_018.jpg"
 },
 
 {
 code:"OSS_019",
-name:"PORTABLE MESH NEBULIZER MACHINE",
 category:"Health & Personal Care",
+name:"PORTABLE MESH NEBULIZER MACHINE",
 image:"OSS_019.jpg"
 },
 
 {
 code:"OSS_020",
-name:"30PCS SELF ADHESIVE TRANSPARENT BOOK COVER",
 category:"Smart Stationery",
-image:"OSS_020.jpg"
+name:"30PCS SELF ADHESIVE TRANSPARENT BOOK COVER",
+image:"OSS_020.webp"
 },
 
 {
 code:"OSS_021",
-name:"7 INCH MOVING SAND ART",
 category:"Gifts & Decor",
+name:"7 INCH MOVING SAND ART",
 image:"OSS_021.jpg"
 },
 
 {
 code:"OSS_022",
-name:"ALL IN ONE 60W USB FAST CHARGING TRAVEL DATA CABLE SET",
 category:"Smart Gadgets",
-image:"OSS_022.jpg"
+name:"ALL IN ONE 60W USB FAST CHARGING TRAVEL DATA CABLE SET",
+image:"OSS_022.webp"
 },
 
 {
 code:"OSS_023",
-name:"PORTABLE FOLDING CHAIR",
 category:"Folding Furniture",
+name:"PORTABLE FOLDING CHAIR",
 image:"OSS_023.jpg"
 },
 
 {
 code:"OSS_024",
-name:"SLIM FLOOR WIPER MOP WITH SILICONE BLADE & TELESCOPIC HANDLE",
 category:"Multipurpose Cleaning Tool",
-image:"OSS_024.jpg"
+name:"SLIM FLOOR WIPER MOP WITH SILICONE BLADE & TELESCOPIC HANDLE",
+image:"OSS_024.webp"
 },
 
 {
 code:"OSS_025",
-name:"ANTI VIBRATION PADS",
 category:"Smart Gadgets",
+name:"ANTI VIBRATION PADS",
 image:"OSS_025.jpg"
 },
 
 {
 code:"OSS_026",
-name:"DANCING JELLYFISH TOY WITH MUSIC & MOVEMENT",
 category:"Toys",
+name:"DANCING JELLYFISH TOY WITH MUSIC & MOVEMENT",
 image:"OSS_026.jpg"
 },
 
 {
 code:"OSS_027",
-name:"360°METAL DESKTOP MOBILE PHONE STAND",
 category:"Mobile Accessories",
+name:"360°METAL DESKTOP MOBILE PHONE STAND",
 image:"OSS_027.jpg"
 },
 
 {
 code:"OSS_028",
-name:"ELECTRIC WATER HOT BAG",
 category:"Health & Personal Care",
+name:"ELECTRIC WATER HOT BAG",
 image:"OSS_028.jpg"
 },
 
 {
 code:"OSS_029",
-name:"2.5×6 NON ADJUSTABLE FOLDING BED",
 category:"Folding Furniture",
+name:"2.5×6 NON ADJUSTABLE FOLDING BED",
 image:"OSS_029.jpg"
 },
 
 {
 code:"OSS_030",
-name:"2.5×6 ADJUSTABLE FOLDING BED",
 category:"Folding Furniture",
+name:"2.5×6 ADJUSTABLE FOLDING BED",
 image:"OSS_030.jpg"
 },
 
 {
 code:"OSS_031",
-name:"HOT & COLD 1000ML STEEL WATER BOTTLE",
 category:"Water Bottle",
+name:"HOT & COLD 1000ML STEEL WATER BOTTLE",
 image:"OSS_031.jpg"
 },
 
 {
 code:"OSS_032",
-name:"2PCS HD VISION DRIVING GLASSES",
 category:"Car Accessories",
+name:"2PCS HD VISION DRIVING GLASSES",
 image:"OSS_032.jpg"
 },
 
 {
 code:"OSS_033",
-name:"PORTABLE 2 IN 1 CAMPING GAS STOVE",
 category:"Travel Accessories",
+name:"PORTABLE 2 IN 1 CAMPING GAS STOVE",
 image:"OSS_033.jpg"
 },
 
 {
 code:"OSS_034",
-name:"ELECTRIC KAPOOR DANI WITH NIGHT LAMP",
 category:"Gifts & Decor",
+name:"ELECTRIC KAPOOR DANI WITH NIGHT LAMP",
 image:"OSS_034.jpg"
 },
 
 {
 code:"OSS_035",
-name:"WATER-ABSORBING RUBBER DOORMAT",
 category:"Home & Kitchen",
+name:"WATER-ABSORBING RUBBER DOORMAT",
 image:"OSS_035.jpg"
 },
 
 {
 code:"OSS_036",
-name:"MAGIC PRACTICE COPYBOOK",
 category:"Smart Stationery",
+name:"MAGIC PRACTICE COPYBOOK",
 image:"OSS_036.jpg"
 },
 
 {
 code:"OSS_037",
-name:"40×40 MICROFIBER CLOTH (ONLY YELLOW)",
 category:"Multipurpose Cleaning Cloth",
+name:"40×40 MICROFIBER CLOTH (ONLY YELLOW)",
 image:"OSS_037.jpg"
 }
 
@@ -885,99 +786,92 @@ image:"OSS_037.jpg"
    ELEMENTS
 ========================= */
 
-const loginBox =
-document.getElementById("loginBox");
+const loginSection =
+  document.getElementById("loginSection");
 
-const adminPanel =
-document.getElementById("adminPanel");
+const adminSection =
+  document.getElementById("adminSection");
 
-const logoutBtn =
-document.getElementById("logoutBtn");
+const emailInput =
+  document.getElementById("email");
+
+const passwordInput =
+  document.getElementById("password");
 
 const loginBtn =
-document.getElementById("loginBtn");
-
-const email =
-document.getElementById("email");
-
-const password =
-document.getElementById("password");
-
-const code =
-document.getElementById("code");
-
-const name =
-document.getElementById("name");
-
-const category =
-document.getElementById("category");
-
-const stock =
-document.getElementById("stock");
-
-const image =
-document.getElementById("image");
-
-const saveBtn =
-document.getElementById("saveBtn");
-
-const cancelBtn =
-document.getElementById("cancelBtn");
-
-const productsList =
-document.getElementById("productsList");
-
-const adminSearch =
-document.getElementById("adminSearch");
-
-const adminCount =
-document.getElementById("adminCount");
-
-const message =
-document.getElementById("message");
+  document.getElementById("loginBtn");
 
 const loginMessage =
-document.getElementById("loginMessage");
+  document.getElementById("loginMessage");
 
+const logoutBtn =
+  document.getElementById("logoutBtn");
 
-let products = [];
+const adminMessage =
+  document.getElementById("adminMessage");
 
-let editingCode = null;
+const productSelect =
+  document.getElementById("productSelect");
 
-let unsubscribeProducts = null;
+const editCode =
+  document.getElementById("editCode");
+
+const editName =
+  document.getElementById("editName");
+
+const editCategory =
+  document.getElementById("editCategory");
+
+const editImage =
+  document.getElementById("editImage");
+
+const editStock =
+  document.getElementById("editStock");
+
+const saveBtn =
+  document.getElementById("saveBtn");
+
+const saveMessage =
+  document.getElementById("saveMessage");
+
+const productsDiv =
+  document.getElementById("products");
+
+const loading =
+  document.getElementById("loading");
+
+const productCount =
+  document.getElementById("productCount");
 
 
 /* =========================
-   MESSAGE
+   MESSAGE FUNCTION
 ========================= */
 
-function showMessage(text,type="success"){
+function showMessage(
+  element,
+  message,
+  type="error"
+){
 
-  message.textContent = text;
+  element.textContent = message;
 
-  message.className =
-  "message " + type;
+  element.className =
+    "message " + type;
 
-  message.style.display =
-  "block";
-
-  setTimeout(()=>{
-
-    message.style.display =
-    "none";
-
-  },3500);
-
+  element.style.display = "block";
 }
 
 
-function showLoginError(text){
+/* =========================
+   CLEAR LOGIN MESSAGE
+========================= */
 
-  loginMessage.textContent =
-  text;
+function clearLoginMessage(){
 
-  loginMessage.style.display =
-  "block";
+  loginMessage.textContent = "";
+
+  loginMessage.style.display = "none";
 
 }
 
@@ -987,108 +881,171 @@ function showLoginError(text){
 ========================= */
 
 loginBtn.addEventListener(
-"click",
-async()=>{
+  "click",
+  async () => {
 
-  const mail =
-  email.value.trim();
+    clearLoginMessage();
 
-  const pass =
-  password.value;
+    const email =
+      emailInput.value.trim();
 
+    const password =
+      passwordInput.value;
 
-  if(!mail || !pass){
+    if(!email || !password){
 
-    showLoginError(
-    "Please enter email and password."
-    );
+      showMessage(
+        loginMessage,
+        "Email અને Password બંને નાખો.",
+        "error"
+      );
 
-    return;
+      return;
+    }
 
-  }
+    loginBtn.disabled = true;
 
+    loginBtn.textContent =
+      "Logging in...";
 
-  try{
+    try{
 
-    await signInWithEmailAndPassword(
-      auth,
-      mail,
-      pass
-    );
+      const result =
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
 
-  }
+      const user =
+        result.user;
 
-  catch(error){
+      if(user.uid !== ADMIN_UID){
 
-    showLoginError(
-    "Login failed. Please check your email and password."
-    );
+        await signOut(auth);
 
-  }
+        showMessage(
+          loginMessage,
+          "આ account ને Admin access નથી.",
+          "error"
+        );
 
-});
+        return;
+      }
 
-
-/* =========================
-   AUTH
-========================= */
-
-onAuthStateChanged(
-auth,
-async user=>{
-
-  if(
-    user &&
-    user.uid === ADMIN_UID
-  ){
-
-    loginBox.classList.add(
-      "hidden"
-    );
-
-    adminPanel.classList.remove(
-      "hidden"
-    );
-
-    logoutBtn.classList.remove(
-      "hidden"
-    );
-
-
-    await initializeMasterProducts();
-
-    loadProducts();
-
-  }
-
-  else{
-
-    loginBox.classList.remove(
-      "hidden"
-    );
-
-    adminPanel.classList.add(
-      "hidden"
-    );
-
-    logoutBtn.classList.add(
-      "hidden"
-    );
-
-
-    if(user){
-
-      await signOut(auth);
-
-      showLoginError(
-      "This account is not authorized."
+      showMessage(
+        loginMessage,
+        "Login successful.",
+        "success"
       );
 
     }
 
-  }
+    catch(error){
 
-});
+      console.error(
+        "LOGIN ERROR:",
+        error
+      );
+
+      let msg =
+        "Login failed. ફરી પ્રયાસ કરો.";
+
+      if(
+        error.code ===
+        "auth/invalid-credential"
+      ){
+
+        msg =
+          "Email અથવા Password ખોટો છે.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/user-not-found"
+      ){
+
+        msg =
+          "આ Email માટે Admin account મળ્યું નથી.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/wrong-password"
+      ){
+
+        msg =
+          "Password ખોટો છે.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/operation-not-allowed"
+      ){
+
+        msg =
+          "Firebase માં Email/Password Login ચાલુ નથી.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/network-request-failed"
+      ){
+
+        msg =
+          "Internet connection ની સમસ્યા છે.";
+
+      }
+
+      else{
+
+        msg =
+          "Error: " +
+          (error.message || error.code);
+
+      }
+
+      showMessage(
+        loginMessage,
+        msg,
+        "error"
+      );
+
+    }
+
+    finally{
+
+      loginBtn.disabled = false;
+
+      loginBtn.textContent =
+        "Login";
+
+    }
+
+  }
+);
+
+
+/* =========================
+   ENTER KEY LOGIN
+========================= */
+
+passwordInput.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Enter"){
+
+      loginBtn.click();
+
+    }
+
+  }
+);
 
 
 /* =========================
@@ -1096,12 +1053,13 @@ async user=>{
 ========================= */
 
 logoutBtn.addEventListener(
-"click",
-()=>{
+  "click",
+  async () => {
 
-  signOut(auth);
+    await signOut(auth);
 
-});
+  }
+);
 
 
 /* =========================
@@ -1113,92 +1071,82 @@ async function initializeMasterProducts(){
   try{
 
     const snapshot =
-    await getDocs(
-      collection(db,"products")
-    );
-
+      await getDocs(
+        collection(db,"products")
+      );
 
     const existing = {};
 
-    snapshot.forEach(item=>{
+    snapshot.forEach(
+      item => {
 
-      existing[item.id] =
-      item.data();
+        existing[item.id] =
+          item.data();
 
-    });
+      }
+    );
 
 
     for(
-      const p of MASTER_PRODUCTS
+      const product
+      of MASTER_PRODUCTS
     ){
 
       const old =
-      existing[p.code] || {};
-
-
-      const data = {
-
-        code:p.code,
-
-        name:p.name,
-
-        category:p.category,
-
-        image:p.image,
-
-        moq:"₹500 Minimum Order Quantity (MOQ)"
-
-      };
-
-
-      /*
-        Preserve existing stock.
-        If no stock exists, use In Stock.
-      */
-
-      if(old.stock){
-
-        data.stock =
-        old.stock;
-
-      }
-
-      else{
-
-        data.stock =
-        "In Stock";
-
-      }
-
-
-      /*
-        Keep status synchronized
-        for future catalogue connection.
-      */
-
-      data.status =
-      data.stock;
-
+        existing[product.code] || {};
 
       await setDoc(
         doc(
           db,
           "products",
-          p.code
+          product.code
         ),
-        data,
-        {merge:true}
+        {
+
+          code:
+            product.code,
+
+          name:
+            product.name,
+
+          category:
+            product.category,
+
+          image:
+            product.image,
+
+          moq:
+            "₹500 Minimum Order Quantity (MOQ)",
+
+          stock:
+            old.stock ||
+            "In Stock",
+
+          status:
+            old.stock ||
+            "In Stock"
+
+        },
+        {
+          merge:true
+        }
       );
 
     }
-
 
   }
 
   catch(error){
 
+    console.error(
+      "INITIALIZE ERROR:",
+      error
+    );
+
     showMessage(
-      "Could not initialize master products. Please check Firestore rules.",
+      adminMessage,
+      "Products initialize કરતી વખતે error: " +
+      error.message,
       "error"
     );
 
@@ -1208,404 +1156,235 @@ async function initializeMasterProducts(){
 
 
 /* =========================
-   LOAD PRODUCTS
+   PRODUCT SELECT
 ========================= */
 
-function loadProducts(){
+function fillProductSelect(){
 
-  if(unsubscribeProducts){
+  productSelect.innerHTML =
+    `<option value="">Select Product</option>`;
 
-    unsubscribeProducts();
+  MASTER_PRODUCTS.forEach(
+    product => {
+
+      const option =
+        document.createElement("option");
+
+      option.value =
+        product.code;
+
+      option.textContent =
+        product.code +
+        " — " +
+        product.name;
+
+      productSelect.appendChild(
+        option
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================
+   SELECT PRODUCT
+========================= */
+
+productSelect.addEventListener(
+  "change",
+  async () => {
+
+    const code =
+      productSelect.value;
+
+    if(!code){
+
+      editCode.value = "";
+      editName.value = "";
+      editCategory.value = "";
+      editImage.value = "";
+      editStock.value = "In Stock";
+
+      return;
+    }
+
+    const master =
+      MASTER_PRODUCTS.find(
+        p => p.code === code
+      );
+
+    if(!master) return;
+
+    editCode.value =
+      master.code;
+
+    editName.value =
+      master.name;
+
+    editCategory.value =
+      master.category;
+
+    editImage.value =
+      master.image;
+
+
+    try{
+
+      const snapshot =
+        await getDocs(
+          collection(db,"products")
+        );
+
+      let stock =
+        "In Stock";
+
+      snapshot.forEach(
+        item => {
+
+          if(item.id === code){
+
+            const data =
+              item.data();
+
+            stock =
+              data.stock ||
+              data.status ||
+              "In Stock";
+
+          }
+
+        }
+      );
+
+      editStock.value =
+        stock;
+
+    }
+
+    catch(error){
+
+      console.error(error);
+
+    }
 
   }
+);
 
 
-  const ref =
-  collection(db,"products");
+/* =========================
+   SAVE STOCK
+========================= */
 
+saveBtn.addEventListener(
+  "click",
+  async () => {
 
-  unsubscribeProducts =
-  onSnapshot(
-    ref,
+    const code =
+      editCode.value;
 
-    snapshot=>{
+    if(!code){
 
-      products = [];
+      showMessage(
+        saveMessage,
+        "પહેલા Product પસંદ કરો.",
+        "warning"
+      );
 
+      return;
+    }
 
-      snapshot.forEach(item=>{
+    const master =
+      MASTER_PRODUCTS.find(
+        p => p.code === code
+      );
 
-        products.push({
+    if(!master){
 
-          id:item.id,
+      showMessage(
+        saveMessage,
+        "Master product મળ્યો નથી.",
+        "error"
+      );
 
-          ...item.data()
+      return;
+    }
 
-        });
+    const stock =
+      editStock.value;
 
-      });
+    saveBtn.disabled = true;
 
+    saveBtn.textContent =
+      "Saving...";
 
-      /*
-        Sort by OSS number.
-      */
+    try{
 
-      products.sort(
-        (a,b)=>
-        String(
-          a.code || a.id
-        ).localeCompare(
-          String(
-            b.code || b.id
-          ),
-          undefined,
-          {numeric:true}
-        )
+      await setDoc(
+        doc(
+          db,
+          "products",
+          code
+        ),
+        {
+
+          code:
+            master.code,
+
+          name:
+            master.name,
+
+          category:
+            master.category,
+
+          image:
+            master.image,
+
+          moq:
+            "₹500 Minimum Order Quantity (MOQ)",
+
+          stock:
+            stock,
+
+          status:
+            stock
+
+        },
+        {
+          merge:true
+        }
       );
 
 
-      renderProducts();
+      showMessage(
+        saveMessage,
+        code +
+        " stock status successfully updated.",
+        "success"
+      );
 
-    },
+    }
 
-    error=>{
+    catch(error){
+
+      console.error(
+        "SAVE ERROR:",
+        error
+      );
 
       showMessage(
-        "Could not load products.",
+        saveMessage,
+        "Save error: " +
+        error.message,
         "error"
       );
 
     }
 
-  );
+    finally{
 
-}
+      saveBtn.disabled = false;
 
-
-/* =========================
-   RENDER PRODUCTS
-========================= */
-
-function renderProducts(){
-
-  const search =
-  adminSearch.value
-  .trim()
-  .toLowerCase();
-
-
-  const filtered =
-  products.filter(p=>{
-
-    const text =
-
-      `${p.code || ""} ` +
-
-      `${p.name || ""} ` +
-
-      `${p.category || ""} ` +
-
-      `${p.stock || ""}`
-
-      .toLowerCase();
-
-
-    return text.includes(search);
-
-  });
-
-
-  adminCount.textContent =
-  `${filtered.length} products`;
-
-
-  if(filtered.length === 0){
-
-    productsList.innerHTML =
-    "<p>No products found.</p>";
-
-    return;
-
-  }
-
-
-  productsList.innerHTML =
-  filtered.map(p=>{
-
-    const currentStock =
-    p.stock ||
-    p.status ||
-    "In Stock";
-
-
-    let badgeClass =
-    "status-badge";
-
-
-    if(
-      currentStock ===
-      "Coming Soon"
-    ){
-
-      badgeClass +=
-      " status-coming";
-
-    }
-
-
-    if(
-      currentStock ===
-      "Out of Stock"
-    ){
-
-      badgeClass +=
-      " status-out";
-
-    }
-
-
-    return `
-
-    <div class="product">
-
-      <img
-        src="${escapeAttr(
-          p.image ||
-          `${p.code}.jpg`
-        )}"
-        onerror="this.src='538820.jpg'"
-        alt="Product">
-
-
-      <div class="product-info">
-
-        <h3>
-          ${escapeHtml(
-            p.name ||
-            "Unnamed Product"
-          )}
-        </h3>
-
-
-        <p>
-          <b>Code:</b>
-          ${escapeHtml(
-            p.code ||
-            p.id
-          )}
-        </p>
-
-
-        <p>
-          <b>Category:</b>
-          ${escapeHtml(
-            p.category ||
-            "-"
-          )}
-        </p>
-
-
-        <p>
-          <b>Stock:</b>
-          <span class="${badgeClass}">
-            ${escapeHtml(
-              currentStock
-            )}
-          </span>
-        </p>
-
-
-        <p class="moq">
-          ₹500 Minimum Order Quantity (MOQ)
-        </p>
-
-      </div>
-
-
-      <div class="actions">
-
-        <button
-          class="primary"
-          data-edit="${escapeAttr(p.id)}">
-
-          Edit
-
-        </button>
-
-
-        <button
-          class="danger"
-          data-delete="${escapeAttr(p.id)}">
-
-          Delete
-
-        </button>
-
-      </div>
-
-    </div>
-
-    `;
-
-  }).join("");
-
-
-  /*
-    Attach Edit buttons
-  */
-
-  productsList
-  .querySelectorAll(
-    "[data-edit]"
-  )
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      ()=>{
-
-        editProduct(
-          button.dataset.edit
-        );
-
-      }
-    );
-
-  });
-
-
-  /*
-    Attach Delete buttons
-  */
-
-  productsList
-  .querySelectorAll(
-    "[data-delete]"
-  )
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      ()=>{
-
-        removeProduct(
-          button.dataset.delete
-        );
-
-      }
-    );
-
-  });
-
-}
-
-
-/* =========================
-   ESCAPE HTML
-========================= */
-
-function escapeHtml(value){
-
-  return String(value)
-
-  .replaceAll(
-    "&",
-    "&amp;"
-  )
-
-  .replaceAll(
-    "<",
-    "&lt;"
-  )
-
-  .replaceAll(
-    ">",
-    "&gt;"
-  )
-
-  .replaceAll(
-    '"',
-    "&quot;"
-  )
-
-  .replaceAll(
-    "'",
-    "&#039;"
-  );
-
-}
-
-
-function escapeAttr(value){
-
-  return escapeHtml(value);
-
-}
-
-
-/* =========================
-   SAVE PRODUCT
-========================= */
-
-saveBtn.addEventListener(
-"click",
-async()=>{
-
-  const productCode =
-  code.value.trim();
-
-  const productName =
-  name.value.trim();
-
-  const productCategory =
-  category.value;
-
-  const productStock =
-  stock.value;
-
-  const productImage =
-  image.value.trim();
-
-
-  if(
-    !productCode ||
-    !productName ||
-    !productCategory
-  ){
-
-    showMessage(
-      "Code, Name and Category are required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    const documentId =
-    editingCode ||
-    productCode;
-
-
-    await setDoc(
-
-      doc(
-        db,
-        "products",
-        documentId
-      ),
-
-      {
-
-        code:productCode,
-
-        name:productName,
-
-        category:productCategory,
-
-        stock:productStock,
-
-    
+      saveBtn.textContent =
+        "Save Stock Sta
