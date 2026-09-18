@@ -3,258 +3,309 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>OSS Admin Panel</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box;
+}
 
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f6f8;
-  color:#172033;
+margin:0;
+font-family:Arial,sans-serif;
+background:#f3f6fa;
+color:#172033;
 }
 
 header{
-  background:#101c3a;
-  color:#fff;
-  padding:15px;
-  display:flex;
-  gap:13px;
-  align-items:center;
+background:#101c3a;
+color:white;
+padding:14px;
+display:flex;
+align-items:center;
+gap:12px;
 }
 
 header img{
-  width:52px;
-  height:52px;
-  object-fit:contain;
-  border-radius:50%;
-  background:#fff;
+width:50px;
+height:50px;
+border-radius:50%;
+background:white;
+object-fit:contain;
 }
 
 header h1{
-  margin:0;
-  font-size:19px;
+margin:0;
+font-size:19px;
 }
 
 header p{
-  margin:4px 0;
-  font-size:11px;
+margin:4px 0 0;
+font-size:11px;
+opacity:.85;
 }
 
 .container{
-  max-width:1100px;
-  margin:auto;
-  padding:14px;
+max-width:1100px;
+margin:auto;
+padding:14px;
 }
 
 .card{
-  background:#fff;
-  border-radius:14px;
-  padding:18px;
-  margin-bottom:16px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
+background:white;
+border-radius:14px;
+padding:18px;
+margin-bottom:16px;
+box-shadow:0 3px 14px rgba(0,0,0,.08);
 }
 
 .login{
-  max-width:430px;
-  margin:55px auto;
+max-width:430px;
+margin:55px auto;
 }
 
 h2{
-  color:#101c3a;
-  margin-top:0;
+margin-top:0;
+color:#101c3a;
 }
 
 label{
-  display:block;
-  font-weight:700;
-  margin:10px 0 6px;
+display:block;
+font-weight:bold;
+margin:12px 0 6px;
 }
 
 input,
 select,
 button{
-  width:100%;
-  padding:12px;
-  border-radius:8px;
-  border:1px solid #ccd3dd;
-  font-size:15px;
+width:100%;
+padding:12px;
+border-radius:8px;
+border:1px solid #ccd3dd;
+font-size:15px;
 }
 
 button{
-  border:0;
-  background:#101c3a;
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
+background:#101c3a;
+color:white;
+border:0;
+font-weight:bold;
+cursor:pointer;
 }
 
 button:disabled{
-  opacity:.6;
+opacity:.6;
 }
 
 .top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+flex-wrap:wrap;
 }
 
 .logout{
-  width:auto;
-  background:#c62828;
-  padding:10px 18px;
+width:auto;
+background:#c62828;
+padding:10px 18px;
 }
 
 .green{
-  background:#188038;
+background:#188038;
 }
 
 .red{
-  background:#c62828;
+background:#c62828;
 }
 
 .gray{
-  background:#5f6368;
+background:#687385;
 }
 
-.message{
-  display:none;
-  margin-top:10px;
-  padding:11px;
-  border-radius:8px;
-  font-weight:700;
-  word-break:break-word;
-}
-
-.success{
-  background:#e8f5e9;
-  color:#1b5e20;
-}
-
-.error{
-  background:#ffebee;
-  color:#b71c1c;
+.blue{
+background:#1565c0;
 }
 
 .hidden{
-  display:none!important;
+display:none!important;
+}
+
+.message{
+display:none;
+padding:11px;
+margin-top:10px;
+border-radius:8px;
+font-weight:bold;
+word-break:break-word;
+}
+
+.success{
+background:#e8f5e9;
+color:#1b5e20;
+}
+
+.error{
+background:#ffebee;
+color:#b71c1c;
 }
 
 .note{
-  font-size:12px;
-  color:#687385;
+font-size:12px;
+color:#687385;
 }
 
 .badge{
-  display:inline-block;
-  padding:5px 8px;
-  border-radius:6px;
-  font-size:11px;
-  font-weight:700;
-  background:#e8eefc;
-  color:#101c3a;
+display:inline-block;
+padding:5px 9px;
+border-radius:6px;
+font-size:11px;
+font-weight:bold;
+background:#e8eefc;
+color:#101c3a;
 }
 
 .badge.new{
-  background:#e8f5e9;
-  color:#188038;
+background:#e8f5e9;
+color:#188038;
+}
+
+.badge.locked{
+background:#fff3cd;
+color:#856404;
 }
 
 .grid{
-  display:grid;
-  grid-template-columns:
-  repeat(auto-fit,minmax(270px,1fr));
-  gap:14px;
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(270px,1fr));
+gap:14px;
+margin-top:15px;
 }
 
 .product{
-  border:1px solid #ddd;
-  border-radius:12px;
-  overflow:hidden;
-  background:#fff;
+border:1px solid #ddd;
+border-radius:12px;
+overflow:hidden;
+background:white;
 }
 
 .product img{
-  width:100%;
-  height:190px;
-  object-fit:contain;
-  background:#f7f7f7;
+width:100%;
+height:190px;
+object-fit:contain;
+background:#f7f7f7;
 }
 
-.body{
-  padding:13px;
+.productBody{
+padding:13px;
 }
 
 .code{
-  font-size:12px;
-  color:#687385;
-  font-weight:700;
+font-size:12px;
+font-weight:bold;
+color:#687385;
+margin-top:8px;
 }
 
 .name{
-  font-weight:700;
-  margin:5px 0;
+font-weight:bold;
+font-size:15px;
+margin:5px 0;
 }
 
-.cat{
-  font-size:12px;
-  color:#566171;
-  margin-bottom:8px;
+.category{
+font-size:12px;
+color:#566171;
+margin-bottom:8px;
 }
 
-.in{
-  color:#188038;
-  font-weight:700;
+.stockIn{
+color:#188038;
+font-weight:bold;
 }
 
-.coming{
-  color:#f29900;
-  font-weight:700;
+.stockComing{
+color:#f29900;
+font-weight:bold;
 }
 
-.out{
-  color:#d93025;
-  font-weight:700;
+.stockOut{
+color:#d93025;
+font-weight:bold;
 }
 
 .actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:10px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:12px;
 }
 
 .preview{
-  width:100%;
-  max-height:180px;
-  object-fit:contain;
-  background:#f7f7f7;
-  border-radius:8px;
-  margin-top:8px;
+width:100%;
+max-height:200px;
+object-fit:contain;
+background:#f7f7f7;
+border-radius:8px;
+margin-top:10px;
+}
+
+.infoBox{
+background:#eef4ff;
+border-left:4px solid #1565c0;
+padding:12px;
+border-radius:8px;
+font-size:13px;
+margin-bottom:14px;
+}
+
+.masterInfo{
+background:#fff8e1;
+border-left:4px solid #f2a900;
+padding:12px;
+border-radius:8px;
+font-size:13px;
+margin-bottom:14px;
+}
+
+.formButtons{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:15px;
 }
 
 @media(max-width:600px){
-  header h1{
-    font-size:16px;
-  }
 
-  .card{
-    padding:14px;
-  }
+header h1{
+font-size:16px;
 }
+
+.card{
+padding:14px;
+}
+
+.formButtons{
+grid-template-columns:1fr;
+}
+
+}
+
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
 <img
-  src="538820.jpg"
-  alt="OSS"
+src="538820.jpg"
+alt="OSS"
 >
 
 <div>
@@ -270,6 +321,7 @@ EVERY PROBLEM ONE SOLUTION — ADMIN PANEL
 </div>
 
 </header>
+
 
 
 <!-- LOGIN -->
@@ -292,7 +344,7 @@ Email
 <input
 id="email"
 type="email"
-placeholder="Enter admin email"
+placeholder="Admin Email"
 >
 
 <label>
@@ -302,10 +354,12 @@ Password
 <input
 id="password"
 type="password"
-placeholder="Enter password"
+placeholder="Password"
 >
 
-<button id="loginBtn">
+<button
+id="loginBtn"
+>
 Login
 </button>
 
@@ -319,6 +373,7 @@ class="message"
 </section>
 
 
+
 <!-- ADMIN -->
 
 <section
@@ -326,6 +381,8 @@ id="adminSection"
 class="container hidden"
 >
 
+
+<!-- HEADER CARD -->
 
 <div class="card">
 
@@ -360,7 +417,8 @@ class="message"
 </div>
 
 
-<!-- PRODUCT FORM -->
+
+<!-- FORM -->
 
 <div class="card">
 
@@ -369,11 +427,30 @@ Add New Product
 </h2>
 
 <div
-id="typeBadge"
+id="formBadge"
 class="badge new"
 >
 NEW PRODUCT
 </div>
+
+
+<div
+id="masterNotice"
+class="masterInfo hidden"
+>
+🔒 Master Product: Code, Name, Category અને Photo
+બદલી શકાશે નહીં. માત્ર Stock Status અને MOQ બદલી શકાશે.
+</div>
+
+
+<div
+id="newNotice"
+class="infoBox"
+>
+➕ New Product માટે Code, Name, Category, Image,
+Stock Status અને MOQ નાખો.
+</div>
+
 
 
 <label>
@@ -392,7 +469,7 @@ Product Name
 
 <input
 id="name"
-placeholder="Enter product name"
+placeholder="Product Name"
 >
 
 
@@ -402,7 +479,7 @@ Category
 
 <input
 id="category"
-placeholder="Enter category"
+placeholder="Category"
 >
 
 
@@ -422,15 +499,15 @@ Stock Status
 
 <select id="stock">
 
-<option>
+<option value="In Stock">
 In Stock
 </option>
 
-<option>
+<option value="Coming Soon">
 Coming Soon
 </option>
 
-<option>
+<option value="Out of Stock">
 Out of Stock
 </option>
 
@@ -450,11 +527,11 @@ value="₹500 Minimum Order Quantity (MOQ)"
 <img
 id="preview"
 class="preview hidden"
-alt="Preview"
+alt="Product Preview"
 >
 
 
-<div class="actions">
+<div class="formButtons">
 
 <button
 id="saveBtn"
@@ -481,26 +558,35 @@ class="message"
 </div>
 
 
+
 <!-- PRODUCT LIST -->
 
 <div class="card">
 
+<div class="top">
+
 <h2>
-Products
-<span id="count"></span>
+All Products
+<span id="count">
+</span>
 </h2>
+
+</div>
+
 
 <input
 id="search"
-placeholder="Search by code, name or category..."
+placeholder="🔎 Search Code, Product Name or Category..."
 >
+
 
 <div
 id="loading"
 style="padding:15px"
 >
-Loading...
+Loading Products...
 </div>
+
 
 <div
 id="products"
@@ -509,42 +595,48 @@ class="grid"
 
 </div>
 
+
 </section>
+
 
 
 <script type="module">
 
+
+/* FIREBASE */
+
 import {
-  initializeApp
+initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 
 import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
+getAuth,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
 import {
-  getFirestore,
-  collection,
-  doc,
-  getDocs,
-  setDoc,
-  deleteDoc,
-  onSnapshot
+getFirestore,
+collection,
+doc,
+getDocs,
+setDoc,
+deleteDoc,
+onSnapshot
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
-/* FIREBASE */
+
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -572,15 +664,19 @@ measurementId:
 };
 
 
-const firebaseApp =
+
+const app =
 initializeApp(firebaseConfig);
 
 const auth =
-getAuth(firebaseApp);
+getAuth(app);
 
 const db =
-getFirestore(firebaseApp);
+getFirestore(app);
 
+
+
+/* ADMIN UID */
 
 const ADMIN_UID =
 "NBaVvM86X9SqffFiWI7lA27Isnl1";
@@ -590,271 +686,90 @@ const DEFAULT_MOQ =
 "₹500 Minimum Order Quantity (MOQ)";
 
 
-/* MASTER 37 PRODUCTS */
+
+/* MASTER PRODUCTS */
 
 const MASTER = [
 
-[
-"OSS_001",
-"Bathroom Accessories",
-"DOUBLE GRID SOAP BOX",
-"OSS_001.jpg"
-],
+["OSS_001","Bathroom Accessories","DOUBLE GRID SOAP BOX","OSS_001.jpg"],
 
-[
-"OSS_002",
-"Home & Kitchen",
-"MINI POPCORN MAKER",
-"OSS_002.jpg"
-],
+["OSS_002","Home & Kitchen","MINI POPCORN MAKER","OSS_002.jpg"],
 
-[
-"OSS_003",
-"Water Bottle",
-"2L MOTIVATIONAL WATTER BOTTLE",
-"OSS_003.jpg"
-],
+["OSS_003","Water Bottle","2L MOTIVATIONAL WATTER BOTTLE","OSS_003.jpg"],
 
-[
-"OSS_004",
-"Home & Kitchen",
-"5M OUTDOOR CLOTHESLINE",
-"OSS_004.jpg"
-],
+["OSS_004","Home & Kitchen","5M OUTDOOR CLOTHESLINE","OSS_004.jpg"],
 
-[
-"OSS_005",
-"Home & Kitchen",
-"10M OUTDOOR CLOTHESLINE",
-"OSS_005.jpg"
-],
+["OSS_005","Home & Kitchen","10M OUTDOOR CLOTHESLINE","OSS_005.jpg"],
 
-[
-"OSS_006",
-"Toys",
-"48PCS CAR CONTAINER",
-"OSS_006.jpg"
-],
+["OSS_006","Toys","48PCS CAR CONTAINER","OSS_006.jpg"],
 
-[
-"OSS_007",
-"Water Bottle",
-"3PCS MOTIVATION WATER BOTTLE",
-"OSS_007.jpg"
-],
+["OSS_007","Water Bottle","3PCS MOTIVATION WATER BOTTLE","OSS_007.jpg"],
 
-[
-"OSS_008",
-"Water Bottle",
-"HOT AND COLD DORI BOTTLE",
-"OSS_008.webp"
-],
+["OSS_008","Water Bottle","HOT AND COLD DORI BOTTLE","OSS_008.webp"],
 
-[
-"OSS_009",
-"Water Bottle",
-"1000ML STEEL WATER BOTTLE",
-"OSS_009.jpg"
-],
+["OSS_009","Water Bottle","1000ML STEEL WATER BOTTLE","OSS_009.jpg"],
 
-[
-"OSS_010",
-"Home & Kitchen",
-"VACCUM FLASK SET WITH 3 CUPS",
-"OSS_010.jpg"
-],
+["OSS_010","Home & Kitchen","VACCUM FLASK SET WITH 3 CUPS","OSS_010.jpg"],
 
-[
-"OSS_011",
-"Electric & Smart Gadgets",
-"PLUG MOSQUITO KILLER LAMP",
-"OSS_011.webp"
-],
+["OSS_011","Electric & Smart Gadgets","PLUG MOSQUITO KILLER LAMP","OSS_011.webp"],
 
-[
-"OSS_012",
-"Electric & Smart Gadgets",
-"ELECTRIC GAS LIGHTER",
-"OSS_012.jpg"
-],
+["OSS_012","Electric & Smart Gadgets","ELECTRIC GAS LIGHTER","OSS_012.jpg"],
 
-[
-"OSS_013",
-"Car Accessories",
-"PORTABLE CAR AIR MATTRESS",
-"OSS_013.webp"
-],
+["OSS_013","Car Accessories","PORTABLE CAR AIR MATTRESS","OSS_013.webp"],
 
-[
-"OSS_014",
-"Electric & Smart Gadgets",
-"SOLAR RECHARGEABLE LED FLOOD LIGHT",
-"OSS_014.jpg"
-],
+["OSS_014","Electric & Smart Gadgets","SOLAR RECHARGEABLE LED FLOOD LIGHT","OSS_014.jpg"],
 
-[
-"OSS_015",
-"Tools And Hardware",
-"ANTI SLIP TAPE WITH GLOW IN DARK STRIPE",
-"OSS_015.jpg"
-],
+["OSS_015","Tools And Hardware","ANTI SLIP TAPE WITH GLOW IN DARK STRIPE","OSS_015.jpg"],
 
-[
-"OSS_016",
-"Folding Furniture",
-"PORTABLE INFLATABLE BED",
-"OSS_016.webp"
-],
+["OSS_016","Folding Furniture","PORTABLE INFLATABLE BED","OSS_016.webp"],
 
-[
-"OSS_017",
-"Car Accessories",
-"4PCS MAGNETIC CAR WINDOW CURTAIN",
-"OSS_017.jpg"
-],
+["OSS_017","Car Accessories","4PCS MAGNETIC CAR WINDOW CURTAIN","OSS_017.jpg"],
 
-[
-"OSS_018",
-"Home & Kitchen",
-"CLOTH DRYING ROPE WITH 12 CLIPS",
-"OSS_018.jpg"
-],
+["OSS_018","Home & Kitchen","CLOTH DRYING ROPE WITH 12 CLIPS","OSS_018.jpg"],
 
-[
-"OSS_019",
-"Health & Personal Care",
-"PORTABLE MESH NEBULIZER MACHINE",
-"OSS_019.jpg"
-],
+["OSS_019","Health & Personal Care","PORTABLE MESH NEBULIZER MACHINE","OSS_019.jpg"],
 
-[
-"OSS_020",
-"Smart Stationery",
-"30PCS SELF ADHESIVE TRANSPARENT BOOK COVER",
-"OSS_020.webp"
-],
+["OSS_020","Smart Stationery","30PCS SELF ADHESIVE TRANSPARENT BOOK COVER","OSS_020.webp"],
 
-[
-"OSS_021",
-"Gifts & Decor",
-"7 INCH MOVING SAND ART",
-"OSS_021.jpg"
-],
+["OSS_021","Gifts & Decor","7 INCH MOVING SAND ART","OSS_021.jpg"],
 
-[
-"OSS_022",
-"Smart Gadgets",
-"ALL IN ONE 60W USB FAST CHARGING TRAVEL DATA CABLE SET",
-"OSS_022.webp"
-],
+["OSS_022","Smart Gadgets","ALL IN ONE 60W USB FAST CHARGING TRAVEL DATA CABLE SET","OSS_022.webp"],
 
-[
-"OSS_023",
-"Folding Furniture",
-"PORTABLE FOLDING CHAIR",
-"OSS_023.jpg"
-],
+["OSS_023","Folding Furniture","PORTABLE FOLDING CHAIR","OSS_023.jpg"],
 
-[
-"OSS_024",
-"Multipurpose Cleaning Tool",
-"SLIM FLOOR WIPER MOP WITH SILICONE BLADE & TELESCOPIC HANDLE",
-"OSS_024.webp"
-],
+["OSS_024","Multipurpose Cleaning Tool","SLIM FLOOR WIPER MOP WITH SILICONE BLADE & TELESCOPIC HANDLE","OSS_024.webp"],
 
-[
-"OSS_025",
-"Smart Gadgets",
-"ANTI VIBRATION PADS",
-"OSS_025.jpg"
-],
+["OSS_025","Smart Gadgets","ANTI VIBRATION PADS","OSS_025.jpg"],
 
-[
-"OSS_026",
-"Toys",
-"DANCING JELLYFISH TOY WITH MUSIC & MOVEMENT",
-"OSS_026.jpg"
-],
+["OSS_026","Toys","DANCING JELLYFISH TOY WITH MUSIC & MOVEMENT","OSS_026.jpg"],
 
-[
-"OSS_027",
-"Mobile Accessories",
-"360°METAL DESKTOP MOBILE PHONE STAND",
-"OSS_027.jpg"
-],
+["OSS_027","Mobile Accessories","360°METAL DESKTOP MOBILE PHONE STAND","OSS_027.jpg"],
 
-[
-"OSS_028",
-"Health & Personal Care",
-"ELECTRIC WATER HOT BAG",
-"OSS_028.jpg"
-],
+["OSS_028","Health & Personal Care","ELECTRIC WATER HOT BAG","OSS_028.jpg"],
 
-[
-"OSS_029",
-"Folding Furniture",
-"2.5×6 NON ADJUSTABLE FOLDING BED",
-"OSS_029.jpg"
-],
+["OSS_029","Folding Furniture","2.5×6 NON ADJUSTABLE FOLDING BED","OSS_029.jpg"],
 
-[
-"OSS_030",
-"Folding Furniture",
-"2.5×6 ADJUSTABLE FOLDING BED",
-"OSS_030.jpg"
-],
+["OSS_030","Folding Furniture","2.5×6 ADJUSTABLE FOLDING BED","OSS_030.jpg"],
 
-[
-"OSS_031",
-"Water Bottle",
-"HOT & COLD 1000ML STEEL WATER BOTTLE",
-"OSS_031.jpg"
-],
+["OSS_031","Water Bottle","HOT & COLD 1000ML STEEL WATER BOTTLE","OSS_031.jpg"],
 
-[
-"OSS_032",
-"Car Accessories",
-"2PCS HD VISION DRIVING GLASSES",
-"OSS_032.jpg"
-],
+["OSS_032","Car Accessories","2PCS HD VISION DRIVING GLASSES","OSS_032.jpg"],
 
-[
-"OSS_033",
-"Travel Accessories",
-"PORTABLE 2 IN 1 CAMPING GAS STOVE",
-"OSS_033.jpg"
-],
+["OSS_033","Travel Accessories","PORTABLE 2 IN 1 CAMPING GAS STOVE","OSS_033.jpg"],
 
-[
-"OSS_034",
-"Gifts & Decor",
-"ELECTRIC KAPOOR DANI WITH NIGHT LAMP",
-"OSS_034.jpg"
-],
+["OSS_034","Gifts & Decor","ELECTRIC KAPOOR DANI WITH NIGHT LAMP","OSS_034.jpg"],
 
-[
-"OSS_035",
-"Home & Kitchen",
-"WATER-ABSORBING RUBBER DOORMAT",
-"OSS_035.jpg"
-],
+["OSS_035","Home & Kitchen","WATER-ABSORBING RUBBER DOORMAT","OSS_035.jpg"],
 
-[
-"OSS_036",
-"Smart Stationery",
-"MAGIC PRACTICE COPYBOOK",
-"OSS_036.jpg"
-],
+["OSS_036","Smart Stationery","MAGIC PRACTICE COPYBOOK","OSS_036.jpg"],
 
-[
-"OSS_037",
-"Multipurpose Cleaning Cloth",
-"40×40 MICROFIBER CLOTH (ONLY YELLOW)",
-"OSS_037.jpg"
-]
+["OSS_037","Multipurpose Cleaning Cloth","40×40 MICROFIBER CLOTH (ONLY YELLOW)","OSS_037.jpg"]
 
 ];
 
+
+
+/* HELPERS */
 
 const $ =
 id =>
@@ -866,16 +781,25 @@ let allProducts = [];
 let editingCode = null;
 
 
-/* MESSAGE */
+
+function masterProduct(code){
+
+return MASTER.find(
+p => p[0] === code
+);
+
+}
+
+
 
 function showMessage(
 element,
-text,
+message,
 type="error"
 ){
 
 element.textContent =
-text;
+message;
 
 element.className =
 "message " + type;
@@ -886,47 +810,29 @@ element.style.display =
 }
 
 
-/* MASTER FIND */
 
-function findMaster(
-code
-){
+function clearMessage(element){
 
-return MASTER.find(
-p =>
-p[0] === code
-);
+element.style.display =
+"none";
+
+element.textContent =
+"";
 
 }
 
 
-/* ESCAPE */
 
-function escapeHtml(
-value
-){
+function escapeHtml(value){
 
-return String(
-value ?? ""
-)
-.replace(
-/&/g,
-"&amp;"
-)
-.replace(
-/</g,
-"&lt;"
-)
-.replace(
-/>/g,
-"&gt;"
-)
-.replace(
-/"/g,
-"&quot;"
-);
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;");
 
 }
+
 
 
 /* CLEAR FORM */
@@ -938,24 +844,28 @@ editingCode = null;
 $("formTitle").textContent =
 "Add New Product";
 
-$("typeBadge").textContent =
+$("formBadge").textContent =
 "NEW PRODUCT";
 
-$("typeBadge").className =
+$("formBadge").className =
 "badge new";
 
+$("masterNotice")
+.classList
+.add("hidden");
 
-$("code").value =
-"";
+$("newNotice")
+.classList
+.remove("hidden");
 
-$("name").value =
-"";
 
-$("category").value =
-"";
+$("code").value = "";
 
-$("image").value =
-"";
+$("name").value = "";
+
+$("category").value = "";
+
+$("image").value = "";
 
 $("stock").value =
 "In Stock";
@@ -964,22 +874,18 @@ $("moq").value =
 DEFAULT_MOQ;
 
 
-$("code").readOnly =
-false;
+$("code").readOnly = false;
 
-$("name").readOnly =
-false;
+$("name").readOnly = false;
 
-$("category").readOnly =
-false;
+$("category").readOnly = false;
 
-$("image").readOnly =
-false;
+$("image").readOnly = false;
 
 
-$("preview").classList.add(
-"hidden"
-);
+$("preview")
+.classList
+.add("hidden");
 
 
 $("saveBtn").textContent =
@@ -988,119 +894,137 @@ $("saveBtn").textContent =
 $("saveBtn").className =
 "green";
 
+
+clearMessage(
+$("formMessage")
+);
+
 }
 
 
-/* FILL FORM */
 
-function fillForm(
-product
-){
+/* EDIT PRODUCT */
+
+function editProduct(product){
 
 editingCode =
 product.code;
 
+
 const master =
-findMaster(
-product.code
-);
+masterProduct(product.code);
 
-const locked =
-!!master;
 
+if(master){
 
 $("formTitle").textContent =
-locked
-?
-"Edit Master Product"
-:
+"Edit Master Product";
+
+$("formBadge").textContent =
+"MASTER PRODUCT — LOCKED";
+
+$("formBadge").className =
+"badge locked";
+
+$("masterNotice")
+.classList
+.remove("hidden");
+
+$("newNotice")
+.classList
+.add("hidden");
+
+}else{
+
+$("formTitle").textContent =
 "Edit New Product";
 
-
-$("typeBadge").textContent =
-locked
-?
-"MASTER PRODUCT — LOCKED"
-:
+$("formBadge").textContent =
 "NEW PRODUCT — EDITABLE";
 
-
-$("typeBadge").className =
-locked
-?
-"badge"
-:
+$("formBadge").className =
 "badge new";
+
+$("masterNotice")
+.classList
+.add("hidden");
+
+$("newNotice")
+.classList
+.remove("hidden");
+
+}
 
 
 $("code").value =
-product.code;
-
+product.code || "";
 
 $("name").value =
 product.name || "";
 
-
 $("category").value =
 product.category || "";
-
 
 $("image").value =
 product.image || "";
 
-
 $("stock").value =
-product.stock ||
-"In Stock";
-
+product.stock || "In Stock";
 
 $("moq").value =
-product.moq ||
-DEFAULT_MOQ;
+product.moq || DEFAULT_MOQ;
 
 
-/*
-Original 37 Master Products:
-Code, Name, Category and Photo
-are protected.
-*/
 
-$("code").readOnly =
-locked;
+/* LOCK MASTER DATA */
 
-$("name").readOnly =
-locked;
+if(master){
 
-$("category").readOnly =
-locked;
+$("code").readOnly = true;
 
-$("image").readOnly =
-locked;
+$("name").readOnly = true;
+
+$("category").readOnly = true;
+
+$("image").readOnly = true;
+
+}else{
+
+$("code").readOnly = false;
+
+$("name").readOnly = false;
+
+$("category").readOnly = false;
+
+$("image").readOnly = false;
+
+}
 
 
-if(
-product.image
-){
+
+if(product.image){
 
 $("preview").src =
 product.image;
 
-$("preview").classList.remove(
-"hidden"
-);
+$("preview")
+.classList
+.remove("hidden");
 
-}
-else{
+}else{
 
-$("preview").classList.add(
-"hidden"
-);
+$("preview")
+.classList
+.add("hidden");
 
 }
 
 
 $("saveBtn").textContent =
 "Save Changes";
+
+$("saveBtn").className =
+"blue";
 
 
 window.scrollTo({
@@ -1109,6 +1033,7 @@ behavior:"smooth"
 });
 
 }
+
 
 
 /* RENDER */
@@ -1122,11 +1047,11 @@ $("search")
 .toLowerCase();
 
 
-const list =
-allProducts.filter(
-product => {
+const filtered =
+allProducts.filter(product => {
 
 const text =
+
 (
 product.code +
 " " +
@@ -1136,72 +1061,63 @@ product.code +
 )
 .toLowerCase();
 
-return text.includes(
-query
-);
+return text.includes(query);
 
-}
-);
+});
 
 
 $("products").innerHTML =
 "";
 
 
-list.forEach(
-product => {
+filtered.forEach(product => {
 
 const master =
-!!findMaster(
-product.code
-);
+!!masterProduct(product.code);
 
 
 let statusClass =
-"in";
+"stockIn";
 
 
-if(
-product.stock ===
-"Coming Soon"
-){
+if(product.stock === "Coming Soon"){
 
 statusClass =
-"coming";
+"stockComing";
 
 }
 
 
-if(
-product.stock ===
-"Out of Stock"
-){
+if(product.stock === "Out of Stock"){
 
 statusClass =
-"out";
+"stockOut";
 
 }
 
 
 const div =
-document.createElement(
-"div"
-);
+document.createElement("div");
 
 div.className =
 "product";
 
 
-const image =
+const imageHTML =
 product.image
+
 ?
+
 `
 <img
 src="${escapeHtml(product.image)}"
 alt=""
+onerror="this.style.display='none'"
 >
 `
+
 :
+
 `
 <div
 style="
@@ -1210,6 +1126,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 background:#f7f7f7;
+color:#777;
 "
 >
 No Image
@@ -1217,40 +1134,54 @@ No Image
 `;
 
 
-div.innerHTML = `
+div.innerHTML =
 
-${image}
+imageHTML +
 
-<div class="body">
+`
 
-<div
-class="badge ${master ? "" : "new"}"
->
+<div class="productBody">
+
+<span class="badge ${master ? "" : "new"}">
+
 ${master ? "MASTER" : "NEW PRODUCT"}
-</div>
+
+</span>
 
 <div class="code">
+
 ${escapeHtml(product.code)}
+
 </div>
 
 <div class="name">
+
 ${escapeHtml(product.name)}
+
 </div>
 
-<div class="cat">
+<div class="category">
+
 ${escapeHtml(product.category)}
+
 </div>
 
 <div class="${statusClass}">
-● ${escapeHtml(
-product.stock || "In Stock"
-)}
+
+● ${escapeHtml(product.stock || "In Stock")}
+
+</div>
+
+<div class="note">
+
+${escapeHtml(product.moq || DEFAULT_MOQ)}
+
 </div>
 
 <div class="actions">
 
 <button
-class="edit"
+class="editBtn blue"
 data-code="${escapeHtml(product.code)}"
 >
 Edit
@@ -1259,11 +1190,18 @@ Edit
 ${
 master
 ?
-""
+`
+<button
+disabled
+class="gray"
+>
+🔒 Protected
+</button>
+`
 :
 `
 <button
-class="del red"
+class="deleteBtn red"
 data-code="${escapeHtml(product.code)}"
 >
 Delete
@@ -1279,18 +1217,16 @@ Delete
 
 
 $("products")
-.appendChild(
-div
-);
+.appendChild(div);
 
 });
 
 
 $("count").textContent =
-" — " +
-allProducts.length;
+" — " + allProducts.length;
 
 }
+
 
 
 /* LOGIN */
@@ -1299,19 +1235,13 @@ $("loginBtn").onclick =
 async () => {
 
 const email =
-$("email")
-.value
-.trim();
+$("email").value.trim();
 
 const password =
-$("password")
-.value;
+$("password").value;
 
 
-if(
-!email ||
-!password
-){
+if(!email || !password){
 
 showMessage(
 $("loginMessage"),
@@ -1337,14 +1267,9 @@ password
 );
 
 
-if(
-result.user.uid !==
-ADMIN_UID
-){
+if(result.user.uid !== ADMIN_UID){
 
-await signOut(
-auth
-);
+await signOut(auth);
 
 showMessage(
 $("loginMessage"),
@@ -1362,24 +1287,27 @@ $("loginMessage"),
 "success"
 );
 
-
 }
 catch(error){
 
-console.error(
-error
-);
+console.error(error);
+
+let msg =
+"Login Error: " +
+error.message;
+
+
+if(error.code === "auth/invalid-credential"){
+
+msg =
+"Email અથવા Password ખોટો છે.";
+
+}
 
 
 showMessage(
 $("loginMessage"),
-error.code ===
-"auth/invalid-credential"
-?
-"Email અથવા Password ખોટો છે."
-:
-"Login Error: " +
-error.message
+msg
 );
 
 }
@@ -1393,11 +1321,12 @@ false;
 };
 
 
+
 /* LOGOUT */
 
 $("logoutBtn").onclick =
-() =>
-signOut(auth);
+() => signOut(auth);
+
 
 
 /* CLEAR */
@@ -1406,10 +1335,12 @@ $("clearBtn").onclick =
 clearForm;
 
 
+
 /* SEARCH */
 
 $("search").oninput =
 render;
+
 
 
 /* IMAGE PREVIEW */
@@ -1417,108 +1348,92 @@ render;
 $("image").oninput =
 () => {
 
-const image =
+const value =
 $("image")
 .value
 .trim();
 
 
-if(
-image
-){
+if(value){
 
 $("preview").src =
-image;
+value;
 
 $("preview")
 .classList
-.remove(
-"hidden"
-);
+.remove("hidden");
 
-}
-else{
+}else{
 
 $("preview")
 .classList
-.add(
-"hidden"
-);
+.add("hidden");
 
 }
 
 };
 
 
-/* PRODUCT BUTTONS */
+
+/* PRODUCT ACTIONS */
 
 $("products").onclick =
 async event => {
 
 
-const editButton =
-event.target.closest(
-".edit"
-);
+const edit =
+event.target.closest(".editBtn");
+
+const del =
+event.target.closest(".deleteBtn");
 
 
-const deleteButton =
-event.target.closest(
-".del"
-);
-
-
-if(
-editButton
-){
+if(edit){
 
 const product =
 allProducts.find(
 p =>
 p.code ===
-editButton.dataset.code
+edit.dataset.code
 );
 
 
-if(
-product
-){
+if(product){
 
-fillForm(
-product
-);
+editProduct(product);
 
 }
-
-}
-
-
-if(
-deleteButton
-){
-
-const code =
-deleteButton.dataset.code;
-
-
-if(
-findMaster(code)
-){
 
 return;
 
 }
 
 
-const confirmDelete =
+if(del){
+
+const code =
+del.dataset.code;
+
+
+if(masterProduct(code)){
+
+showMessage(
+$("formMessage"),
+"Master Product delete કરી શકાતું નથી."
+);
+
+return;
+
+}
+
+
+const ok =
 confirm(
 "શું તમે આ New Product delete કરવા માંગો છો?"
 );
 
 
-if(
-!confirmDelete
-){
+if(!ok){
 
 return;
 
@@ -1543,10 +1458,7 @@ $("formMessage"),
 );
 
 
-if(
-editingCode ===
-code
-){
+if(editingCode === code){
 
 clearForm();
 
@@ -1568,54 +1480,34 @@ error.message
 };
 
 
-/* SAVE / ADD */
+
+/* SAVE */
 
 $("saveBtn").onclick =
 async () => {
 
 
 const code =
-$("code")
-.value
-.trim();
-
+$("code").value.trim();
 
 const name =
-$("name")
-.value
-.trim();
-
+$("name").value.trim();
 
 const category =
-$("category")
-.value
-.trim();
-
+$("category").value.trim();
 
 const image =
-$("image")
-.value
-.trim();
-
+$("image").value.trim();
 
 const stock =
-$("stock")
-.value;
-
+$("stock").value;
 
 const moq =
-$("moq")
-.value
-.trim()
-||
+$("moq").value.trim() ||
 DEFAULT_MOQ;
 
 
-if(
-!code ||
-!name ||
-!category
-){
+if(!code || !name || !category){
 
 showMessage(
 $("formMessage"),
@@ -1627,24 +1519,12 @@ return;
 }
 
 
-const master =
-findMaster(
-code
-);
 
+/* NEW PRODUCT */
 
-/*
-ADD NEW
-*/
+if(editingCode === null){
 
-if(
-editingCode ===
-null
-){
-
-if(
-master
-){
+if(masterProduct(code)){
 
 showMessage(
 $("formMessage"),
@@ -1672,27 +1552,85 @@ return;
 
 }
 
+
+$("saveBtn").disabled =
+true;
+
+
+try{
+
+await setDoc(
+
+doc(
+db,
+"products",
+code
+),
+
+{
+
+code:code,
+
+name:name,
+
+category:category,
+
+image:image,
+
+stock:stock,
+
+status:stock,
+
+moq:moq,
+
+isMaster:false
+
 }
 
+);
 
-/*
-EDIT
-*/
-
-if(
-editingCode &&
-editingCode !==
-code
-){
 
 showMessage(
 $("formMessage"),
-"Existing Product નો Code બદલવો નહીં."
+"New Product successfully added.",
+"success"
 );
+
+
+clearForm();
+
+}
+catch(error){
+
+console.error(error);
+
+showMessage(
+$("formMessage"),
+"Save Error: " +
+error.message
+);
+
+}
+finally{
+
+$("saveBtn").disabled =
+false;
+
+}
 
 return;
 
 }
+
+
+
+/* EDIT EXISTING */
+
+const oldCode =
+editingCode;
+
+const master =
+masterProduct(oldCode);
 
 
 $("saveBtn").disabled =
@@ -1702,18 +1640,19 @@ true;
 try{
 
 
-let data;
+/* MASTER */
 
+if(master){
 
-/*
-MASTER PRODUCT
-*/
+await setDoc(
 
-if(
-master
-){
+doc(
+db,
+"products",
+oldCode
+),
 
-data = {
+{
 
 code:
 master[0],
@@ -1736,47 +1675,61 @@ stock,
 moq:
 moq,
 
-isMaster:
-true
+isMaster:true
 
-};
+},
+
+{
+merge:true
+}
+
+);
+
+
+showMessage(
+$("formMessage"),
+"Master Product updated successfully.",
+"success"
+);
+
+
+clearForm();
+
+return;
 
 }
 
 
-/*
-NEW PRODUCT
-*/
 
-else{
+/* NEW PRODUCT */
 
-data = {
+if(oldCode !== code){
 
-code:
-code,
+if(
+allProducts.some(
+p =>
+p.code === code &&
+p.code !== oldCode
+)
+){
 
-name:
-name,
+showMessage(
+$("formMessage"),
+"આ Product Code પહેલેથી હાજર છે."
+);
 
-category:
-category,
+return;
 
-image:
-image,
+}
 
-stock:
-stock,
 
-status:
-stock,
-
-moq:
-moq,
-
-isMaster:
-false
-
-};
+await deleteDoc(
+doc(
+db,
+"products",
+oldCode
+)
+);
 
 }
 
@@ -1789,7 +1742,25 @@ db,
 code
 ),
 
-data,
+{
+
+code:code,
+
+name:name,
+
+category:category,
+
+image:image,
+
+stock:stock,
+
+status:stock,
+
+moq:moq,
+
+isMaster:false
+
+},
 
 {
 merge:true
@@ -1800,11 +1771,7 @@ merge:true
 
 showMessage(
 $("formMessage"),
-editingCode
-?
-"Product updated successfully."
-:
-"New Product added successfully.",
+"Product updated successfully.",
 "success"
 );
 
@@ -1815,9 +1782,7 @@ clearForm();
 }
 catch(error){
 
-console.error(
-error
-);
+console.error(error);
 
 showMessage(
 $("formMessage"),
@@ -1836,9 +1801,10 @@ false;
 };
 
 
+
 /* INITIALIZE MASTER PRODUCTS */
 
-async function initializeMaster(){
+async function initializeMasterProducts(){
 
 const snapshot =
 await getDocs(
@@ -1849,66 +1815,47 @@ db,
 );
 
 
-const old = {};
+const existing = {};
 
 
-snapshot.forEach(
-item => {
+snapshot.forEach(item => {
 
-old[item.id] =
+existing[item.id] =
 item.data();
 
 });
 
 
-for(
-const product of MASTER
-){
+for(const p of MASTER){
+
+if(!existing[p[0]]){
 
 await setDoc(
 
 doc(
 db,
 "products",
-product[0]
+p[0]
 ),
 
 {
 
-code:
-product[0],
+code:p[0],
 
-name:
-product[2],
+name:p[2],
 
-category:
-product[1],
+category:p[1],
 
-image:
-product[3],
+image:p[3],
 
-stock:
-old[product[0]]
-?.stock ||
-"In Stock",
+stock:"In Stock",
 
-status:
-old[product[0]]
-?.stock ||
-"In Stock",
+status:"In Stock",
 
-moq:
-old[product[0]]
-?.moq ||
-DEFAULT_MOQ,
+moq:DEFAULT_MOQ,
 
-isMaster:
-true
+isMaster:true
 
-},
-
-{
-merge:true
 }
 
 );
@@ -1917,8 +1864,11 @@ merge:true
 
 }
 
+}
 
-/* FIRESTORE LISTENER */
+
+
+/* FIRESTORE LIVE LISTENER */
 
 function startListener(){
 
@@ -1931,95 +1881,84 @@ db,
 
 snapshot => {
 
-allProducts =
-[];
+allProducts = [];
 
 
-snapshot.forEach(
-item => {
+snapshot.forEach(item => {
+
+const data =
+item.data();
 
 allProducts.push({
 
-...item.data(),
+...data,
 
-code:
-item.id
-
-});
+code:item.id
 
 });
 
+});
 
-/*
-Keep Master 37
-in exact original order.
-New products after them.
-*/
 
-allProducts.sort(
-(a,b) => {
+/* MASTER FIRST */
 
-let ai =
+allProducts.sort((a,b) => {
+
+const ai =
 MASTER.findIndex(
 p =>
 p[0] === a.code
 );
 
-
-let bi =
+const bi =
 MASTER.findIndex(
 p =>
 p[0] === b.code
 );
 
 
-if(
-ai < 0
-){
+if(ai === -1 && bi === -1){
 
-ai =
-9999;
+return a.code.localeCompare(
+b.code
+);
 
 }
 
 
-if(
-bi < 0
-){
+if(ai === -1){
 
-bi =
-9999;
+return 1;
+
+}
+
+
+if(bi === -1){
+
+return -1;
 
 }
 
 
 return ai - bi;
 
-}
-);
+});
 
 
 $("loading")
 .classList
-.add(
-"hidden"
-);
+.add("hidden");
 
 
 render();
 
 },
 
-
 error => {
 
-console.error(
-error
-);
+console.error(error);
 
-
-$("loading")
-.textContent =
+$("loading").textContent =
 "Firestore Error: " +
 error.message;
 
@@ -2030,7 +1969,8 @@ error.message;
 }
 
 
-/* AUTH */
+
+/* AUTH STATE */
 
 onAuthStateChanged(
 
@@ -2039,35 +1979,24 @@ auth,
 async user => {
 
 
-if(
-!user
-){
+if(!user){
 
 $("loginSection")
 .classList
-.remove(
-"hidden"
-);
+.remove("hidden");
 
 $("adminSection")
 .classList
-.add(
-"hidden"
-);
+.add("hidden");
 
 return;
 
 }
 
 
-if(
-user.uid !==
-ADMIN_UID
-){
+if(user.uid !== ADMIN_UID){
 
-await signOut(
-auth
-);
+await signOut(auth);
 
 return;
 
@@ -2076,29 +2005,23 @@ return;
 
 $("loginSection")
 .classList
-.add(
-"hidden"
-);
+.add("hidden");
 
 $("adminSection")
 .classList
-.remove(
-"hidden"
-);
+.remove("hidden");
 
 
 try{
 
-await initializeMaster();
+await initializeMasterProducts();
 
 startListener();
 
 }
 catch(error){
 
-console.error(
-error
-);
+console.error(error);
 
 showMessage(
 $("adminMessage"),
