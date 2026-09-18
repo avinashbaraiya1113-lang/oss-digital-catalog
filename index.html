@@ -1,87 +1,229 @@
 <!doctype html>
 <html lang="en">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>ONE STOP SOLUTION (OSS) — Wholesale Catalogue</title>
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
 
-<link rel="icon" href="538820.jpg">
-<link rel="stylesheet" href="style.css">
+<title>
+ONE STOP SOLUTION (OSS) — Wholesale Catalogue
+</title>
+
+<link
+  rel="icon"
+  href="538820.jpg"
+>
+
+<link
+  rel="stylesheet"
+  href="style.css"
+>
+
 </head>
+
 
 <body>
 
 <div class="page">
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
-<div class="brand">
-<img src="538820.jpg" alt="OSS">
+  <div class="brand">
 
-<div>
-<h1>ONE STOP SOLUTION <span>(OSS)</span></h1>
-<p>EVERY PROBLEM <b>ONE SOLUTION</b></p>
-</div>
+    <img
+      src="538820.jpg"
+      alt="OSS"
+    >
 
-</div>
+    <div>
 
-<div class="hero">
-<div class="hero-red">WHOLESALE CATALOGUE</div>
-<p>Wide Range • Quality • Fast Delivery • Support</p>
-</div>
+      <h1>
+        ONE STOP SOLUTION
+        <span>(OSS)</span>
+      </h1>
 
-<div class="tools">
+      <p>
+        EVERY PROBLEM
+        <b>ONE SOLUTION</b>
+      </p>
 
-<input id="search" placeholder="Search product name or code…">
+    </div>
 
-<div id="cats" class="cats"></div>
+  </div>
 
-<div class="filters">
-<button data-filter="All">All Stock</button>
-<button data-filter="In Stock">In Stock</button>
-<button data-filter="Coming Soon">Coming Soon</button>
-<button data-filter="Out of Stock">Out of Stock</button>
-</div>
 
-</div>
+  <div class="hero">
+
+    <div class="hero-red">
+      WHOLESALE CATALOGUE
+    </div>
+
+    <p>
+      Wide Range • Quality • Fast Delivery • Support
+    </p>
+
+  </div>
+
+
+  <div class="tools">
+
+    <input
+      id="search"
+      placeholder="Search product name or code…"
+      autocomplete="off"
+    >
+
+
+    <div
+      id="cats"
+      class="cats"
+    ></div>
+
+
+    <div class="filters">
+
+      <button
+        data-filter="All"
+      >
+        All Stock
+      </button>
+
+      <button
+        data-filter="In Stock"
+      >
+        In Stock
+      </button>
+
+      <button
+        data-filter="Coming Soon"
+      >
+        Coming Soon
+      </button>
+
+      <button
+        data-filter="Out of Stock"
+      >
+        Out of Stock
+      </button>
+
+    </div>
+
+  </div>
 
 </header>
 
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
 <main>
 
-<div class="count" id="count"></div>
+  <div
+    class="count"
+    id="count"
+  ></div>
 
-<section id="grid" class="grid"></section>
+
+  <section
+    id="grid"
+    class="grid"
+  ></section>
 
 </main>
 
-<div id="bar" class="enquiry-bar hidden">
 
-<div>
-<b id="selectedCount">0</b> products selected
+
+<!-- =========================
+     MULTIPLE ENQUIRY BAR
+========================= -->
+
+<div
+  id="bar"
+  class="enquiry-bar hidden"
+>
+
+  <div>
+
+    <b id="selectedCount">
+      0
+    </b>
+
+    products selected
+
+  </div>
+
+
+  <button id="multi">
+    Send Enquiry on WhatsApp
+  </button>
+
 </div>
 
-<button id="multi">Send Enquiry on WhatsApp</button>
 
-</div>
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
-<img src="538820.jpg">
+  <img
+    src="538820.jpg"
+    alt="OSS"
+  >
 
-<div>
-<b>ONE STOP SOLUTION (OSS)</b><br>
-Every Problem One Solution<br>
-WhatsApp: 9499806747<br>
-Instagram: @onestopsolution4325
-</div>
+
+  <div>
+
+    <b>
+      ONE STOP SOLUTION (OSS)
+    </b>
+
+    <br>
+
+    Every Problem One Solution
+
+    <br>
+
+    WhatsApp: 9499806747
+
+    <br>
+
+    Instagram: @onestopsolution4325
+
+  </div>
 
 </footer>
 
+
 </div>
 
-<script src="app.js"></script>
+
+
+<!-- =========================
+     IMPORTANT
+     app.js uses Firebase imports,
+     therefore type="module" is required.
+========================= -->
+
+<script
+  type="module"
+  src="app.js"
+></script>
+
 
 </body>
+
 </html>
