@@ -1,1 +1,874 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
+<title>OSS Admin Panel</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f6f8;
+  color:#172033;
+}
+
+header{
+  background:#101c3a;
+  color:#fff;
+  padding:18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+header img{
+  width:58px;
+  height:58px;
+  object-fit:contain;
+  border-radius:50%;
+}
+
+header h1{
+  margin:0;
+  font-size:22px;
+}
+
+header p{
+  margin:5px 0 0;
+  color:#f2c94c;
+  font-size:13px;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 4px 18px rgba(0,0,0,.08);
+}
+
+h2{
+  margin-top:0;
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin:6px 0 14px;
+  border:1px solid #ccd2dc;
+  border-radius:8px;
+  font-size:15px;
+}
+
+button{
+  border:0;
+  border-radius:8px;
+  padding:11px 16px;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.primary{
+  background:#101c3a;
+  color:#fff;
+}
+
+.gold{
+  background:#d9a928;
+  color:#111;
+}
+
+.danger{
+  background:#d93636;
+  color:#fff;
+}
+
+.logout{
+  margin-left:auto;
+  background:#fff;
+  color:#101c3a;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.message{
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:15px;
+  display:none;
+}
+
+.success{
+  background:#dff5e5;
+  color:#17652d;
+}
+
+.error{
+  background:#ffe1e1;
+  color:#8b1515;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.product{
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:14px;
+  margin-bottom:12px;
+  display:flex;
+  gap:15px;
+  align-items:center;
+}
+
+.product img{
+  width:85px;
+  height:85px;
+  object-fit:contain;
+  border-radius:8px;
+  background:#f5f5f5;
+}
+
+.product-info{
+  flex:1;
+}
+
+.product-info h3{
+  margin:0 0 5px;
+  font-size:17px;
+}
+
+.product-info p{
+  margin:4px 0;
+  font-size:13px;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.stock{
+  font-weight:bold;
+}
+
+@media(max-width:650px){
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .product{
+    align-items:flex-start;
+  }
+
+  .product img{
+    width:70px;
+    height:70px;
+  }
+
+  .actions{
+    margin-top:10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="538820.jpg" alt="OSS">
+  <div>
+    <h1>ONE STOP SOLUTION (OSS)</h1>
+    <p>ADMIN PANEL</p>
+  </div>
+  <button id="logoutBtn" class="logout hidden">Logout</button>
+</header>
+
+<div class="container">
+
+  <!-- LOGIN -->
+  <div id="loginBox" class="card">
+    <h2>Admin Login</h2>
+
+    <div id="loginMessage" class="message error"></div>
+
+    <input id="email" type="email"
+      placeholder="Admin Email">
+
+    <input id="password" type="password"
+      placeholder="Password">
+
+    <button id="loginBtn" class="primary">
+      Login
+    </button>
+  </div>
+
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel" class="hidden">
+
+    <div id="message" class="message"></div>
+
+    <!-- PRODUCT FORM -->
+    <div class="card">
+
+      <h2 id="formTitle">Add Product</h2>
+
+      <div class="form-grid">
+
+        <div>
+          <label>Product Code</label>
+          <input id="code"
+            placeholder="Example: OSS_038">
+        </div>
+
+        <div>
+          <label>Product Name</label>
+          <input id="name"
+            placeholder="Product name">
+        </div>
+
+        <div>
+          <label>Category</label>
+          <select id="category">
+            <option value="">Select Category</option>
+            <option>Water Bottle</option>
+            <option>Home & Kitchen</option>
+            <option>Electric & Smart Gadgets</option>
+            <option>Car Accessories</option>
+            <option>Smart Gadgets</option>
+            <option>Health & Personal Care</option>
+            <option>Smart Stationery</option>
+            <option>Gifts & Decor</option>
+            <option>Folding Furniture</option>
+            <option>Multipurpose Cleaning Tool</option>
+            <option>Toys</option>
+            <option>Mobile Accessories</option>
+            <option>Travel Accessories</option>
+            <option>Multipurpose Cleaning Cloth</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Stock Status</label>
+          <select id="stock">
+            <option value="In Stock">In Stock</option>
+            <option value="Coming Soon">Coming Soon</option>
+            <option value="Out of Stock">Out of Stock</option>
+          </select>
+        </div>
+
+      </div>
+
+      <label>Product Image URL</label>
+      <input id="image"
+        placeholder="Example: OSS_001.jpg">
+
+      <button id="saveBtn" class="gold">
+        Save Product
+      </button>
+
+      <button id="cancelBtn"
+        class="hidden">
+        Cancel Edit
+      </button>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+    <div class="card">
+
+      <h2>Products</h2>
+
+      <input id="adminSearch"
+        placeholder="Search product...">
+
+      <div id="productsList">
+        Loading products...
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  deleteDoc,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+/* FIREBASE */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBY7FpGggnMnv-IsqG81rjY1ofCWRm48wk",
+  authDomain: "oss-digital-catalog.firebaseapp.com",
+  projectId: "oss-digital-catalog",
+  storageBucket: "oss-digital-catalog.firebasestorage.app",
+  messagingSenderId: "294933773409",
+  appId: "1:294933773409:web:3a62fc14daaa9d344cfe20",
+  measurementId: "G-GT8YNKQJ5K"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+/* YOUR ADMIN UID */
+
+const ADMIN_UID =
+"NBaVvM86X9SqffFiWI7lA27Isnl1";
+
+
+/* ELEMENTS */
+
+const loginBox =
+document.getElementById("loginBox");
+
+const adminPanel =
+document.getElementById("adminPanel");
+
+const logoutBtn =
+document.getElementById("logoutBtn");
+
+const loginBtn =
+document.getElementById("loginBtn");
+
+const email =
+document.getElementById("email");
+
+const password =
+document.getElementById("password");
+
+const code =
+document.getElementById("code");
+
+const name =
+document.getElementById("name");
+
+const category =
+document.getElementById("category");
+
+const stock =
+document.getElementById("stock");
+
+const image =
+document.getElementById("image");
+
+const saveBtn =
+document.getElementById("saveBtn");
+
+const cancelBtn =
+document.getElementById("cancelBtn");
+
+const productsList =
+document.getElementById("productsList");
+
+const adminSearch =
+document.getElementById("adminSearch");
+
+const message =
+document.getElementById("message");
+
+const loginMessage =
+document.getElementById("loginMessage");
+
+
+let products = [];
+let editingCode = null;
+
+
+/* MESSAGE */
+
+function showMessage(text,type="success"){
+
+  message.textContent = text;
+
+  message.className =
+    "message " + type;
+
+  message.style.display = "block";
+
+  setTimeout(()=>{
+    message.style.display = "none";
+  },3000);
+}
+
+
+function showLoginError(text){
+
+  loginMessage.textContent = text;
+
+  loginMessage.style.display = "block";
+
+}
+
+
+/* LOGIN */
+
+loginBtn.addEventListener("click",async()=>{
+
+  const mail = email.value.trim();
+  const pass = password.value;
+
+  if(!mail || !pass){
+
+    showLoginError(
+      "Please enter email and password."
+    );
+
+    return;
+  }
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      mail,
+      pass
+    );
+
+  }catch(error){
+
+    showLoginError(
+      "Login failed. Please check your email and password."
+    );
+
+  }
+
+});
+
+
+/* AUTH CHECK */
+
+onAuthStateChanged(auth,user=>{
+
+  if(user && user.uid === ADMIN_UID){
+
+    loginBox.classList.add("hidden");
+
+    adminPanel.classList.remove("hidden");
+
+    logoutBtn.classList.remove("hidden");
+
+    loadProducts();
+
+  }else{
+
+    loginBox.classList.remove("hidden");
+
+    adminPanel.classList.add("hidden");
+
+    logoutBtn.classList.add("hidden");
+
+    if(user){
+
+      signOut(auth);
+
+      showLoginError(
+        "This account is not authorized."
+      );
+
+    }
+
+  }
+
+});
+
+
+/* LOGOUT */
+
+logoutBtn.addEventListener("click",()=>{
+
+  signOut(auth);
+
+});
+
+
+/* LOAD PRODUCTS */
+
+function loadProducts(){
+
+  const ref =
+    collection(db,"products");
+
+  onSnapshot(ref,snapshot=>{
+
+    products = [];
+
+    snapshot.forEach(item=>{
+
+      products.push({
+        id:item.id,
+        ...item.data()
+      });
+
+    });
+
+    products.sort((a,b)=>
+      String(a.code || a.id)
+      .localeCompare(
+        String(b.code || b.id),
+        undefined,
+        {numeric:true}
+      )
+    );
+
+    renderProducts();
+
+  },error=>{
+
+    showMessage(
+      "Could not load products.",
+      "error"
+    );
+
+  });
+
+}
+
+
+/* RENDER */
+
+function renderProducts(){
+
+  const search =
+    adminSearch.value
+    .trim()
+    .toLowerCase();
+
+  const filtered =
+    products.filter(p=>{
+
+      const text =
+        `${p.code || ""} ${p.name || ""} ${p.category || ""}`
+        .toLowerCase();
+
+      return text.includes(search);
+
+    });
+
+
+  if(filtered.length === 0){
+
+    productsList.innerHTML =
+      "<p>No products found.</p>";
+
+    return;
+
+  }
+
+
+  productsList.innerHTML =
+    filtered.map(p=>`
+
+      <div class="product">
+
+        <img
+          src="${p.image || "538820.jpg"}"
+          onerror="this.src='538820.jpg'"
+          alt="Product">
+
+        <div class="product-info">
+
+          <h3>
+            ${escapeHtml(p.name || "Unnamed Product")}
+          </h3>
+
+          <p>
+            <b>Code:</b>
+            ${escapeHtml(p.code || p.id)}
+          </p>
+
+          <p>
+            <b>Category:</b>
+            ${escapeHtml(p.category || "-")}
+          </p>
+
+          <p class="stock">
+            Stock:
+            ${escapeHtml(p.stock || "In Stock")}
+          </p>
+
+          <p>
+            <b>₹500 Minimum Order Quantity (MOQ)</b>
+          </p>
+
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="primary"
+            onclick="editProduct('${p.id}')">
+            Edit
+          </button>
+
+          <button
+            class="danger"
+            onclick="removeProduct('${p.id}')">
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* ESCAPE HTML */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* SAVE PRODUCT */
+
+saveBtn.addEventListener("click",async()=>{
+
+  const productCode =
+    code.value.trim();
+
+  const productName =
+    name.value.trim();
+
+  const productCategory =
+    category.value;
+
+  const productStock =
+    stock.value;
+
+  const productImage =
+    image.value.trim();
+
+
+  if(!productCode ||
+     !productName ||
+     !productCategory){
+
+    showMessage(
+      "Code, Name and Category are required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const documentId =
+      editingCode || productCode;
+
+
+    await setDoc(
+      doc(db,"products",documentId),
+      {
+        code:productCode,
+        name:productName,
+        category:productCategory,
+        stock:productStock,
+        image:productImage,
+        updatedAt:new Date().toISOString()
+      },
+      {merge:true}
+    );
+
+
+    showMessage(
+      editingCode
+      ? "Product updated successfully."
+      : "Product added successfully."
+    );
+
+
+    clearForm();
+
+  }catch(error){
+
+    showMessage(
+      "Could not save product.",
+      "error"
+    );
+
+  }
+
+});
+
+
+/* EDIT */
+
+window.editProduct = function(id){
+
+  const p =
+    products.find(x=>x.id === id);
+
+  if(!p) return;
+
+  editingCode = id;
+
+  code.value =
+    p.code || id;
+
+  name.value =
+    p.name || "";
+
+  category.value =
+    p.category || "";
+
+  stock.value =
+    p.stock || "In Stock";
+
+  image.value =
+    p.image || "";
+
+  document.getElementById("formTitle")
+    .textContent =
+    "Edit Product";
+
+  saveBtn.textContent =
+    "Update Product";
+
+  cancelBtn.classList.remove("hidden");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+};
+
+
+/* DELETE */
+
+window.removeProduct = async function(id){
+
+  const p =
+    products.find(x=>x.id === id);
+
+  if(!p) return;
+
+  const ok =
+    confirm(
+      `Delete ${p.name || id}?`
+    );
+
+  if(!ok) return;
+
+  try{
+
+    await deleteDoc(
+      doc(db,"products",id)
+    );
+
+    showMessage(
+      "Product deleted successfully."
+    );
+
+  }catch(error){
+
+    showMessage(
+      "Could not delete product.",
+      "error"
+    );
+
+  }
+
+};
+
+
+/* CLEAR */
+
+function clearForm(){
+
+  editingCode = null;
+
+  code.value = "";
+  name.value = "";
+  category.value = "";
+  stock.value = "In Stock";
+  image.value = "";
+
+  document.getElementById("formTitle")
+    .textContent =
+    "Add Product";
+
+  saveBtn.textContent =
+    "Save Product";
+
+  cancelBtn.classList.add("hidden");
+
+}
+
+
+/* CANCEL */
+
+cancelBtn.addEventListener(
+  "click",
+  clearForm
+);
+
+
+/* SEARCH */
+
+adminSearch.addEventListener(
+  "input",
+  renderProducts
+);
+
+</script>
+
+</body>
+</html>
