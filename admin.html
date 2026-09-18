@@ -89,11 +89,6 @@ select{
   margin-bottom:14px;
 }
 
-input[readonly]{
-  background:#eef1f5;
-  color:#667085;
-}
-
 button{
   border:0;
   background:#101c3a;
@@ -131,20 +126,6 @@ button:disabled{
   padding:10px 18px;
 }
 
-.addBtn{
-  background:#188038;
-  margin-top:5px;
-}
-
-.deleteBtn{
-  background:#c62828;
-  margin-top:8px;
-}
-
-.secondary{
-  background:#5f6368;
-}
-
 .top{
   display:flex;
   justify-content:space-between;
@@ -163,7 +144,6 @@ button:disabled{
   border:1px solid #ddd;
   border-radius:12px;
   overflow:hidden;
-  background:white;
 }
 
 .product img{
@@ -218,43 +198,6 @@ button:disabled{
   display:none!important;
 }
 
-.small-note{
-  font-size:12px;
-  color:#687385;
-  margin-top:-8px;
-  margin-bottom:12px;
-}
-
-.badge{
-  display:inline-block;
-  padding:5px 8px;
-  border-radius:6px;
-  background:#eef1f5;
-  font-size:11px;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
-.new-badge{
-  background:#e8f5e9;
-  color:#188038;
-}
-
-.master-badge{
-  background:#e8eefc;
-  color:#101c3a;
-}
-
-.preview{
-  width:100%;
-  max-height:180px;
-  object-fit:contain;
-  background:#f7f7f7;
-  border-radius:8px;
-  margin-bottom:12px;
-  display:none;
-}
-
 @media(max-width:600px){
 
   .container{
@@ -263,10 +206,6 @@ button:disabled{
 
   header h1{
     font-size:17px;
-  }
-
-  .card{
-    padding:15px;
   }
 
 }
@@ -333,7 +272,7 @@ Login
 
 <div>
 <h2>OSS Product Management</h2>
-<p>37 Master Products + New Products</p>
+<p>37 Master Products</p>
 </div>
 
 <button
@@ -350,11 +289,11 @@ Logout
 </div>
 
 
-<!-- EDIT PRODUCT -->
+<!-- EDIT -->
 
 <div class="card">
 
-<h2>Edit Product</h2>
+<h2>Edit Stock</h2>
 
 <label>Select Product</label>
 
@@ -366,47 +305,25 @@ Select Product
 
 </select>
 
-<div id="productType" class="badge master-badge">
-MASTER PRODUCT
-</div>
-
 
 <label>Product Code</label>
 
-<input
-  id="editCode"
-  readonly
->
+<input id="editCode" readonly>
 
 
 <label>Product Name</label>
 
-<input
-  id="editName"
-  readonly
->
+<input id="editName" readonly>
 
 
 <label>Category</label>
 
-<input
-  id="editCategory"
-  readonly
->
+<input id="editCategory" readonly>
 
 
 <label>Image</label>
 
-<input
-  id="editImage"
-  readonly
->
-
-<img
-  id="editPreview"
-  class="preview"
-  alt="Product Preview"
->
+<input id="editImage" readonly>
 
 
 <label>Stock Status</label>
@@ -428,107 +345,11 @@ Out of Stock
 </select>
 
 
-<label>Minimum Order Quantity</label>
-
-<input
-  id="editMOQ"
-  value="₹500 Minimum Order Quantity (MOQ)"
->
-
-
 <button id="saveBtn">
-Save Changes
+Save Stock Status
 </button>
 
 <div id="saveMessage" class="message"></div>
-
-<button
-  id="deleteBtn"
-  class="deleteBtn hidden"
->
-Delete New Product
-</button>
-
-</div>
-
-
-<!-- ADD NEW PRODUCT -->
-
-<div class="card">
-
-<h2>➕ Add New Product</h2>
-
-<p class="small-note">
-નવી Product ઉમેરવા માટે નીચેની વિગતો ભરો.
-</p>
-
-<label>Product Code</label>
-
-<input
-  id="newCode"
-  placeholder="Example: OSS_038"
->
-
-
-<label>Product Name</label>
-
-<input
-  id="newName"
-  placeholder="Enter product name"
->
-
-
-<label>Category</label>
-
-<input
-  id="newCategory"
-  placeholder="Enter category"
->
-
-
-<label>Image Filename / URL</label>
-
-<input
-  id="newImage"
-  placeholder="Example: OSS_038.jpg"
->
-
-
-<label>Stock Status</label>
-
-<select id="newStock">
-
-<option value="In Stock">
-In Stock
-</option>
-
-<option value="Coming Soon">
-Coming Soon
-</option>
-
-<option value="Out of Stock">
-Out of Stock
-</option>
-
-</select>
-
-
-<label>Minimum Order Quantity</label>
-
-<input
-  id="newMOQ"
-  value="₹500 Minimum Order Quantity (MOQ)"
->
-
-
-<button
-  id="addBtn"
-  class="addBtn"
->
-Add New Product
-</button>
-
-<div id="addMessage" class="message"></div>
 
 </div>
 
@@ -581,10 +402,10 @@ import {
   doc,
   getDocs,
   setDoc,
-  deleteDoc,
   onSnapshot
 } from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
 
 
 /* FIREBASE */
@@ -636,41 +457,77 @@ const ADMIN_UID =
 const PRODUCTS = [
 
 ["OSS_001","Bathroom Accessories","DOUBLE GRID SOAP BOX","OSS_001.jpg"],
+
 ["OSS_002","Home & Kitchen","MINI POPCORN MAKER","OSS_002.jpg"],
+
 ["OSS_003","Water Bottle","2L MOTIVATIONAL WATTER BOTTLE","OSS_003.jpg"],
+
 ["OSS_004","Home & Kitchen","5M OUTDOOR CLOTHESLINE","OSS_004.jpg"],
+
 ["OSS_005","Home & Kitchen","10M OUTDOOR CLOTHESLINE","OSS_005.jpg"],
+
 ["OSS_006","Toys","48PCS CAR CONTAINER","OSS_006.jpg"],
+
 ["OSS_007","Water Bottle","3PCS MOTIVATION WATER BOTTLE","OSS_007.jpg"],
+
 ["OSS_008","Water Bottle","HOT AND COLD DORI BOTTLE","OSS_008.webp"],
+
 ["OSS_009","Water Bottle","1000ML STEEL WATER BOTTLE","OSS_009.jpg"],
+
 ["OSS_010","Home & Kitchen","VACCUM FLASK SET WITH 3 CUPS","OSS_010.jpg"],
+
 ["OSS_011","Electric & Smart Gadgets","PLUG MOSQUITO KILLER LAMP","OSS_011.webp"],
+
 ["OSS_012","Electric & Smart Gadgets","ELECTRIC GAS LIGHTER","OSS_012.jpg"],
+
 ["OSS_013","Car Accessories","PORTABLE CAR AIR MATTRESS","OSS_013.webp"],
+
 ["OSS_014","Electric & Smart Gadgets","SOLAR RECHARGEABLE LED FLOOD LIGHT","OSS_014.jpg"],
+
 ["OSS_015","Tools And Hardware","ANTI SLIP TAPE WITH GLOW IN DARK STRIPE","OSS_015.jpg"],
+
 ["OSS_016","Folding Furniture","PORTABLE INFLATABLE BED","OSS_016.webp"],
+
 ["OSS_017","Car Accessories","4PCS MAGNETIC CAR WINDOW CURTAIN","OSS_017.jpg"],
+
 ["OSS_018","Home & Kitchen","CLOTH DRYING ROPE WITH 12 CLIPS","OSS_018.jpg"],
+
 ["OSS_019","Health & Personal Care","PORTABLE MESH NEBULIZER MACHINE","OSS_019.jpg"],
+
 ["OSS_020","Smart Stationery","30PCS SELF ADHESIVE TRANSPARENT BOOK COVER","OSS_020.webp"],
+
 ["OSS_021","Gifts & Decor","7 INCH MOVING SAND ART","OSS_021.jpg"],
+
 ["OSS_022","Smart Gadgets","ALL IN ONE 60W USB FAST CHARGING TRAVEL DATA CABLE SET","OSS_022.webp"],
+
 ["OSS_023","Folding Furniture","PORTABLE FOLDING CHAIR","OSS_023.jpg"],
+
 ["OSS_024","Multipurpose Cleaning Tool","SLIM FLOOR WIPER MOP WITH SILICONE BLADE & TELESCOPIC HANDLE","OSS_024.webp"],
+
 ["OSS_025","Smart Gadgets","ANTI VIBRATION PADS","OSS_025.jpg"],
+
 ["OSS_026","Toys","DANCING JELLYFISH TOY WITH MUSIC & MOVEMENT","OSS_026.jpg"],
+
 ["OSS_027","Mobile Accessories","360°METAL DESKTOP MOBILE PHONE STAND","OSS_027.jpg"],
+
 ["OSS_028","Health & Personal Care","ELECTRIC WATER HOT BAG","OSS_028.jpg"],
+
 ["OSS_029","Folding Furniture","2.5×6 NON ADJUSTABLE FOLDING BED","OSS_029.jpg"],
+
 ["OSS_030","Folding Furniture","2.5×6 ADJUSTABLE FOLDING BED","OSS_030.jpg"],
+
 ["OSS_031","Water Bottle","HOT & COLD 1000ML STEEL WATER BOTTLE","OSS_031.jpg"],
+
 ["OSS_032","Car Accessories","2PCS HD VISION DRIVING GLASSES","OSS_032.jpg"],
+
 ["OSS_033","Travel Accessories","PORTABLE 2 IN 1 CAMPING GAS STOVE","OSS_033.jpg"],
+
 ["OSS_034","Gifts & Decor","ELECTRIC KAPOOR DANI WITH NIGHT LAMP","OSS_034.jpg"],
+
 ["OSS_035","Home & Kitchen","WATER-ABSORBING RUBBER DOORMAT","OSS_035.jpg"],
+
 ["OSS_036","Smart Stationery","MAGIC PRACTICE COPYBOOK","OSS_036.jpg"],
+
 ["OSS_037","Multipurpose Cleaning Cloth","40×40 MICROFIBER CLOTH (ONLY YELLOW)","OSS_037.jpg"]
 
 ];
@@ -700,9 +557,6 @@ document.getElementById("logoutBtn");
 const productSelect =
 document.getElementById("productSelect");
 
-const productType =
-document.getElementById("productType");
-
 const editCode =
 document.getElementById("editCode");
 
@@ -715,23 +569,14 @@ document.getElementById("editCategory");
 const editImage =
 document.getElementById("editImage");
 
-const editPreview =
-document.getElementById("editPreview");
-
 const editStock =
 document.getElementById("editStock");
-
-const editMOQ =
-document.getElementById("editMOQ");
 
 const saveBtn =
 document.getElementById("saveBtn");
 
 const saveMessage =
 document.getElementById("saveMessage");
-
-const deleteBtn =
-document.getElementById("deleteBtn");
 
 const productsDiv =
 document.getElementById("products");
@@ -741,36 +586,6 @@ document.getElementById("loading");
 
 const productCount =
 document.getElementById("productCount");
-
-
-/* ADD NEW */
-
-const newCode =
-document.getElementById("newCode");
-
-const newName =
-document.getElementById("newName");
-
-const newCategory =
-document.getElementById("newCategory");
-
-const newImage =
-document.getElementById("newImage");
-
-const newStock =
-document.getElementById("newStock");
-
-const newMOQ =
-document.getElementById("newMOQ");
-
-const addBtn =
-document.getElementById("addBtn");
-
-const addMessage =
-document.getElementById("addMessage");
-
-
-let firestoreProducts = [];
 
 
 function message(
@@ -897,7 +712,7 @@ logoutBtn.addEventListener(
 );
 
 
-/* PRODUCT OPTIONS */
+/* PRODUCT SELECT */
 
 function createProductOptions(){
 
@@ -924,626 +739,83 @@ option
 
 });
 
-
-/* NEW PRODUCTS */
-
-firestoreProducts.forEach(
-p=>{
-
-const isMaster =
-PRODUCTS.some(
-m=>m[0]===p.code
-);
-
-if(isMaster) return;
-
-const option =
-document.createElement("option");
-
-option.value =
-p.code;
-
-option.textContent =
-p.code +
-" — " +
-(p.name || "New Product");
-
-productSelect.appendChild(
-option
-);
-
-});
-
 }
 
 
-/* CLEAR FORM */
+/* SELECT */
 
-function clearEdit(){
+productSelect.addEventListener(
+"change",
+async()=>{
+
+const code =
+productSelect.value;
+
+const product =
+PRODUCTS.find(
+p=>p[0]===code
+);
+
+if(!product){
 
 editCode.value="";
 editName.value="";
 editCategory.value="";
 editImage.value="";
-editMOQ.value =
-"₹500 Minimum Order Quantity (MOQ)";
-
-editStock.value =
-"In Stock";
-
-editPreview.style.display =
-"none";
-
-deleteBtn.classList.add(
-"hidden"
-);
-
-productType.textContent =
-"MASTER PRODUCT";
-
-productType.className =
-"badge master-badge";
-
-}
-
-
-/* SELECT PRODUCT */
-
-productSelect.addEventListener(
-"change",
-()=>{
-
-const code =
-productSelect.value;
-
-if(!code){
-
-clearEdit();
-
-return;
-
-}
-
-
-/* MASTER */
-
-const master =
-PRODUCTS.find(
-p=>p[0]===code
-);
-
-if(master){
-
-editCode.value =
-master[0];
-
-editName.value =
-master[2];
-
-editCategory.value =
-master[1];
-
-editImage.value =
-master[3];
-
-editPreview.src =
-master[3];
-
-editPreview.style.display =
-"block";
-
-productType.textContent =
-"MASTER PRODUCT — LOCKED";
-
-productType.className =
-"badge master-badge";
-
-deleteBtn.classList.add(
-"hidden"
-);
-
-
-/* FIRESTORE DATA */
-
-const data =
-firestoreProducts.find(
-p=>p.code===code
-);
-
-editStock.value =
-data?.stock ||
-"In Stock";
-
-editMOQ.value =
-data?.moq ||
-"₹500 Minimum Order Quantity (MOQ)";
-
-return;
-
-}
-
-
-/* NEW PRODUCT */
-
-const newProduct =
-firestoreProducts.find(
-p=>p.code===code
-);
-
-if(!newProduct){
-
-clearEdit();
 
 return;
 
 }
 
 editCode.value =
-newProduct.code || "";
-
-editName.value =
-newProduct.name || "";
+product[0];
 
 editCategory.value =
-newProduct.category || "";
+product[1];
+
+editName.value =
+product[2];
 
 editImage.value =
-newProduct.image || "";
-
-editStock.value =
-newProduct.stock ||
-"In Stock";
-
-editMOQ.value =
-newProduct.moq ||
-"₹500 Minimum Order Quantity (MOQ)";
-
-if(newProduct.image){
-
-editPreview.src =
-newProduct.image;
-
-editPreview.style.display =
-"block";
-
-}else{
-
-editPreview.style.display =
-"none";
-
-}
-
-productType.textContent =
-"NEW PRODUCT — EDITABLE";
-
-productType.className =
-"badge new-badge";
-
-deleteBtn.classList.remove(
-"hidden"
-);
-
-});
-
-
-/* SAVE */
-
-saveBtn.addEventListener(
-"click",
-async()=>{
-
-const code =
-editCode.value.trim();
-
-if(!code){
-
-message(
-saveMessage,
-"પહેલા Product પસંદ કરો."
-);
-
-return;
-
-}
-
-
-/* MASTER */
-
-const master =
-PRODUCTS.find(
-p=>p[0]===code
-);
-
-saveBtn.disabled =
-true;
-
-saveBtn.textContent =
-"Saving...";
+product[3];
 
 try{
 
-if(master){
-
-await setDoc(
-
-doc(
+const snap =
+await getDocs(
+collection(
 db,
-"products",
-code
-),
-
-{
-
-code:master[0],
-
-category:master[1],
-
-name:master[2],
-
-image:master[3],
-
-moq:
-editMOQ.value.trim() ||
-"₹500 Minimum Order Quantity (MOQ)",
-
-stock:
-editStock.value,
-
-status:
-editStock.value,
-
-isMaster:true
-
-},
-
-{
-merge:true
-}
-
-);
-
-message(
-saveMessage,
-"Master Product stock/MOQ updated successfully.",
-"success"
-);
-
-}
-
-
-/* NEW PRODUCT */
-
-else{
-
-await setDoc(
-
-doc(
-db,
-"products",
-code
-),
-
-{
-
-code:code,
-
-name:
-editName.value.trim(),
-
-category:
-editCategory.value.trim(),
-
-image:
-editImage.value.trim(),
-
-moq:
-editMOQ.value.trim() ||
-"₹500 Minimum Order Quantity (MOQ)",
-
-stock:
-editStock.value,
-
-status:
-editStock.value,
-
-isMaster:false
-
-},
-
-{
-merge:true
-}
-
-);
-
-message(
-saveMessage,
-"Product updated successfully.",
-"success"
-);
-
-}
-
-}
-catch(error){
-
-console.error(error);
-
-message(
-saveMessage,
-"Save Error: " +
-error.message
-);
-
-}
-
-finally{
-
-saveBtn.disabled =
-false;
-
-saveBtn.textContent =
-"Save Changes";
-
-}
-
-});
-
-
-/* ADD NEW PRODUCT */
-
-addBtn.addEventListener(
-"click",
-async()=>{
-
-const code =
-newCode.value.trim();
-
-const name =
-newName.value.trim();
-
-const category =
-newCategory.value.trim();
-
-const image =
-newImage.value.trim();
-
-const stock =
-newStock.value;
-
-const moq =
-newMOQ.value.trim() ||
-"₹500 Minimum Order Quantity (MOQ)";
-
-
-if(
-!code ||
-!name ||
-!category
-){
-
-message(
-addMessage,
-"Code, Name અને Category ભરવું જરૂરી છે."
-);
-
-return;
-
-}
-
-
-/* MASTER CODE PROTECTION */
-
-const master =
-PRODUCTS.find(
-p=>p[0]===code
-);
-
-if(master){
-
-message(
-addMessage,
-"આ Code Master Product માટે પહેલેથી ઉપયોગમાં છે."
-);
-
-return;
-
-}
-
-
-/* DUPLICATE */
-
-const exists =
-firestoreProducts.some(
-p=>p.code===code
-);
-
-if(exists){
-
-message(
-addMessage,
-"આ Product Code પહેલેથી હાજર છે."
-);
-
-return;
-
-}
-
-addBtn.disabled =
-true;
-
-addBtn.textContent =
-"Adding...";
-
-try{
-
-await setDoc(
-
-doc(
-db,
-"products",
-code
-),
-
-{
-
-code:code,
-
-name:name,
-
-category:category,
-
-image:image,
-
-stock:stock,
-
-status:stock,
-
-moq:moq,
-
-isMaster:false
-
-}
-
-);
-
-message(
-addMessage,
-"New Product added successfully.",
-"success"
-);
-
-
-/* CLEAR */
-
-newCode.value="";
-newName.value="";
-newCategory.value="";
-newImage.value="";
-
-newStock.value =
-"In Stock";
-
-newMOQ.value =
-"₹500 Minimum Order Quantity (MOQ)";
-
-}
-catch(error){
-
-console.error(error);
-
-message(
-addMessage,
-"Add Error: " +
-error.message
-);
-
-}
-
-finally{
-
-addBtn.disabled =
-false;
-
-addBtn.textContent =
-"Add New Product";
-
-}
-
-});
-
-
-/* DELETE NEW PRODUCT */
-
-deleteBtn.addEventListener(
-"click",
-async()=>{
-
-const code =
-editCode.value.trim();
-
-if(!code) return;
-
-
-/* NEVER DELETE MASTER */
-
-const master =
-PRODUCTS.find(
-p=>p[0]===code
-);
-
-if(master){
-
-message(
-saveMessage,
-"Master Product delete કરી શકાતું નથી."
-);
-
-return;
-
-}
-
-const ok =
-confirm(
-"શું તમે આ New Product delete કરવા માંગો છો?"
-);
-
-if(!ok) return;
-
-deleteBtn.disabled =
-true;
-
-deleteBtn.textContent =
-"Deleting...";
-
-try{
-
-await deleteDoc(
-doc(
-db,
-"products",
-code
+"products"
 )
 );
 
-message(
-saveMessage,
-"New Product deleted successfully.",
-"success"
-);
+snap.forEach(
+item=>{
 
-productSelect.value =
-"";
+if(item.id===code){
 
-clearEdit();
+const data =
+item.data();
+
+editStock.value =
+data.stock ||
+"In Stock";
+
+}
+
+});
 
 }
 catch(error){
 
 console.error(error);
 
-message(
-saveMessage,
-"Delete Error: " +
-error.message
-);
-
-}
-
-finally{
-
-deleteBtn.disabled =
-false;
-
-deleteBtn.textContent =
-"Delete New Product";
-
 }
 
 });
 
 
-/* INITIALIZE MASTER PRODUCTS */
+/* INITIALIZE */
 
 async function initializeProducts(){
 
@@ -1561,10 +833,8 @@ const old = {};
 
 snap.forEach(
 item=>{
-
 old[item.id] =
 item.data();
-
 });
 
 
@@ -1591,7 +861,6 @@ name:p[2],
 image:p[3],
 
 moq:
-old[p[0]]?.moq ||
 "₹500 Minimum Order Quantity (MOQ)",
 
 stock:
@@ -1600,9 +869,7 @@ old[p[0]]?.stock ||
 
 status:
 old[p[0]]?.stock ||
-"In Stock",
-
-isMaster:true
+"In Stock"
 
 },
 
@@ -1630,8 +897,315 @@ error.message
 }
 
 
-/* RENDER PRODUCTS */
+/* SAVE */
 
-function renderProducts(){
+saveBtn.addEventListener(
+"click",
+async()=>{
 
-productsDiv.i
+const code =
+editCode.value;
+
+if(!code){
+
+message(
+saveMessage,
+"પહેલા Product પસંદ કરો."
+);
+
+return;
+
+}
+
+const product =
+PRODUCTS.find(
+p=>p[0]===code
+);
+
+if(!product){
+
+return;
+
+}
+
+const stock =
+editStock.value;
+
+saveBtn.disabled =
+true;
+
+saveBtn.textContent =
+"Saving...";
+
+try{
+
+await setDoc(
+
+doc(
+db,
+"products",
+code
+),
+
+{
+
+code:product[0],
+
+category:product[1],
+
+name:product[2],
+
+image:product[3],
+
+moq:
+"₹500 Minimum Order Quantity (MOQ)",
+
+stock:stock,
+
+status:stock
+
+},
+
+{
+merge:true
+}
+
+);
+
+message(
+saveMessage,
+"Stock status updated successfully.",
+"success"
+);
+
+}
+catch(error){
+
+message(
+saveMessage,
+"Save Error: " +
+error.message
+);
+
+}
+
+finally{
+
+saveBtn.disabled =
+false;
+
+saveBtn.textContent =
+"Save Stock Status";
+
+}
+
+});
+
+
+/* RENDER */
+
+function renderProducts(list){
+
+productsDiv.innerHTML =
+"";
+
+PRODUCTS.forEach(
+master=>{
+
+const data =
+list.find(
+p=>p.code===master[0]
+) || {};
+
+const stock =
+data.stock ||
+"In Stock";
+
+let cls =
+"in";
+
+if(
+stock==="Coming Soon"
+) cls="coming";
+
+if(
+stock==="Out of Stock"
+) cls="out";
+
+
+const div =
+document.createElement("div");
+
+div.className =
+"product";
+
+div.innerHTML = `
+
+<img
+src="${master[3]}"
+alt="${master[2]}"
+>
+
+<div class="product-body">
+
+<div class="code">
+${master[0]}
+</div>
+
+<div class="name">
+${master[2]}
+</div>
+
+<div class="category">
+${master[1]}
+</div>
+
+<div class="${cls}">
+● ${stock}
+</div>
+
+<button
+class="edit"
+data-code="${master[0]}"
+>
+Edit Stock
+</button>
+
+</div>
+`;
+
+productsDiv.appendChild(div);
+
+});
+
+
+document
+.querySelectorAll(".edit")
+.forEach(
+btn=>{
+
+btn.addEventListener(
+"click",
+()=>{
+
+productSelect.value =
+btn.dataset.code;
+
+productSelect.dispatchEvent(
+new Event("change")
+);
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+});
+
+});
+
+
+productCount.textContent =
+" — " +
+PRODUCTS.length;
+
+}
+
+
+/* FIRESTORE LISTENER */
+
+function startListener(){
+
+onSnapshot(
+
+collection(
+db,
+"products"
+),
+
+snap=>{
+
+const list=[];
+
+snap.forEach(
+item=>{
+
+list.push({
+...item.data(),
+code:item.id
+});
+
+});
+
+renderProducts(list);
+
+loading.style.display =
+"none";
+
+},
+
+error=>{
+
+console.error(error);
+
+loading.textContent =
+"Firestore Error: " +
+error.message;
+
+});
+
+}
+
+
+/* AUTH */
+
+onAuthStateChanged(
+auth,
+async user=>{
+
+if(!user){
+
+loginSection.classList.remove(
+"hidden"
+);
+
+adminSection.classList.add(
+"hidden"
+);
+
+return;
+
+}
+
+
+if(
+user.uid !== ADMIN_UID
+){
+
+await signOut(auth);
+
+return;
+
+}
+
+
+loginSection.classList.add(
+"hidden"
+);
+
+adminSection.classList.remove(
+"hidden"
+);
+
+createProductOptions();
+
+await initializeProducts();
+
+startListener();
+
+});
+
+</script>
+
+</body>
+</html>
