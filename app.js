@@ -398,6 +398,19 @@ const products = [
   image:"OSS_037.jpg",
   status:"In Stock",
   moq:"₹500 Minimum Order Quantity (MOQ)"
+},
+
+/* =========================================================
+   NEW PRODUCT - OSS_038
+========================================================= */
+
+{
+  code:"OSS_038",
+  name:"Self Adhesive Door Bottom Sealing Strip Guard",
+  category:"Home & Kitchen",
+  image:"OSS_038.jpg",
+  status:"In Stock",
+  moq:"₹500 Minimum Order Quantity (MOQ)"
 }
 
 ];
@@ -574,11 +587,6 @@ Please share details and rates.`;
   const url =
     `https://wa.me/${WA}?text=${encodeURIComponent(message)}`;
 
-
-  /*
-    Open WhatsApp directly.
-    Works with WhatsApp app or WhatsApp Web.
-  */
 
   window.location.href =
     url;
@@ -824,9 +832,7 @@ function render(){
       .join("");
 
 
-  /*
-    Attach WhatsApp button events
-  */
+  /* WhatsApp buttons */
 
   grid
     .querySelectorAll(
@@ -859,9 +865,7 @@ function render(){
     );
 
 
-  /*
-    Attach plus button events
-  */
+  /* Plus buttons */
 
   grid
     .querySelectorAll(
@@ -971,9 +975,7 @@ onSnapshot(
     );
 
 
-    /*
-      Update only stock status
-    */
+    /* Update stock status only */
 
     products.forEach(
       product => {
@@ -995,9 +997,7 @@ onSnapshot(
     );
 
 
-    /*
-      Re-render immediately
-    */
+    /* Re-render immediately */
 
     render();
 
