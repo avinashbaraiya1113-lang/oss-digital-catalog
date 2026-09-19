@@ -1,12 +1,7 @@
 /* =========================================================
    OSS DIGITAL CATALOG
-   FIRESTORE LIVE STOCK + WHATSAPP
-   ADMIN NAME UPDATE COMPATIBILITY
-========================================================= */
-
-
-/* =========================================================
-   FIREBASE
+   FIRESTORE LIVE CATALOG
+   ADMIN PANEL NAME UPDATE SUPPORT
 ========================================================= */
 
 import {
@@ -21,7 +16,7 @@ import {
 
 
 /* =========================================================
-   FIREBASE CONFIG
+   FIREBASE
 ========================================================= */
 
 const firebaseConfig = {
@@ -33,11 +28,6 @@ const firebaseConfig = {
   appId: "1:294933773409:web:3a62fc14daaa9d344cfe20",
   measurementId: "G-GT8YNKQJ5K"
 };
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -62,40 +52,485 @@ let activeStock = "All";
 
 const grid = document.getElementById("grid");
 const count = document.getElementById("count");
-const searchInput = document.getElementById("search");
+const search = document.getElementById("search");
 const cats = document.getElementById("cats");
 
-const enquiryBar = document.getElementById("bar");
+const bar = document.getElementById("bar");
 const selectedCount = document.getElementById("selectedCount");
 const multiButton = document.getElementById("multi");
 
 
 /* =========================================================
-   SAFE TEXT
+   FORCE CLEAN CATALOG DESIGN
 ========================================================= */
 
-function escapeHTML(value) {
+const style = document.createElement("style");
 
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+style.textContent = `
+
+/* ===============================
+   PRODUCT GRID
+================================ */
+
+#grid.grid {
+
+  display:grid !important;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr)) !important;
+
+  gap:18px !important;
+
+  width:100% !important;
+
+  align-items:start !important;
 
 }
 
 
-/* =========================================================
+/* ===============================
+   PRODUCT CARD
+================================ */
+
+#grid .product-card {
+
+  width:100% !important;
+
+  min-width:0 !important;
+
+  background:#ffffff !important;
+
+  border-radius:18px !important;
+
+  overflow:hidden !important;
+
+  border:1px solid #e2e6eb !important;
+
+  box-shadow:
+    0 5px 18px rgba(0,0,0,.08) !important;
+
+  display:flex !important;
+
+  flex-direction:column !important;
+
+}
+
+
+/* ===============================
+   IMAGE
+================================ */
+
+#grid .product-image-wrap {
+
+  width:100% !important;
+
+  height:260px !important;
+
+  background:#f5f5f5 !important;
+
+  display:flex !important;
+
+  align-items:center !important;
+
+  justify-content:center !important;
+
+  overflow:hidden !important;
+
+}
+
+
+#grid .product-image-wrap img {
+
+  width:100% !important;
+
+  height:100% !important;
+
+  object-fit:cover !important;
+
+  display:block !important;
+
+}
+
+
+/* ===============================
+   BODY
+================================ */
+
+#grid .product-body {
+
+  padding:14px !important;
+
+  background:#fff !important;
+
+}
+
+
+/* ===============================
+   CODE
+================================ */
+
+#grid .product-code {
+
+  color:#718096 !important;
+
+  font-size:12px !important;
+
+  font-weight:700 !important;
+
+  margin-bottom:6px !important;
+
+}
+
+
+/* ===============================
    PRODUCT NAME
-   IMPORTANT:
-   Supports:
-   name
-   productName
-   title
+================================ */
+
+#grid .product-name {
+
+  color:#071b3a !important;
+
+  font-size:18px !important;
+
+  line-height:1.25 !important;
+
+  margin:0 0 7px 0 !important;
+
+  font-weight:800 !important;
+
+}
+
+
+/* ===============================
+   CATEGORY
+================================ */
+
+#grid .product-category {
+
+  color:#5c6675 !important;
+
+  font-size:13px !important;
+
+  margin-bottom:8px !important;
+
+}
+
+
+/* ===============================
+   STOCK
+================================ */
+
+#grid .stock-in,
+#grid .stock-coming,
+#grid .stock-out {
+
+  display:inline-block !important;
+
+  padding:6px 10px !important;
+
+  border-radius:20px !important;
+
+  font-size:12px !important;
+
+  font-weight:700 !important;
+
+  margin-bottom:8px !important;
+
+}
+
+
+#grid .stock-in {
+
+  background:#dff6e5 !important;
+
+  color:#16733a !important;
+
+}
+
+
+#grid .stock-coming {
+
+  background:#fff1c9 !important;
+
+  color:#956d00 !important;
+
+}
+
+
+#grid .stock-out {
+
+  background:#ffdede !important;
+
+  color:#a00000 !important;
+
+}
+
+
+/* ===============================
+   MOQ
+================================ */
+
+#grid .product-moq {
+
+  color:#c62828 !important;
+
+  font-size:13px !important;
+
+  font-weight:700 !important;
+
+  margin-bottom:12px !important;
+
+}
+
+
+/* ===============================
+   BUTTONS
+================================ */
+
+#grid .product-actions {
+
+  display:flex !important;
+
+  gap:9px !important;
+
+  width:100% !important;
+
+}
+
+
+#grid .whatsapp-btn {
+
+  flex:1 !important;
+
+  border:0 !important;
+
+  border-radius:10px !important;
+
+  background:#1c9b50 !important;
+
+  color:#fff !important;
+
+  padding:12px 10px !important;
+
+  font-size:14px !important;
+
+  font-weight:700 !important;
+
+  cursor:pointer !important;
+
+}
+
+
+#grid .select-btn {
+
+  width:52px !important;
+
+  min-width:52px !important;
+
+  border:0 !important;
+
+  border-radius:10px !important;
+
+  background:#17375f !important;
+
+  color:#fff !important;
+
+  font-size:25px !important;
+
+  font-weight:700 !important;
+
+  cursor:pointer !important;
+
+}
+
+
+#grid .select-btn.selected {
+
+  background:#1c9b50 !important;
+
+}
+
+
+/* ===============================
+   CATEGORY BUTTONS
+================================ */
+
+#cats {
+
+  display:flex !important;
+
+  flex-wrap:wrap !important;
+
+  gap:7px !important;
+
+}
+
+
+#cats button {
+
+  border:1px solid #d7dce2 !important;
+
+  background:#fff !important;
+
+  color:#172033 !important;
+
+  border-radius:20px !important;
+
+  padding:8px 12px !important;
+
+  font-size:12px !important;
+
+  font-weight:700 !important;
+
+  cursor:pointer !important;
+
+}
+
+
+#cats button.active {
+
+  background:#071b3a !important;
+
+  color:#fff !important;
+
+  border-color:#071b3a !important;
+
+}
+
+
+/* ===============================
+   STOCK FILTER
+================================ */
+
+.filters button {
+
+  cursor:pointer !important;
+
+}
+
+
+.filters button.active {
+
+  background:#071b3a !important;
+
+  color:#fff !important;
+
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media(max-width:700px){
+
+  #grid.grid {
+
+    grid-template-columns:
+      repeat(2,minmax(0,1fr)) !important;
+
+    gap:10px !important;
+
+  }
+
+
+  #grid .product-image-wrap {
+
+    height:170px !important;
+
+  }
+
+
+  #grid .product-body {
+
+    padding:9px !important;
+
+  }
+
+
+  #grid .product-name {
+
+    font-size:14px !important;
+
+    line-height:1.25 !important;
+
+  }
+
+
+  #grid .product-code {
+
+    font-size:10px !important;
+
+  }
+
+
+  #grid .product-category {
+
+    font-size:10px !important;
+
+  }
+
+
+  #grid .product-moq {
+
+    font-size:10px !important;
+
+  }
+
+
+  #grid .whatsapp-btn {
+
+    font-size:10px !important;
+
+    padding:9px 4px !important;
+
+  }
+
+
+  #grid .select-btn {
+
+    width:38px !important;
+
+    min-width:38px !important;
+
+    font-size:20px !important;
+
+  }
+
+}
+
+
+@media(max-width:430px){
+
+  #grid .product-image-wrap {
+
+    height:155px !important;
+
+  }
+
+}
+
+
+`;
+
+
+document.head.appendChild(style);
+
+
+/* =========================================================
+   HELPER FUNCTIONS
 ========================================================= */
 
-function getProductName(product) {
+function getName(product) {
+
+  /*
+     ADMIN PANEL saves:
+     name
+
+     Compatibility:
+     productName
+     title
+  */
 
   return (
     product.name ||
@@ -107,9 +542,15 @@ function getProductName(product) {
 }
 
 
-/* =========================================================
-   PRODUCT STOCK
-========================================================= */
+function getCategory(product) {
+
+  return (
+    product.category ||
+    "Other"
+  );
+
+}
+
 
 function getStock(product) {
 
@@ -121,10 +562,6 @@ function getStock(product) {
 
 }
 
-
-/* =========================================================
-   PRODUCT IMAGE
-========================================================= */
 
 function getImage(product) {
 
@@ -138,24 +575,6 @@ function getImage(product) {
 }
 
 
-/* =========================================================
-   PRODUCT CATEGORY
-========================================================= */
-
-function getCategory(product) {
-
-  return (
-    product.category ||
-    "Other"
-  );
-
-}
-
-
-/* =========================================================
-   PRODUCT MOQ
-========================================================= */
-
 function getMOQ(product) {
 
   return (
@@ -166,37 +585,61 @@ function getMOQ(product) {
 }
 
 
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function compareCodes(a,b) {
+
+  const x =
+    parseInt(
+      String(a || "").replace(/\D/g,"")
+    ) || 999999;
+
+  const y =
+    parseInt(
+      String(b || "").replace(/\D/g,"")
+    ) || 999999;
+
+  return x-y;
+
+}
+
+
 /* =========================================================
-   FIRESTORE LIVE PRODUCTS
+   FIRESTORE LIVE
 ========================================================= */
 
 onSnapshot(
-  collection(db, "products"),
 
-  function(snapshot) {
+  collection(db,"products"),
+
+  function(snapshot){
 
     products = [];
 
-    snapshot.forEach(function(doc) {
-
-      const data = doc.data();
+    snapshot.forEach(function(doc){
 
       products.push({
 
-        id: doc.id,
+        id:doc.id,
 
-        ...data
+        ...doc.data()
 
       });
 
     });
 
 
-    /* -----------------------------------------
-       SORT BY PRODUCT CODE
-    ----------------------------------------- */
-
-    products.sort(function(a, b) {
+    products.sort(function(a,b){
 
       return compareCodes(
         a.code || a.id,
@@ -206,42 +649,35 @@ onSnapshot(
     });
 
 
-    /* -----------------------------------------
-       UPDATE CATEGORY BUTTONS
-    ----------------------------------------- */
-
     renderCategories();
-
-
-    /* -----------------------------------------
-       RENDER PRODUCTS
-    ----------------------------------------- */
 
     renderProducts();
 
-
   },
 
-  function(error) {
+  function(error){
 
     console.error(
       "Firestore error:",
       error
     );
 
-    if (grid) {
+    if(grid){
 
       grid.innerHTML = `
+
         <div style="
-          padding:30px;
+          grid-column:1/-1;
           text-align:center;
+          padding:40px;
           color:#c62828;
           font-weight:bold;
         ">
-          Unable to load products.
-          <br><br>
-          Please refresh the page.
+
+          Firebase connection error.
+
         </div>
+
       `;
 
     }
@@ -252,108 +688,89 @@ onSnapshot(
 
 
 /* =========================================================
-   SORT PRODUCT CODES
-========================================================= */
-
-function compareCodes(a, b) {
-
-  const na =
-    parseInt(
-      String(a || "").replace(/\D/g, "")
-    ) || 999999;
-
-  const nb =
-    parseInt(
-      String(b || "").replace(/\D/g, "")
-    ) || 999999;
-
-  return na - nb;
-
-}
-
-
-/* =========================================================
    CATEGORIES
 ========================================================= */
 
-function renderCategories() {
+function renderCategories(){
 
-  if (!cats) return;
+  if(!cats) return;
 
-  const categorySet = new Set();
+  const set =
+    new Set();
 
-  products.forEach(function(product) {
+  products.forEach(function(product){
 
-    const category =
-      getCategory(product);
-
-    if (category) {
-
-      categorySet.add(category);
-
-    }
+    set.add(
+      getCategory(product)
+    );
 
   });
-
-
-  const categoryList =
-    Array.from(categorySet).sort();
 
 
   cats.innerHTML = "";
 
 
-  /* ALL BUTTON */
-
-  const allButton =
+  const all =
     document.createElement("button");
 
-  allButton.textContent = "All";
+  all.textContent = "All";
 
-  allButton.className =
-    activeCategory === "All"
-      ? "active"
-      : "";
+  if(activeCategory === "All"){
 
-  allButton.onclick = function() {
+    all.classList.add("active");
+
+  }
+
+
+  all.onclick = function(){
 
     activeCategory = "All";
 
     renderCategories();
+
     renderProducts();
 
   };
 
-  cats.appendChild(allButton);
+
+  cats.appendChild(all);
 
 
-  /* CATEGORY BUTTONS */
+  Array
+    .from(set)
+    .sort()
+    .forEach(function(category){
 
-  categoryList.forEach(function(category) {
+      const button =
+        document.createElement("button");
 
-    const button =
-      document.createElement("button");
+      button.textContent =
+        category;
 
-    button.textContent =
-      category;
+      if(
+        activeCategory === category
+      ){
 
-    button.className =
-      activeCategory === category
-        ? "active"
-        : "";
+        button.classList.add("active");
 
-    button.onclick = function() {
+      }
 
-      activeCategory = category;
 
-      renderCategories();
-      renderProducts();
+      button.onclick = function(){
 
-    };
+        activeCategory =
+          category;
 
-    cats.appendChild(button);
+        renderCategories();
 
-  });
+        renderProducts();
+
+      };
+
+
+      cats.appendChild(button);
+
+    });
 
 }
 
@@ -363,20 +780,18 @@ function renderCategories() {
 ========================================================= */
 
 document
-  .querySelectorAll(
-    ".filters button"
-  )
-  .forEach(function(button) {
+  .querySelectorAll(".filters button")
+  .forEach(function(button){
 
     button.addEventListener(
       "click",
-      function() {
+      function(){
 
         document
           .querySelectorAll(
             ".filters button"
           )
-          .forEach(function(btn) {
+          .forEach(function(btn){
 
             btn.classList.remove(
               "active"
@@ -407,11 +822,11 @@ document
    SEARCH
 ========================================================= */
 
-if (searchInput) {
+if(search){
 
-  searchInput.addEventListener(
+  search.addEventListener(
     "input",
-    function() {
+    function(){
 
       renderProducts();
 
@@ -422,34 +837,27 @@ if (searchInput) {
 
 
 /* =========================================================
-   RENDER PRODUCTS
+   RENDER
 ========================================================= */
 
-function renderProducts() {
+function renderProducts(){
 
-  if (!grid) return;
+  if(!grid) return;
 
 
-  const search =
-    (
-      searchInput
-        ? searchInput.value
-        : ""
-    )
-      .toLowerCase()
-      .trim();
+  const searchText =
+    search
+      ? search.value
+          .toLowerCase()
+          .trim()
+      : "";
 
 
   const filtered =
-    products.filter(function(product) {
-
-
-      /* -----------------------------------------
-         SEARCH
-      ----------------------------------------- */
+    products.filter(function(product){
 
       const name =
-        getProductName(product);
+        getName(product);
 
       const code =
         product.code ||
@@ -459,8 +867,11 @@ function renderProducts() {
       const category =
         getCategory(product);
 
+      const stock =
+        getStock(product);
 
-      const searchableText =
+
+      const searchable =
         (
           name +
           " " +
@@ -471,47 +882,33 @@ function renderProducts() {
           .toLowerCase();
 
 
-      const matchSearch =
-        !search ||
-        searchableText.includes(search);
+      const searchMatch =
+        !searchText ||
+        searchable.includes(
+          searchText
+        );
 
 
-      /* -----------------------------------------
-         CATEGORY
-      ----------------------------------------- */
-
-      const matchCategory =
+      const categoryMatch =
         activeCategory === "All" ||
         category === activeCategory;
 
 
-      /* -----------------------------------------
-         STOCK
-      ----------------------------------------- */
-
-      const stock =
-        getStock(product);
-
-
-      const matchStock =
+      const stockMatch =
         activeStock === "All" ||
         stock === activeStock;
 
 
       return (
-        matchSearch &&
-        matchCategory &&
-        matchStock
+        searchMatch &&
+        categoryMatch &&
+        stockMatch
       );
 
     });
 
 
-  /* =====================================================
-     COUNT
-  ===================================================== */
-
-  if (count) {
+  if(count){
 
     count.textContent =
       `${filtered.length} Products`;
@@ -519,19 +916,19 @@ function renderProducts() {
   }
 
 
-  /* =====================================================
-     EMPTY
-  ===================================================== */
+  grid.innerHTML = "";
 
-  if (filtered.length === 0) {
+
+  if(filtered.length === 0){
 
     grid.innerHTML = `
 
       <div style="
         grid-column:1/-1;
-        padding:40px;
         text-align:center;
+        padding:40px;
         font-weight:bold;
+        color:#555;
       ">
 
         No products found.
@@ -545,55 +942,42 @@ function renderProducts() {
   }
 
 
-  /* =====================================================
-     PRODUCT HTML
-  ===================================================== */
-
-  grid.innerHTML = "";
-
-
-  filtered.forEach(function(product) {
+  filtered.forEach(function(product){
 
     const name =
-      getProductName(product);
+      getName(product);
 
     const code =
       product.code ||
       product.id ||
       "";
 
-
     const category =
       getCategory(product);
-
-
-    const image =
-      getImage(product);
-
 
     const stock =
       getStock(product);
 
+    const image =
+      getImage(product);
 
     const moq =
       getMOQ(product);
 
 
-    /* -----------------------------------------
-       STOCK CLASS
-    ----------------------------------------- */
-
     let stockClass =
       "stock-in";
 
-    if (stock === "Coming Soon") {
+
+    if(stock === "Coming Soon"){
 
       stockClass =
         "stock-coming";
 
     }
 
-    if (stock === "Out of Stock") {
+
+    if(stock === "Out of Stock"){
 
       stockClass =
         "stock-out";
@@ -601,19 +985,11 @@ function renderProducts() {
     }
 
 
-    /* -----------------------------------------
-       SELECTED
-    ----------------------------------------- */
-
-    const isSelected =
+    const selected =
       selectedProducts.has(
         product.id
       );
 
-
-    /* -----------------------------------------
-       CARD
-    ----------------------------------------- */
 
     const card =
       document.createElement("article");
@@ -631,7 +1007,10 @@ function renderProducts() {
           src="${escapeHTML(image)}"
           alt="${escapeHTML(name)}"
           loading="lazy"
-          onerror="this.onerror=null;this.src='538820.jpg';"
+          onerror="
+            this.onerror=null;
+            this.src='538820.jpg';
+          "
         >
 
       </div>
@@ -640,27 +1019,37 @@ function renderProducts() {
       <div class="product-body">
 
         <div class="product-code">
+
           ${escapeHTML(code)}
+
         </div>
 
 
         <h2 class="product-name">
+
           ${escapeHTML(name)}
+
         </h2>
 
 
         <div class="product-category">
+
           ${escapeHTML(category)}
+
         </div>
 
 
         <div class="${stockClass}">
+
           ${escapeHTML(stock)}
+
         </div>
 
 
         <div class="product-moq">
+
           ${escapeHTML(moq)}
+
         </div>
 
 
@@ -668,18 +1057,23 @@ function renderProducts() {
 
           <button
             class="whatsapp-btn"
-            onclick="sendSingleEnquiry('${escapeHTML(product.id)}')"
+            data-id="${escapeHTML(product.id)}"
           >
             WhatsApp Enquiry
           </button>
 
 
           <button
-            class="select-btn ${isSelected ? "selected" : ""}"
-            onclick="toggleProduct('${escapeHTML(product.id)}')"
-            aria-label="Select product"
+            class="select-btn ${
+              selected ? "selected" : ""
+            }"
+            data-id="${escapeHTML(product.id)}"
           >
-            ${isSelected ? "✓" : "+"}
+            ${
+              selected
+                ? "✓"
+                : "+"
+            }
           </button>
 
         </div>
@@ -689,37 +1083,71 @@ function renderProducts() {
     `;
 
 
+    /* ===============================
+       WHATSAPP
+    =============================== */
+
+    card
+      .querySelector(".whatsapp-btn")
+      .addEventListener(
+        "click",
+        function(){
+
+          sendSingleEnquiry(
+            product.id
+          );
+
+        }
+      );
+
+
+    /* ===============================
+       SELECT
+    =============================== */
+
+    card
+      .querySelector(".select-btn")
+      .addEventListener(
+        "click",
+        function(){
+
+          toggleProduct(
+            product.id
+          );
+
+        }
+      );
+
+
     grid.appendChild(card);
 
   });
 
 
-  updateSelectionBar();
+  updateBar();
 
 }
 
 
 /* =========================================================
-   SINGLE WHATSAPP ENQUIRY
+   SINGLE WHATSAPP
 ========================================================= */
 
-window.sendSingleEnquiry =
-function(id) {
+function sendSingleEnquiry(id){
 
   const product =
-    products.find(function(p) {
+    products.find(function(p){
 
       return p.id === id;
 
     });
 
 
-  if (!product) return;
+  if(!product) return;
 
 
   const name =
-    getProductName(product);
-
+    getName(product);
 
   const code =
     product.code ||
@@ -747,7 +1175,9 @@ Please share the wholesale price and details.`;
     "https://wa.me/" +
     WHATSAPP_NUMBER +
     "?text=" +
-    encodeURIComponent(message);
+    encodeURIComponent(
+      message
+    );
 
 
   window.open(
@@ -755,23 +1185,22 @@ Please share the wholesale price and details.`;
     "_blank"
   );
 
-};
+}
 
 
 /* =========================================================
-   SELECT / UNSELECT PRODUCT
+   SELECT PRODUCT
 ========================================================= */
 
-window.toggleProduct =
-function(id) {
+function toggleProduct(id){
 
-  if (
+  if(
     selectedProducts.has(id)
-  ) {
+  ){
 
     selectedProducts.delete(id);
 
-  } else {
+  }else{
 
     selectedProducts.add(id);
 
@@ -780,20 +1209,20 @@ function(id) {
 
   renderProducts();
 
-};
+}
 
 
 /* =========================================================
    SELECTION BAR
 ========================================================= */
 
-function updateSelectionBar() {
+function updateBar(){
 
   const total =
     selectedProducts.size;
 
 
-  if (selectedCount) {
+  if(selectedCount){
 
     selectedCount.textContent =
       total;
@@ -801,17 +1230,17 @@ function updateSelectionBar() {
   }
 
 
-  if (enquiryBar) {
+  if(bar){
 
-    if (total > 0) {
+    if(total > 0){
 
-      enquiryBar.classList.remove(
+      bar.classList.remove(
         "hidden"
       );
 
-    } else {
+    }else{
 
-      enquiryBar.classList.add(
+      bar.classList.add(
         "hidden"
       );
 
@@ -823,32 +1252,32 @@ function updateSelectionBar() {
 
 
 /* =========================================================
-   MULTIPLE WHATSAPP ENQUIRY
+   MULTIPLE WHATSAPP
 ========================================================= */
 
-if (multiButton) {
+if(multiButton){
 
   multiButton.addEventListener(
     "click",
-    function() {
-
-      if (
-        selectedProducts.size === 0
-      ) {
-
-        return;
-
-      }
-
+    function(){
 
       const selected =
-        products.filter(function(product) {
+        products.filter(function(product){
 
           return selectedProducts.has(
             product.id
           );
 
         });
+
+
+      if(
+        selected.length === 0
+      ){
+
+        return;
+
+      }
 
 
       let message =
@@ -860,11 +1289,10 @@ I am interested in the following products:
 
 
       selected.forEach(
-        function(product, index) {
+        function(product,index){
 
           const name =
-            getProductName(product);
-
+            getName(product);
 
           const code =
             product.code ||
@@ -873,7 +1301,7 @@ I am interested in the following products:
 
 
           message +=
-`${index + 1}. ${name}
+`${index+1}. ${name}
 Code: ${code}
 
 `;
@@ -907,18 +1335,18 @@ Code: ${code}
 
 
 /* =========================================================
-   INITIAL FILTER BUTTON
+   DEFAULT FILTER
 ========================================================= */
 
-const firstFilter =
+const allFilter =
   document.querySelector(
     '.filters button[data-filter="All"]'
   );
 
 
-if (firstFilter) {
+if(allFilter){
 
-  firstFilter.classList.add(
+  allFilter.classList.add(
     "active"
   );
 
@@ -926,36 +1354,9 @@ if (firstFilter) {
 
 
 /* =========================================================
-   FIREBASE LIVE UPDATE NOTE
+   DONE
 ========================================================= */
 
-/*
-   IMPORTANT:
-
-   This catalog uses Firestore onSnapshot().
-
-   Therefore:
-
-   ADMIN PANEL
-        ↓
-   Firestore
-        ↓
-   onSnapshot()
-        ↓
-   Main Catalog
-
-   When the Admin Panel changes:
-   Product Name
-   Category
-   Image
-   Stock
-   MOQ
-
-   the Main Catalog automatically receives
-   the updated document.
-*/
-
-
 console.log(
-  "OSS Digital Catalog — Firebase Live Connected"
+  "OSS Digital Catalog — Live Firestore Connected"
 );
