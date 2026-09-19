@@ -47,307 +47,307 @@ const WHATSAPP_NUMBER = "9499806747";
 const MASTER_PRODUCTS = [
 
   {
-    code:"OSS_001",
-    name:"DOUBLE GRID SOAP BOX",
-    category:"Bathroom Accessories",
-    image:"OSS_001.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_001",
+    name: "DOUBLE GRID SOAP BOX",
+    category: "Bathroom Accessories",
+    image: "OSS_001.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_002",
-    name:"MINI POPCORN MAKER",
-    category:"Home & Kitchen",
-    image:"OSS_002.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_002",
+    name: "MINI POPCORN MAKER",
+    category: "Home & Kitchen",
+    image: "OSS_002.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_003",
-    name:"2L MOTIVATIONAL WATTER BOTTLE",
-    category:"Water Bottle",
-    image:"OSS_003.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_003",
+    name: "2L MOTIVATIONAL WATTER BOTTLE",
+    category: "Water Bottle",
+    image: "OSS_003.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_004",
-    name:"5M OUTDOOR CLOTHESLINE",
-    category:"Home & Kitchen",
-    image:"OSS_004.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_004",
+    name: "5M OUTDOOR CLOTHESLINE",
+    category: "Home & Kitchen",
+    image: "OSS_004.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_005",
-    name:"10M OUTDOOR CLOTHESLINE",
-    category:"Home & Kitchen",
-    image:"OSS_005.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_005",
+    name: "10M OUTDOOR CLOTHESLINE",
+    category: "Home & Kitchen",
+    image: "OSS_005.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_006",
-    name:"48PCS CAR CONTAINER",
-    category:"Toys",
-    image:"OSS_006.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_006",
+    name: "48PCS CAR CONTAINER",
+    category: "Toys",
+    image: "OSS_006.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_007",
-    name:"3PCS MOTIVATION WATER BOTTLE",
-    category:"Water Bottle",
-    image:"OSS_007.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_007",
+    name: "3PCS MOTIVATION WATER BOTTLE",
+    category: "Water Bottle",
+    image: "OSS_007.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_008",
-    name:"HOT AND COLD DORI BOTTLE",
-    category:"Water Bottle",
-    image:"OSS_008.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_008",
+    name: "HOT AND COLD DORI BOTTLE",
+    category: "Water Bottle",
+    image: "OSS_008.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_009",
-    name:"1000ML STEEL WATER BOTTLE",
-    category:"Water Bottle",
-    image:"OSS_009.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_009",
+    name: "1000ML STEEL WATER BOTTLE",
+    category: "Water Bottle",
+    image: "OSS_009.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_010",
-    name:"VACCUM FLASK SET WITH 3 CUPS",
-    category:"Home & Kitchen",
-    image:"OSS_010.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_010",
+    name: "VACCUM FLASK SET WITH 3 CUPS",
+    category: "Home & Kitchen",
+    image: "OSS_010.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_011",
-    name:"PLUG MOSQUITO KILLER LAMP",
-    category:"Electric & Smart Gadgets",
-    image:"OSS_011.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_011",
+    name: "PLUG MOSQUITO KILLER LAMP",
+    category: "Electric & Smart Gadgets",
+    image: "OSS_011.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_012",
-    name:"ELECTRIC GAS LIGHTER",
-    category:"Electric & Smart Gadgets",
-    image:"OSS_012.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_012",
+    name: "ELECTRIC GAS LIGHTER",
+    category: "Electric & Smart Gadgets",
+    image: "OSS_012.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_013",
-    name:"PORTABLE CAR AIR MATTRESS",
-    category:"Car Accessories",
-    image:"OSS_013.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_013",
+    name: "PORTABLE CAR AIR MATTRESS",
+    category: "Car Accessories",
+    image: "OSS_013.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_014",
-    name:"SOLAR RECHARGEABLE LED FLOOD LIGHT",
-    category:"Electric & Smart Gadgets",
-    image:"OSS_014.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_014",
+    name: "SOLAR RECHARGEABLE LED FLOOD LIGHT",
+    category: "Electric & Smart Gadgets",
+    image: "OSS_014.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_015",
-    name:"ANTI SLIP TAPE WITH GLOW IN DARK STRIPE",
-    category:"Tools And Hardware",
-    image:"OSS_015.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_015",
+    name: "ANTI SLIP TAPE WITH GLOW IN DARK STRIPE",
+    category: "Tools And Hardware",
+    image: "OSS_015.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_016",
-    name:"PORTABLE INFLATABLE BED",
-    category:"Folding Furniture",
-    image:"OSS_016.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_016",
+    name: "PORTABLE INFLATABLE BED",
+    category: "Folding Furniture",
+    image: "OSS_016.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_017",
-    name:"4PCS MAGNETIC CAR WINDOW CURTAIN",
-    category:"Car Accessories",
-    image:"OSS_017.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_017",
+    name: "4PCS MAGNETIC CAR WINDOW CURTAIN",
+    category: "Car Accessories",
+    image: "OSS_017.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_018",
-    name:"CLOTH DRYING ROPE WITH 12 CLIPS",
-    category:"Home & Kitchen",
-    image:"OSS_018.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_018",
+    name: "CLOTH DRYING ROPE WITH 12 CLIPS",
+    category: "Home & Kitchen",
+    image: "OSS_018.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_019",
-    name:"PORTABLE MESH NEBULIZER MACHINE",
-    category:"Health & Personal Care",
-    image:"OSS_019.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_019",
+    name: "PORTABLE MESH NEBULIZER MACHINE",
+    category: "Health & Personal Care",
+    image: "OSS_019.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_020",
-    name:"30PCS SELF ADHESIVE TRANSPARENT BOOK COVER",
-    category:"Smart Stationery",
-    image:"OSS_020.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_020",
+    name: "30PCS SELF ADHESIVE TRANSPARENT BOOK COVER",
+    category: "Smart Stationery",
+    image: "OSS_020.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_021",
-    name:"7 INCH MOVING SAND ART",
-    category:"Gifts & Decor",
-    image:"OSS_021.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_021",
+    name: "7 INCH MOVING SAND ART",
+    category: "Gifts & Decor",
+    image: "OSS_021.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_022",
-    name:"ALL IN ONE 60W USB FAST CHARGING TRAVEL DATA CABLE SET",
-    category:"Smart Gadgets",
-    image:"OSS_022.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_022",
+    name: "ALL IN ONE 60W USB FAST CHARGING TRAVEL DATA CABLE SET",
+    category: "Smart Gadgets",
+    image: "OSS_022.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_023",
-    name:"PORTABLE FOLDING CHAIR",
-    category:"Folding Furniture",
-    image:"OSS_023.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_023",
+    name: "PORTABLE FOLDING CHAIR",
+    category: "Folding Furniture",
+    image: "OSS_023.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_024",
-    name:"SLIM FLOOR WIPER MOP WITH SILICONE BLADE & TELESCOPIC HANDLE",
-    category:"Multipurpose Cleaning Tool",
-    image:"OSS_024.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_024",
+    name: "SLIM FLOOR WIPER MOP WITH SILICONE BLADE & TELESCOPIC HANDLE",
+    category: "Multipurpose Cleaning Tool",
+    image: "OSS_024.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_025",
-    name:"ANTI VIBRATION PADS",
-    category:"Smart Gadgets",
-    image:"OSS_025.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_025",
+    name: "ANTI VIBRATION PADS",
+    category: "Smart Gadgets",
+    image: "OSS_025.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_026",
-    name:"DANCING JELLYFISH TOY WITH MUSIC & MOVEMENT",
-    category:"Toys",
-    image:"OSS_026.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_026",
+    name: "DANCING JELLYFISH TOY WITH MUSIC & MOVEMENT",
+    category: "Toys",
+    image: "OSS_026.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_027",
-    name:"360°METAL DESKTOP MOBILE PHONE STAND",
-    category:"Mobile Accessories",
-    image:"OSS_027.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_027",
+    name: "360°METAL DESKTOP MOBILE PHONE STAND",
+    category: "Mobile Accessories",
+    image: "OSS_027.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_028",
-    name:"ELECTRIC WATER HOT BAG",
-    category:"Health & Personal Care",
-    image:"OSS_028.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_028",
+    name: "ELECTRIC WATER HOT BAG",
+    category: "Health & Personal Care",
+    image: "OSS_028.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_029",
-    name:"2.5×6 NON ADJUSTABLE FOLDING BED",
-    category:"Folding Furniture",
-    image:"OSS_029.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_029",
+    name: "2.5×6 NON ADJUSTABLE FOLDING BED",
+    category: "Folding Furniture",
+    image: "OSS_029.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_030",
-    name:"2.5×6 ADJUSTABLE FOLDING BED",
-    category:"Folding Furniture",
-    image:"OSS_030.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_030",
+    name: "2.5×6 ADJUSTABLE FOLDING BED",
+    category: "Folding Furniture",
+    image: "OSS_030.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_031",
-    name:"HOT & COLD 1000ML STEEL WATER BOTTLE",
-    category:"Water Bottle",
-    image:"OSS_031.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_031",
+    name: "HOT & COLD 1000ML STEEL WATER BOTTLE",
+    category: "Water Bottle",
+    image: "OSS_031.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_032",
-    name:"2PCS HD VISION DRIVING GLASSES",
-    category:"Car Accessories",
-    image:"OSS_032.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_032",
+    name: "2PCS HD VISION DRIVING GLASSES",
+    category: "Car Accessories",
+    image: "OSS_032.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_033",
-    name:"PORTABLE 2 IN 1 CAMPING GAS STOVE",
-    category:"Travel Accessories",
-    image:"OSS_033.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_033",
+    name: "PORTABLE 2 IN 1 CAMPING GAS STOVE",
+    category: "Travel Accessories",
+    image: "OSS_033.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_034",
-    name:"ELECTRIC KAPOOR DANI WITH NIGHT LAMP",
-    category:"Gifts & Decor",
-    image:"OSS_034.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_034",
+    name: "ELECTRIC KAPOOR DANI WITH NIGHT LAMP",
+    category: "Gifts & Decor",
+    image: "OSS_034.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_035",
-    name:"WATER-ABSORBING RUBBER DOORMAT",
-    category:"Home & Kitchen",
-    image:"OSS_035.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_035",
+    name: "WATER-ABSORBING RUBBER DOORMAT",
+    category: "Home & Kitchen",
+    image: "OSS_035.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_036",
-    name:"MAGIC PRACTICE COPYBOOK",
-    category:"Smart Stationery",
-    image:"OSS_036.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_036",
+    name: "MAGIC PRACTICE COPYBOOK",
+    category: "Smart Stationery",
+    image: "OSS_036.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_037",
-    name:"40×40 MICROFIBER CLOTH (ONLY YELLOW)",
-    category:"Multipurpose Cleaning Cloth",
-    image:"OSS_037.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_037",
+    name: "40×40 MICROFIBER CLOTH (ONLY YELLOW)",
+    category: "Multipurpose Cleaning Cloth",
+    image: "OSS_037.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   },
 
   {
-    code:"OSS_038",
-    name:"Self Adhesive Door Bottom Sealing Strip Guard",
-    category:"Home & Kitchen",
-    image:"OSS_038.jpg",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
+    code: "OSS_038",
+    name: "Self Adhesive Door Bottom Sealing Strip Guard",
+    category: "Home & Kitchen",
+    image: "OSS_038.jpg",
+    moq: "₹500 Minimum Order Quantity (MOQ)"
   }
 
 ];
@@ -357,58 +357,42 @@ const MASTER_PRODUCTS = [
    WORKING PRODUCTS
 ========================================================= */
 
-let products =
-  MASTER_PRODUCTS.map(product => ({
-    ...product,
-    status:"In Stock"
-  }));
+let products = MASTER_PRODUCTS.map(product => ({
+  ...product,
+  status: "In Stock"
+}));
 
+let selectedProducts = new Set();
 
-let selectedProducts =
-  new Set();
+let activeCategory = "All";
 
-
-let activeCategory =
-  "All";
-
-
-let activeStock =
-  "All";
+let activeStock = "All";
 
 
 /* =========================================================
    DOM
 ========================================================= */
 
-const grid =
-  document.getElementById("grid");
+const grid = document.getElementById("grid");
 
-const count =
-  document.getElementById("count");
+const count = document.getElementById("count");
 
-const search =
-  document.getElementById("search");
+const search = document.getElementById("search");
 
-const cats =
-  document.getElementById("cats");
+const cats = document.getElementById("cats");
 
-const bar =
-  document.getElementById("bar");
+const bar = document.getElementById("bar");
 
-const selectedCount =
-  document.getElementById("selectedCount");
+const selectedCount = document.getElementById("selectedCount");
 
-const multiButton =
-  document.getElementById("multi");
+const multiButton = document.getElementById("multi");
 
 
 /* =========================================================
    PRODUCT CARD STYLE
 ========================================================= */
 
-const style =
-  document.createElement("style");
-
+const style = document.createElement("style");
 
 style.textContent = `
 
@@ -649,24 +633,23 @@ function renderCategories(){
     )
   ];
 
-  cats.innerHTML =
-    categories
-      .map(category => `
+  cats.innerHTML = categories
+    .map(category => `
 
-        <button
-          type="button"
-          class="${
-            activeCategory === category
-              ? "active"
-              : ""
-          }"
-          data-category="${escapeHTML(category)}"
-        >
-          ${escapeHTML(category)}
-        </button>
+      <button
+        type="button"
+        class="${
+          activeCategory === category
+            ? "active"
+            : ""
+        }"
+        data-category="${escapeHTML(category)}"
+      >
+        ${escapeHTML(category)}
+      </button>
 
-      `)
-      .join("");
+    `)
+    .join("");
 
   cats
     .querySelectorAll(
@@ -758,31 +741,11 @@ function escapeHTML(value){
   return String(
     value ?? ""
   )
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 
 }
 
@@ -811,8 +774,7 @@ function renderProducts(){
         product.code +
         " " +
         product.category
-      )
-        .toLowerCase();
+      ).toLowerCase();
 
       const searchMatch =
         !searchText ||
@@ -861,9 +823,7 @@ function renderProducts(){
         font-weight:bold;
         color:#555;
       ">
-
         No products found.
-
       </div>
 
     `;
@@ -882,10 +842,7 @@ function renderProducts(){
         product.code
       );
 
-
-    let stockClass =
-      "stock-in";
-
+    let stockClass = "stock-in";
 
     if(
       product.status ===
@@ -896,7 +853,6 @@ function renderProducts(){
         "stock-coming";
 
     }
-
 
     if(
       product.status ===
@@ -913,7 +869,6 @@ function renderProducts(){
       document.createElement(
         "article"
       );
-
 
     card.className =
       "product-card";
@@ -942,26 +897,21 @@ function renderProducts(){
           ${escapeHTML(product.code)}
         </div>
 
-
         <h2 class="product-name">
           ${escapeHTML(product.name)}
         </h2>
-
 
         <div class="product-category">
           ${escapeHTML(product.category)}
         </div>
 
-
         <div class="${stockClass}">
           ${escapeHTML(product.status)}
         </div>
 
-
         <div class="product-moq">
           ${escapeHTML(product.moq)}
         </div>
-
 
         <div class="product-actions">
 
@@ -972,13 +922,11 @@ function renderProducts(){
             WhatsApp Enquiry
           </button>
 
-
           <button
             type="button"
-            class="
-              select-btn
-              ${selected ? "selected" : ""}
-            "
+            class="select-btn ${
+              selected ? "selected" : ""
+            }"
           >
             ${selected ? "✓" : "+"}
           </button>
@@ -1040,9 +988,7 @@ function renderProducts(){
    SINGLE WHATSAPP
 ========================================================= */
 
-function sendSingleEnquiry(
-  product
-){
+function sendSingleEnquiry(product){
 
   const message =
 `Hi ONE STOP SOLUTION (OSS),
@@ -1051,7 +997,6 @@ I'm interested in ${product.name} (${product.code}).
 
 Please share details and rates.`;
 
-
   const url =
     "https://wa.me/" +
     WHATSAPP_NUMBER +
@@ -1059,7 +1004,6 @@ Please share details and rates.`;
     encodeURIComponent(
       message
     );
-
 
   window.location.href =
     url;
@@ -1079,4 +1023,6 @@ function toggleProduct(code){
     )
   ){
 
-    selectedProducts.dele
+    selectedProducts.delete(
+      code
+  
