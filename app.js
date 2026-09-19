@@ -1,6 +1,6 @@
 /* =========================================================
    OSS DIGITAL CATALOG
-   MASTER PRODUCT LIST + FIRESTORE LIVE STOCK
+   MASTER PRODUCTS + FIREBASE FIRESTORE LIVE STOCK
 ========================================================= */
 
 import {
@@ -15,7 +15,7 @@ import {
 
 
 /* =========================================================
-   FIREBASE
+   FIREBASE CONFIG
 ========================================================= */
 
 const firebaseConfig = {
@@ -28,8 +28,8 @@ const firebaseConfig = {
   measurementId: "G-GT8YNKQJ5K"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
 
 
 /* =========================================================
@@ -41,7 +41,7 @@ const WHATSAPP_NUMBER = "9499806747";
 
 /* =========================================================
    MASTER PRODUCTS
-   DO NOT CHANGE ORDER / CODE / NAME / CATEGORY / IMAGE
+   DO NOT CHANGE PRODUCT ORDER / CODE / NAME / IMAGE
 ========================================================= */
 
 const MASTER_PRODUCTS = [
@@ -354,7 +354,7 @@ const MASTER_PRODUCTS = [
 
 
 /* =========================================================
-   WORKING PRODUCTS
+   WORKING DATA
 ========================================================= */
 
 let products = MASTER_PRODUCTS.map(product => ({
@@ -370,259 +370,269 @@ let activeStock = "All";
 
 
 /* =========================================================
-   DOM
+   DOM ELEMENTS
 ========================================================= */
 
 const grid = document.getElementById("grid");
-
 const count = document.getElementById("count");
-
 const search = document.getElementById("search");
-
 const cats = document.getElementById("cats");
-
 const bar = document.getElementById("bar");
-
 const selectedCount = document.getElementById("selectedCount");
-
 const multiButton = document.getElementById("multi");
 
 
 /* =========================================================
-   PRODUCT CARD STYLE
+   CATALOG CSS
 ========================================================= */
 
-const style = document.createElement("style");
+const catalogStyle = document.createElement("style");
 
-style.textContent = `
+catalogStyle.textContent = `
 
-#grid.grid{
-  display:grid !important;
-  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-  gap:18px !important;
-  width:100% !important;
-  align-items:start !important;
+#grid.grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+  width: 100% !important;
+  align-items: start !important;
 }
 
-#grid .product-card{
-  width:100% !important;
-  min-width:0 !important;
-  background:#fff !important;
-  border-radius:18px !important;
-  overflow:hidden !important;
-  border:1px solid #e2e6eb !important;
-  box-shadow:0 5px 18px rgba(0,0,0,.08) !important;
-  display:flex !important;
-  flex-direction:column !important;
+.product-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e6eb !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  box-shadow: 0 5px 18px rgba(0,0,0,.08) !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
-#grid .product-image-wrap{
-  width:100% !important;
-  height:260px !important;
-  background:#f5f5f5 !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  overflow:hidden !important;
+.product-image-wrap {
+  width: 100% !important;
+  height: 260px !important;
+  background: #f5f5f5 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
 }
 
-#grid .product-image-wrap img{
-  width:100% !important;
-  height:100% !important;
-  object-fit:cover !important;
-  display:block !important;
+.product-image-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
-#grid .product-body{
-  padding:14px !important;
-  background:#fff !important;
+.product-body {
+  padding: 14px !important;
+  background: #ffffff !important;
 }
 
-#grid .product-code{
-  color:#718096 !important;
-  font-size:12px !important;
-  font-weight:700 !important;
-  margin-bottom:6px !important;
+.product-code {
+  color: #718096 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  margin-bottom: 6px !important;
 }
 
-#grid .product-name{
-  color:#071b3a !important;
-  font-size:18px !important;
-  line-height:1.25 !important;
-  margin:0 0 7px 0 !important;
-  font-weight:800 !important;
+.product-name {
+  color: #071b3a !important;
+  font-size: 18px !important;
+  line-height: 1.25 !important;
+  margin: 0 0 7px 0 !important;
+  font-weight: 800 !important;
 }
 
-#grid .product-category{
-  color:#5c6675 !important;
-  font-size:13px !important;
-  margin-bottom:8px !important;
+.product-category {
+  color: #5c6675 !important;
+  font-size: 13px !important;
+  margin-bottom: 8px !important;
 }
 
-#grid .stock-in,
-#grid .stock-coming,
-#grid .stock-out{
-  display:inline-block !important;
-  padding:6px 10px !important;
-  border-radius:20px !important;
-  font-size:12px !important;
-  font-weight:700 !important;
-  margin-bottom:8px !important;
+.stock-in,
+.stock-coming,
+.stock-out {
+  display: inline-block !important;
+  padding: 6px 10px !important;
+  border-radius: 20px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  margin-bottom: 8px !important;
 }
 
-#grid .stock-in{
-  background:#dff6e5 !important;
-  color:#16733a !important;
+.stock-in {
+  background: #dff6e5 !important;
+  color: #16733a !important;
 }
 
-#grid .stock-coming{
-  background:#fff1c9 !important;
-  color:#956d00 !important;
+.stock-coming {
+  background: #fff1c9 !important;
+  color: #956d00 !important;
 }
 
-#grid .stock-out{
-  background:#ffdede !important;
-  color:#a00000 !important;
+.stock-out {
+  background: #ffdede !important;
+  color: #a00000 !important;
 }
 
-#grid .product-moq{
-  color:#c62828 !important;
-  font-size:13px !important;
-  font-weight:700 !important;
-  margin-bottom:12px !important;
+.product-moq {
+  color: #c62828 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  margin-bottom: 12px !important;
 }
 
-#grid .product-actions{
-  display:flex !important;
-  gap:9px !important;
-  width:100% !important;
+.product-actions {
+  display: flex !important;
+  gap: 9px !important;
+  width: 100% !important;
 }
 
-#grid .whatsapp-btn{
-  flex:1 !important;
-  border:0 !important;
-  border-radius:10px !important;
-  background:#1c9b50 !important;
-  color:#fff !important;
-  padding:12px 10px !important;
-  font-size:14px !important;
-  font-weight:700 !important;
-  cursor:pointer !important;
+.whatsapp-btn {
+  flex: 1 !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: #1c9b50 !important;
+  color: #ffffff !important;
+  padding: 12px 10px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
 }
 
-#grid .select-btn{
-  width:52px !important;
-  min-width:52px !important;
-  border:0 !important;
-  border-radius:10px !important;
-  background:#17375f !important;
-  color:#fff !important;
-  font-size:25px !important;
-  font-weight:700 !important;
-  cursor:pointer !important;
+.select-btn {
+  width: 52px !important;
+  min-width: 52px !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: #17375f !important;
+  color: #ffffff !important;
+  font-size: 25px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
 }
 
-#grid .select-btn.selected{
-  background:#1c9b50 !important;
+.select-btn.selected {
+  background: #1c9b50 !important;
 }
 
-#cats{
-  display:flex !important;
-  flex-wrap:wrap !important;
-  gap:7px !important;
+#cats {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 7px !important;
 }
 
-#cats button{
-  border:1px solid #d7dce2 !important;
-  background:#fff !important;
-  color:#172033 !important;
-  border-radius:20px !important;
-  padding:8px 12px !important;
-  font-size:12px !important;
-  font-weight:700 !important;
-  cursor:pointer !important;
+#cats button {
+  border: 1px solid #d7dce2 !important;
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-radius: 20px !important;
+  padding: 8px 12px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
 }
 
-#cats button.active{
-  background:#071b3a !important;
-  color:#fff !important;
-  border-color:#071b3a !important;
+#cats button.active {
+  background: #071b3a !important;
+  color: #ffffff !important;
+  border-color: #071b3a !important;
 }
 
-.filters button{
-  cursor:pointer !important;
+.filters button {
+  cursor: pointer !important;
 }
 
-.filters button.active{
-  background:#071b3a !important;
-  color:#fff !important;
+.filters button.active {
+  background: #071b3a !important;
+  color: #ffffff !important;
 }
 
-@media(max-width:700px){
+@media (max-width: 700px) {
 
-  #grid.grid{
-    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-    gap:10px !important;
+  #grid.grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
   }
 
-  #grid .product-image-wrap{
-    height:170px !important;
+  .product-image-wrap {
+    height: 170px !important;
   }
 
-  #grid .product-body{
-    padding:9px !important;
+  .product-body {
+    padding: 9px !important;
   }
 
-  #grid .product-name{
-    font-size:14px !important;
-    line-height:1.25 !important;
+  .product-name {
+    font-size: 14px !important;
+    line-height: 1.25 !important;
   }
 
-  #grid .product-code{
-    font-size:10px !important;
+  .product-code {
+    font-size: 10px !important;
   }
 
-  #grid .product-category{
-    font-size:10px !important;
+  .product-category {
+    font-size: 10px !important;
   }
 
-  #grid .product-moq{
-    font-size:10px !important;
+  .product-moq {
+    font-size: 10px !important;
   }
 
-  #grid .whatsapp-btn{
-    font-size:10px !important;
-    padding:9px 4px !important;
+  .whatsapp-btn {
+    font-size: 10px !important;
+    padding: 9px 4px !important;
   }
 
-  #grid .select-btn{
-    width:38px !important;
-    min-width:38px !important;
-    font-size:20px !important;
+  .select-btn {
+    width: 38px !important;
+    min-width: 38px !important;
+    font-size: 20px !important;
   }
 
 }
 
-@media(max-width:430px){
+@media (max-width: 430px) {
 
-  #grid .product-image-wrap{
-    height:155px !important;
+  .product-image-wrap {
+    height: 155px !important;
   }
 
 }
 
 `;
 
-document.head.appendChild(style);
+document.head.appendChild(catalogStyle);
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
 
 
 /* =========================================================
    CATEGORY BUTTONS
 ========================================================= */
 
-function renderCategories(){
+function renderCategories() {
 
-  if(!cats) return;
+  if (!cats) return;
 
   const categories = [
     "All",
@@ -634,22 +644,26 @@ function renderCategories(){
   ];
 
   cats.innerHTML = categories
-    .map(category => `
+    .map(category => {
 
-      <button
-        type="button"
-        class="${
-          activeCategory === category
-            ? "active"
-            : ""
-        }"
-        data-category="${escapeHTML(category)}"
-      >
-        ${escapeHTML(category)}
-      </button>
+      const active =
+        activeCategory === category
+          ? "active"
+          : "";
 
-    `)
+      return `
+        <button
+          type="button"
+          class="${active}"
+          data-category="${escapeHTML(category)}"
+        >
+          ${escapeHTML(category)}
+        </button>
+      `;
+
+    })
     .join("");
+
 
   cats
     .querySelectorAll(
@@ -665,7 +679,6 @@ function renderCategories(){
             button.dataset.category;
 
           renderCategories();
-
           renderProducts();
 
         }
@@ -677,7 +690,7 @@ function renderCategories(){
 
 
 /* =========================================================
-   STOCK FILTER
+   STOCK FILTER BUTTONS
 ========================================================= */
 
 document
@@ -722,7 +735,7 @@ document
    SEARCH
 ========================================================= */
 
-if(search){
+if (search) {
 
   search.addEventListener(
     "input",
@@ -733,30 +746,12 @@ if(search){
 
 
 /* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(value){
-
-  return String(
-    value ?? ""
-  )
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-
-}
-
-
-/* =========================================================
    RENDER PRODUCTS
 ========================================================= */
 
-function renderProducts(){
+function renderProducts() {
 
-  if(!grid) return;
+  if (!grid) return;
 
   const searchText =
     search
@@ -764,6 +759,7 @@ function renderProducts(){
           .toLowerCase()
           .trim()
       : "";
+
 
   const filtered =
     products.filter(product => {
@@ -776,21 +772,25 @@ function renderProducts(){
         product.category
       ).toLowerCase();
 
+
       const searchMatch =
         !searchText ||
         searchable.includes(
           searchText
         );
 
+
       const categoryMatch =
         activeCategory === "All" ||
         product.category ===
           activeCategory;
 
+
       const stockMatch =
         activeStock === "All" ||
         product.status ===
           activeStock;
+
 
       return (
         searchMatch &&
@@ -801,7 +801,7 @@ function renderProducts(){
     });
 
 
-  if(count){
+  if (count) {
 
     count.textContent =
       `${filtered.length} Products`;
@@ -812,7 +812,7 @@ function renderProducts(){
   grid.innerHTML = "";
 
 
-  if(filtered.length === 0){
+  if (filtered.length === 0) {
 
     grid.innerHTML = `
 
@@ -823,7 +823,9 @@ function renderProducts(){
         font-weight:bold;
         color:#555;
       ">
+
         No products found.
+
       </div>
 
     `;
@@ -842,22 +844,26 @@ function renderProducts(){
         product.code
       );
 
-    let stockClass = "stock-in";
 
-    if(
+    let stockClass =
+      "stock-in";
+
+
+    if (
       product.status ===
       "Coming Soon"
-    ){
+    ) {
 
       stockClass =
         "stock-coming";
 
     }
 
-    if(
+
+    if (
       product.status ===
       "Out of Stock"
-    ){
+    ) {
 
       stockClass =
         "stock-out";
@@ -869,6 +875,7 @@ function renderProducts(){
       document.createElement(
         "article"
       );
+
 
     card.className =
       "product-card";
@@ -897,21 +904,26 @@ function renderProducts(){
           ${escapeHTML(product.code)}
         </div>
 
+
         <h2 class="product-name">
           ${escapeHTML(product.name)}
         </h2>
+
 
         <div class="product-category">
           ${escapeHTML(product.category)}
         </div>
 
+
         <div class="${stockClass}">
           ${escapeHTML(product.status)}
         </div>
 
+
         <div class="product-moq">
           ${escapeHTML(product.moq)}
         </div>
+
 
         <div class="product-actions">
 
@@ -922,13 +934,20 @@ function renderProducts(){
             WhatsApp Enquiry
           </button>
 
+
           <button
             type="button"
             class="select-btn ${
-              selected ? "selected" : ""
+              selected
+                ? "selected"
+                : ""
             }"
           >
-            ${selected ? "✓" : "+"}
+            ${
+              selected
+                ? "✓"
+                : "+"
+            }
           </button>
 
         </div>
@@ -985,10 +1004,10 @@ function renderProducts(){
 
 
 /* =========================================================
-   SINGLE WHATSAPP
+   SINGLE WHATSAPP ENQUIRY
 ========================================================= */
 
-function sendSingleEnquiry(product){
+function sendSingleEnquiry(product) {
 
   const message =
 `Hi ONE STOP SOLUTION (OSS),
@@ -996,6 +1015,7 @@ function sendSingleEnquiry(product){
 I'm interested in ${product.name} (${product.code}).
 
 Please share details and rates.`;
+
 
   const url =
     "https://wa.me/" +
@@ -1005,24 +1025,11 @@ Please share details and rates.`;
       message
     );
 
+
   window.location.href =
     url;
 
 }
 
 
-/* =========================================================
-   SELECT PRODUCT
-========================================================= */
-
-function toggleProduct(code){
-
-  if(
-    selectedProducts.has(
-      code
-    )
-  ){
-
-    selectedProducts.delete(
-      code
-  
+/* =========================
