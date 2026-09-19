@@ -1,7 +1,6 @@
 /* =========================================================
    OSS DIGITAL CATALOG
-   FIRESTORE LIVE CATALOG
-   ADMIN PANEL NAME UPDATE SUPPORT
+   MASTER PRODUCT LIST + FIRESTORE LIVE STOCK
 ========================================================= */
 
 import {
@@ -39,40 +38,381 @@ const db = getFirestore(app);
 
 const WHATSAPP_NUMBER = "9499806747";
 
-let products = [];
-let selectedProducts = new Set();
 
-let activeCategory = "All";
-let activeStock = "All";
+/* =========================================================
+   MASTER PRODUCTS
+   DO NOT CHANGE ORDER / CODE / NAME / CATEGORY / IMAGE
+========================================================= */
+
+const MASTER_PRODUCTS = [
+
+  {
+    code:"OSS_001",
+    name:"DOUBLE GRID SOAP BOX",
+    category:"Bathroom Accessories",
+    image:"OSS_001.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_002",
+    name:"MINI POPCORN MAKER",
+    category:"Home & Kitchen",
+    image:"OSS_002.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_003",
+    name:"2L MOTIVATIONAL WATTER BOTTLE",
+    category:"Water Bottle",
+    image:"OSS_003.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_004",
+    name:"5M OUTDOOR CLOTHESLINE",
+    category:"Home & Kitchen",
+    image:"OSS_004.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_005",
+    name:"10M OUTDOOR CLOTHESLINE",
+    category:"Home & Kitchen",
+    image:"OSS_005.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_006",
+    name:"48PCS CAR CONTAINER",
+    category:"Toys",
+    image:"OSS_006.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_007",
+    name:"3PCS MOTIVATION WATER BOTTLE",
+    category:"Water Bottle",
+    image:"OSS_007.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_008",
+    name:"HOT AND COLD DORI BOTTLE",
+    category:"Water Bottle",
+    image:"OSS_008.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_009",
+    name:"1000ML STEEL WATER BOTTLE",
+    category:"Water Bottle",
+    image:"OSS_009.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_010",
+    name:"VACCUM FLASK SET WITH 3 CUPS",
+    category:"Home & Kitchen",
+    image:"OSS_010.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_011",
+    name:"PLUG MOSQUITO KILLER LAMP",
+    category:"Electric & Smart Gadgets",
+    image:"OSS_011.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_012",
+    name:"ELECTRIC GAS LIGHTER",
+    category:"Electric & Smart Gadgets",
+    image:"OSS_012.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_013",
+    name:"PORTABLE CAR AIR MATTRESS",
+    category:"Car Accessories",
+    image:"OSS_013.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_014",
+    name:"SOLAR RECHARGEABLE LED FLOOD LIGHT",
+    category:"Electric & Smart Gadgets",
+    image:"OSS_014.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_015",
+    name:"ANTI SLIP TAPE WITH GLOW IN DARK STRIPE",
+    category:"Tools And Hardware",
+    image:"OSS_015.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_016",
+    name:"PORTABLE INFLATABLE BED",
+    category:"Folding Furniture",
+    image:"OSS_016.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_017",
+    name:"4PCS MAGNETIC CAR WINDOW CURTAIN",
+    category:"Car Accessories",
+    image:"OSS_017.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_018",
+    name:"CLOTH DRYING ROPE WITH 12 CLIPS",
+    category:"Home & Kitchen",
+    image:"OSS_018.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_019",
+    name:"PORTABLE MESH NEBULIZER MACHINE",
+    category:"Health & Personal Care",
+    image:"OSS_019.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_020",
+    name:"30PCS SELF ADHESIVE TRANSPARENT BOOK COVER",
+    category:"Smart Stationery",
+    image:"OSS_020.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_021",
+    name:"7 INCH MOVING SAND ART",
+    category:"Gifts & Decor",
+    image:"OSS_021.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_022",
+    name:"ALL IN ONE 60W USB FAST CHARGING TRAVEL DATA CABLE SET",
+    category:"Smart Gadgets",
+    image:"OSS_022.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_023",
+    name:"PORTABLE FOLDING CHAIR",
+    category:"Folding Furniture",
+    image:"OSS_023.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_024",
+    name:"SLIM FLOOR WIPER MOP WITH SILICONE BLADE & TELESCOPIC HANDLE",
+    category:"Multipurpose Cleaning Tool",
+    image:"OSS_024.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_025",
+    name:"ANTI VIBRATION PADS",
+    category:"Smart Gadgets",
+    image:"OSS_025.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_026",
+    name:"DANCING JELLYFISH TOY WITH MUSIC & MOVEMENT",
+    category:"Toys",
+    image:"OSS_026.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_027",
+    name:"360°METAL DESKTOP MOBILE PHONE STAND",
+    category:"Mobile Accessories",
+    image:"OSS_027.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_028",
+    name:"ELECTRIC WATER HOT BAG",
+    category:"Health & Personal Care",
+    image:"OSS_028.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_029",
+    name:"2.5×6 NON ADJUSTABLE FOLDING BED",
+    category:"Folding Furniture",
+    image:"OSS_029.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_030",
+    name:"2.5×6 ADJUSTABLE FOLDING BED",
+    category:"Folding Furniture",
+    image:"OSS_030.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_031",
+    name:"HOT & COLD 1000ML STEEL WATER BOTTLE",
+    category:"Water Bottle",
+    image:"OSS_031.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_032",
+    name:"2PCS HD VISION DRIVING GLASSES",
+    category:"Car Accessories",
+    image:"OSS_032.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_033",
+    name:"PORTABLE 2 IN 1 CAMPING GAS STOVE",
+    category:"Travel Accessories",
+    image:"OSS_033.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_034",
+    name:"ELECTRIC KAPOOR DANI WITH NIGHT LAMP",
+    category:"Gifts & Decor",
+    image:"OSS_034.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_035",
+    name:"WATER-ABSORBING RUBBER DOORMAT",
+    category:"Home & Kitchen",
+    image:"OSS_035.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_036",
+    name:"MAGIC PRACTICE COPYBOOK",
+    category:"Smart Stationery",
+    image:"OSS_036.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_037",
+    name:"40×40 MICROFIBER CLOTH (ONLY YELLOW)",
+    category:"Multipurpose Cleaning Cloth",
+    image:"OSS_037.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  },
+
+  {
+    code:"OSS_038",
+    name:"Self Adhesive Door Bottom Sealing Strip Guard",
+    category:"Home & Kitchen",
+    image:"OSS_038.jpg",
+    moq:"₹500 Minimum Order Quantity (MOQ)"
+  }
+
+];
+
+
+/* =========================================================
+   WORKING PRODUCTS
+========================================================= */
+
+let products =
+  MASTER_PRODUCTS.map(product => ({
+    ...product,
+    status:"In Stock"
+  }));
+
+
+let selectedProducts =
+  new Set();
+
+
+let activeCategory =
+  "All";
+
+
+let activeStock =
+  "All";
 
 
 /* =========================================================
    DOM
 ========================================================= */
 
-const grid = document.getElementById("grid");
-const count = document.getElementById("count");
-const search = document.getElementById("search");
-const cats = document.getElementById("cats");
+const grid =
+  document.getElementById("grid");
 
-const bar = document.getElementById("bar");
-const selectedCount = document.getElementById("selectedCount");
-const multiButton = document.getElementById("multi");
+const count =
+  document.getElementById("count");
+
+const search =
+  document.getElementById("search");
+
+const cats =
+  document.getElementById("cats");
+
+const bar =
+  document.getElementById("bar");
+
+const selectedCount =
+  document.getElementById("selectedCount");
+
+const multiButton =
+  document.getElementById("multi");
 
 
 /* =========================================================
-   FORCE CLEAN CATALOG DESIGN
+   PRODUCT CARD STYLE
 ========================================================= */
 
-const style = document.createElement("style");
+const style =
+  document.createElement("style");
+
 
 style.textContent = `
 
-/* ===============================
-   PRODUCT GRID
-================================ */
-
-#grid.grid {
+#grid.grid{
 
   display:grid !important;
 
@@ -88,17 +428,13 @@ style.textContent = `
 }
 
 
-/* ===============================
-   PRODUCT CARD
-================================ */
-
-#grid .product-card {
+#grid .product-card{
 
   width:100% !important;
 
   min-width:0 !important;
 
-  background:#ffffff !important;
+  background:#fff !important;
 
   border-radius:18px !important;
 
@@ -116,11 +452,7 @@ style.textContent = `
 }
 
 
-/* ===============================
-   IMAGE
-================================ */
-
-#grid .product-image-wrap {
+#grid .product-image-wrap{
 
   width:100% !important;
 
@@ -139,7 +471,7 @@ style.textContent = `
 }
 
 
-#grid .product-image-wrap img {
+#grid .product-image-wrap img{
 
   width:100% !important;
 
@@ -152,11 +484,7 @@ style.textContent = `
 }
 
 
-/* ===============================
-   BODY
-================================ */
-
-#grid .product-body {
+#grid .product-body{
 
   padding:14px !important;
 
@@ -165,11 +493,7 @@ style.textContent = `
 }
 
 
-/* ===============================
-   CODE
-================================ */
-
-#grid .product-code {
+#grid .product-code{
 
   color:#718096 !important;
 
@@ -182,11 +506,7 @@ style.textContent = `
 }
 
 
-/* ===============================
-   PRODUCT NAME
-================================ */
-
-#grid .product-name {
+#grid .product-name{
 
   color:#071b3a !important;
 
@@ -201,11 +521,7 @@ style.textContent = `
 }
 
 
-/* ===============================
-   CATEGORY
-================================ */
-
-#grid .product-category {
+#grid .product-category{
 
   color:#5c6675 !important;
 
@@ -216,13 +532,9 @@ style.textContent = `
 }
 
 
-/* ===============================
-   STOCK
-================================ */
-
 #grid .stock-in,
 #grid .stock-coming,
-#grid .stock-out {
+#grid .stock-out{
 
   display:inline-block !important;
 
@@ -239,7 +551,7 @@ style.textContent = `
 }
 
 
-#grid .stock-in {
+#grid .stock-in{
 
   background:#dff6e5 !important;
 
@@ -248,7 +560,7 @@ style.textContent = `
 }
 
 
-#grid .stock-coming {
+#grid .stock-coming{
 
   background:#fff1c9 !important;
 
@@ -257,7 +569,7 @@ style.textContent = `
 }
 
 
-#grid .stock-out {
+#grid .stock-out{
 
   background:#ffdede !important;
 
@@ -266,11 +578,7 @@ style.textContent = `
 }
 
 
-/* ===============================
-   MOQ
-================================ */
-
-#grid .product-moq {
+#grid .product-moq{
 
   color:#c62828 !important;
 
@@ -283,11 +591,7 @@ style.textContent = `
 }
 
 
-/* ===============================
-   BUTTONS
-================================ */
-
-#grid .product-actions {
+#grid .product-actions{
 
   display:flex !important;
 
@@ -298,7 +602,7 @@ style.textContent = `
 }
 
 
-#grid .whatsapp-btn {
+#grid .whatsapp-btn{
 
   flex:1 !important;
 
@@ -321,7 +625,7 @@ style.textContent = `
 }
 
 
-#grid .select-btn {
+#grid .select-btn{
 
   width:52px !important;
 
@@ -344,18 +648,14 @@ style.textContent = `
 }
 
 
-#grid .select-btn.selected {
+#grid .select-btn.selected{
 
   background:#1c9b50 !important;
 
 }
 
 
-/* ===============================
-   CATEGORY BUTTONS
-================================ */
-
-#cats {
+#cats{
 
   display:flex !important;
 
@@ -366,7 +666,7 @@ style.textContent = `
 }
 
 
-#cats button {
+#cats button{
 
   border:1px solid #d7dce2 !important;
 
@@ -387,7 +687,7 @@ style.textContent = `
 }
 
 
-#cats button.active {
+#cats button.active{
 
   background:#071b3a !important;
 
@@ -398,18 +698,14 @@ style.textContent = `
 }
 
 
-/* ===============================
-   STOCK FILTER
-================================ */
-
-.filters button {
+.filters button{
 
   cursor:pointer !important;
 
 }
 
 
-.filters button.active {
+.filters button.active{
 
   background:#071b3a !important;
 
@@ -418,13 +714,9 @@ style.textContent = `
 }
 
 
-/* ===============================
-   MOBILE
-================================ */
-
 @media(max-width:700px){
 
-  #grid.grid {
+  #grid.grid{
 
     grid-template-columns:
       repeat(2,minmax(0,1fr)) !important;
@@ -434,21 +726,21 @@ style.textContent = `
   }
 
 
-  #grid .product-image-wrap {
+  #grid .product-image-wrap{
 
     height:170px !important;
 
   }
 
 
-  #grid .product-body {
+  #grid .product-body{
 
     padding:9px !important;
 
   }
 
 
-  #grid .product-name {
+  #grid .product-name{
 
     font-size:14px !important;
 
@@ -457,28 +749,28 @@ style.textContent = `
   }
 
 
-  #grid .product-code {
+  #grid .product-code{
 
     font-size:10px !important;
 
   }
 
 
-  #grid .product-category {
+  #grid .product-category{
 
     font-size:10px !important;
 
   }
 
 
-  #grid .product-moq {
+  #grid .product-moq{
 
     font-size:10px !important;
 
   }
 
 
-  #grid .whatsapp-btn {
+  #grid .whatsapp-btn{
 
     font-size:10px !important;
 
@@ -487,7 +779,7 @@ style.textContent = `
   }
 
 
-  #grid .select-btn {
+  #grid .select-btn{
 
     width:38px !important;
 
@@ -502,7 +794,7 @@ style.textContent = `
 
 @media(max-width:430px){
 
-  #grid .product-image-wrap {
+  #grid .product-image-wrap{
 
     height:155px !important;
 
@@ -510,265 +802,69 @@ style.textContent = `
 
 }
 
-
 `;
-
 
 document.head.appendChild(style);
 
 
 /* =========================================================
-   HELPER FUNCTIONS
-========================================================= */
-
-function getName(product) {
-
-  /*
-     ADMIN PANEL saves:
-     name
-
-     Compatibility:
-     productName
-     title
-  */
-
-  return (
-    product.name ||
-    product.productName ||
-    product.title ||
-    "Unnamed Product"
-  );
-
-}
-
-
-function getCategory(product) {
-
-  return (
-    product.category ||
-    "Other"
-  );
-
-}
-
-
-function getStock(product) {
-
-  return (
-    product.stock ||
-    product.status ||
-    "In Stock"
-  );
-
-}
-
-
-function getImage(product) {
-
-  return (
-    product.image ||
-    product.imageUrl ||
-    product.photo ||
-    "538820.jpg"
-  );
-
-}
-
-
-function getMOQ(product) {
-
-  return (
-    product.moq ||
-    "₹500 Minimum Order Quantity (MOQ)"
-  );
-
-}
-
-
-function escapeHTML(value) {
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-function compareCodes(a,b) {
-
-  const x =
-    parseInt(
-      String(a || "").replace(/\D/g,"")
-    ) || 999999;
-
-  const y =
-    parseInt(
-      String(b || "").replace(/\D/g,"")
-    ) || 999999;
-
-  return x-y;
-
-}
-
-
-/* =========================================================
-   FIRESTORE LIVE
-========================================================= */
-
-onSnapshot(
-
-  collection(db,"products"),
-
-  function(snapshot){
-
-    products = [];
-
-    snapshot.forEach(function(doc){
-
-      products.push({
-
-        id:doc.id,
-
-        ...doc.data()
-
-      });
-
-    });
-
-
-    products.sort(function(a,b){
-
-      return compareCodes(
-        a.code || a.id,
-        b.code || b.id
-      );
-
-    });
-
-
-    renderCategories();
-
-    renderProducts();
-
-  },
-
-  function(error){
-
-    console.error(
-      "Firestore error:",
-      error
-    );
-
-    if(grid){
-
-      grid.innerHTML = `
-
-        <div style="
-          grid-column:1/-1;
-          text-align:center;
-          padding:40px;
-          color:#c62828;
-          font-weight:bold;
-        ">
-
-          Firebase connection error.
-
-        </div>
-
-      `;
-
-    }
-
-  }
-
-);
-
-
-/* =========================================================
-   CATEGORIES
+   CATEGORY BUTTONS
 ========================================================= */
 
 function renderCategories(){
 
   if(!cats) return;
 
-  const set =
-    new Set();
 
-  products.forEach(function(product){
-
-    set.add(
-      getCategory(product)
-    );
-
-  });
-
-
-  cats.innerHTML = "";
+  const categories = [
+    "All",
+    ...new Set(
+      MASTER_PRODUCTS.map(
+        product => product.category
+      )
+    )
+  ];
 
 
-  const all =
-    document.createElement("button");
+  cats.innerHTML =
+    categories
+      .map(category => `
 
-  all.textContent = "All";
+        <button
+          type="button"
+          class="${
+            activeCategory === category
+              ? "active"
+              : ""
+          }"
+          data-category="${category}"
+        >
+          ${category}
+        </button>
 
-  if(activeCategory === "All"){
-
-    all.classList.add("active");
-
-  }
-
-
-  all.onclick = function(){
-
-    activeCategory = "All";
-
-    renderCategories();
-
-    renderProducts();
-
-  };
+      `)
+      .join("");
 
 
-  cats.appendChild(all);
+  cats
+    .querySelectorAll(
+      "button[data-category]"
+    )
+    .forEach(button => {
 
+      button.addEventListener(
+        "click",
+        () => {
 
-  Array
-    .from(set)
-    .sort()
-    .forEach(function(category){
+          activeCategory =
+            button.dataset.category;
 
-      const button =
-        document.createElement("button");
+          renderCategories();
 
-      button.textContent =
-        category;
+          renderProducts();
 
-      if(
-        activeCategory === category
-      ){
-
-        button.classList.add("active");
-
-      }
-
-
-      button.onclick = function(){
-
-        activeCategory =
-          category;
-
-        renderCategories();
-
-        renderProducts();
-
-      };
-
-
-      cats.appendChild(button);
+        }
+      );
 
     });
 
@@ -780,18 +876,20 @@ function renderCategories(){
 ========================================================= */
 
 document
-  .querySelectorAll(".filters button")
-  .forEach(function(button){
+  .querySelectorAll(
+    ".filters button"
+  )
+  .forEach(button => {
 
     button.addEventListener(
       "click",
-      function(){
+      () => {
 
         document
           .querySelectorAll(
             ".filters button"
           )
-          .forEach(function(btn){
+          .forEach(btn => {
 
             btn.classList.remove(
               "active"
@@ -826,18 +924,52 @@ if(search){
 
   search.addEventListener(
     "input",
-    function(){
-
-      renderProducts();
-
-    }
+    renderProducts
   );
 
 }
 
 
 /* =========================================================
-   RENDER
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   RENDER PRODUCTS
 ========================================================= */
 
 function renderProducts(){
@@ -854,32 +986,16 @@ function renderProducts(){
 
 
   const filtered =
-    products.filter(function(product){
+    products.filter(product => {
 
-      const name =
-        getName(product);
-
-      const code =
-        product.code ||
-        product.id ||
-        "";
-
-      const category =
-        getCategory(product);
-
-      const stock =
-        getStock(product);
-
-
-      const searchable =
-        (
-          name +
-          " " +
-          code +
-          " " +
-          category
-        )
-          .toLowerCase();
+      const searchable = (
+        product.name +
+        " " +
+        product.code +
+        " " +
+        product.category
+      )
+        .toLowerCase();
 
 
       const searchMatch =
@@ -891,12 +1007,14 @@ function renderProducts(){
 
       const categoryMatch =
         activeCategory === "All" ||
-        category === activeCategory;
+        product.category ===
+          activeCategory;
 
 
       const stockMatch =
         activeStock === "All" ||
-        stock === activeStock;
+        product.status ===
+          activeStock;
 
 
       return (
@@ -937,39 +1055,29 @@ function renderProducts(){
 
     `;
 
+    updateBar();
+
     return;
 
   }
 
 
-  filtered.forEach(function(product){
+  filtered.forEach(product => {
 
-    const name =
-      getName(product);
-
-    const code =
-      product.code ||
-      product.id ||
-      "";
-
-    const category =
-      getCategory(product);
-
-    const stock =
-      getStock(product);
-
-    const image =
-      getImage(product);
-
-    const moq =
-      getMOQ(product);
+    const selected =
+      selectedProducts.has(
+        product.code
+      );
 
 
     let stockClass =
       "stock-in";
 
 
-    if(stock === "Coming Soon"){
+    if(
+      product.status ===
+      "Coming Soon"
+    ){
 
       stockClass =
         "stock-coming";
@@ -977,7 +1085,10 @@ function renderProducts(){
     }
 
 
-    if(stock === "Out of Stock"){
+    if(
+      product.status ===
+      "Out of Stock"
+    ){
 
       stockClass =
         "stock-out";
@@ -985,14 +1096,10 @@ function renderProducts(){
     }
 
 
-    const selected =
-      selectedProducts.has(
-        product.id
-      );
-
-
     const card =
-      document.createElement("article");
+      document.createElement(
+        "article"
+      );
 
 
     card.className =
@@ -1004,8 +1111,8 @@ function renderProducts(){
       <div class="product-image-wrap">
 
         <img
-          src="${escapeHTML(image)}"
-          alt="${escapeHTML(name)}"
+          src="${escapeHTML(product.image)}"
+          alt="${escapeHTML(product.name)}"
           loading="lazy"
           onerror="
             this.onerror=null;
@@ -1019,61 +1126,48 @@ function renderProducts(){
       <div class="product-body">
 
         <div class="product-code">
-
-          ${escapeHTML(code)}
-
+          ${escapeHTML(product.code)}
         </div>
 
 
         <h2 class="product-name">
-
-          ${escapeHTML(name)}
-
+          ${escapeHTML(product.name)}
         </h2>
 
 
         <div class="product-category">
-
-          ${escapeHTML(category)}
-
+          ${escapeHTML(product.category)}
         </div>
 
 
         <div class="${stockClass}">
-
-          ${escapeHTML(stock)}
-
+          ${escapeHTML(product.status)}
         </div>
 
 
         <div class="product-moq">
-
-          ${escapeHTML(moq)}
-
+          ${escapeHTML(product.moq)}
         </div>
 
 
         <div class="product-actions">
 
           <button
+            type="button"
             class="whatsapp-btn"
-            data-id="${escapeHTML(product.id)}"
           >
             WhatsApp Enquiry
           </button>
 
 
           <button
-            class="select-btn ${
-              selected ? "selected" : ""
-            }"
-            data-id="${escapeHTML(product.id)}"
+            type="button"
+            class="
+              select-btn
+              ${selected ? "selected" : ""}
+            "
           >
-            ${
-              selected
-                ? "✓"
-                : "+"
-            }
+            ${selected ? "✓" : "+"}
           </button>
 
         </div>
@@ -1083,40 +1177,40 @@ function renderProducts(){
     `;
 
 
-    /* ===============================
-       WHATSAPP
-    =============================== */
-
-    card
-      .querySelector(".whatsapp-btn")
-      .addEventListener(
-        "click",
-        function(){
-
-          sendSingleEnquiry(
-            product.id
-          );
-
-        }
+    const whatsappButton =
+      card.querySelector(
+        ".whatsapp-btn"
       );
 
 
-    /* ===============================
-       SELECT
-    =============================== */
+    whatsappButton.addEventListener(
+      "click",
+      () => {
 
-    card
-      .querySelector(".select-btn")
-      .addEventListener(
-        "click",
-        function(){
+        sendSingleEnquiry(
+          product
+        );
 
-          toggleProduct(
-            product.id
-          );
+      }
+    );
 
-        }
+
+    const selectButton =
+      card.querySelector(
+        ".select-btn"
       );
+
+
+    selectButton.addEventListener(
+      "click",
+      () => {
+
+        toggleProduct(
+          product.code
+        );
+
+      }
+    );
 
 
     grid.appendChild(card);
@@ -1133,42 +1227,16 @@ function renderProducts(){
    SINGLE WHATSAPP
 ========================================================= */
 
-function sendSingleEnquiry(id){
-
-  const product =
-    products.find(function(p){
-
-      return p.id === id;
-
-    });
-
-
-  if(!product) return;
-
-
-  const name =
-    getName(product);
-
-  const code =
-    product.code ||
-    product.id ||
-    "";
-
-
-  const category =
-    getCategory(product);
-
+function sendSingleEnquiry(
+  product
+){
 
   const message =
-`Hello OSS,
+`Hi ONE STOP SOLUTION (OSS),
 
-I am interested in this product:
+I'm interested in ${product.name} (${product.code}).
 
-Product: ${name}
-Code: ${code}
-Category: ${category}
-
-Please share the wholesale price and details.`;
+Please share details and rates.`;
 
 
   const url =
@@ -1180,183 +1248,11 @@ Please share the wholesale price and details.`;
     );
 
 
-  window.open(
-    url,
-    "_blank"
-  );
+  window.location.href =
+    url;
 
 }
 
 
 /* =========================================================
-   SELECT PRODUCT
-========================================================= */
-
-function toggleProduct(id){
-
-  if(
-    selectedProducts.has(id)
-  ){
-
-    selectedProducts.delete(id);
-
-  }else{
-
-    selectedProducts.add(id);
-
-  }
-
-
-  renderProducts();
-
-}
-
-
-/* =========================================================
-   SELECTION BAR
-========================================================= */
-
-function updateBar(){
-
-  const total =
-    selectedProducts.size;
-
-
-  if(selectedCount){
-
-    selectedCount.textContent =
-      total;
-
-  }
-
-
-  if(bar){
-
-    if(total > 0){
-
-      bar.classList.remove(
-        "hidden"
-      );
-
-    }else{
-
-      bar.classList.add(
-        "hidden"
-      );
-
-    }
-
-  }
-
-}
-
-
-/* =========================================================
-   MULTIPLE WHATSAPP
-========================================================= */
-
-if(multiButton){
-
-  multiButton.addEventListener(
-    "click",
-    function(){
-
-      const selected =
-        products.filter(function(product){
-
-          return selectedProducts.has(
-            product.id
-          );
-
-        });
-
-
-      if(
-        selected.length === 0
-      ){
-
-        return;
-
-      }
-
-
-      let message =
-`Hello OSS,
-
-I am interested in the following products:
-
-`;
-
-
-      selected.forEach(
-        function(product,index){
-
-          const name =
-            getName(product);
-
-          const code =
-            product.code ||
-            product.id ||
-            "";
-
-
-          message +=
-`${index+1}. ${name}
-Code: ${code}
-
-`;
-
-        }
-      );
-
-
-      message +=
-`Please share the wholesale prices and details.`;
-
-
-      const url =
-        "https://wa.me/" +
-        WHATSAPP_NUMBER +
-        "?text=" +
-        encodeURIComponent(
-          message
-        );
-
-
-      window.open(
-        url,
-        "_blank"
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   DEFAULT FILTER
-========================================================= */
-
-const allFilter =
-  document.querySelector(
-    '.filters button[data-filter="All"]'
-  );
-
-
-if(allFilter){
-
-  allFilter.classList.add(
-    "active"
-  );
-
-}
-
-
-/* =========================================================
-   DONE
-========================================================= */
-
-console.log(
-  "OSS Digital Catalog — Live Firestore Connected"
-);
+   SELECT PROD
