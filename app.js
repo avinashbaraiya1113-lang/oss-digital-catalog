@@ -403,7 +403,7 @@ const multiButton =
 
 
 /* =========================================================
-   PRODUCT CARD STYLE
+   EXTRA PRODUCT CARD CSS
 ========================================================= */
 
 const style =
@@ -413,380 +413,230 @@ const style =
 style.textContent = `
 
 #grid.grid{
-
   display:grid !important;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr)) !important;
-
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
   gap:18px !important;
-
   width:100% !important;
-
   align-items:start !important;
-
 }
 
 
 #grid .product-card{
-
   width:100% !important;
-
   min-width:0 !important;
-
   background:#fff !important;
-
   border-radius:18px !important;
-
   overflow:hidden !important;
-
   border:1px solid #e2e6eb !important;
-
-  box-shadow:
-    0 5px 18px rgba(0,0,0,.08) !important;
-
+  box-shadow:0 5px 18px rgba(0,0,0,.08) !important;
   display:flex !important;
-
   flex-direction:column !important;
-
 }
 
 
 #grid .product-image-wrap{
-
   width:100% !important;
-
   height:260px !important;
-
   background:#f5f5f5 !important;
-
   display:flex !important;
-
   align-items:center !important;
-
   justify-content:center !important;
-
   overflow:hidden !important;
-
 }
 
 
 #grid .product-image-wrap img{
-
   width:100% !important;
-
   height:100% !important;
-
   object-fit:cover !important;
-
   display:block !important;
-
 }
 
 
 #grid .product-body{
-
   padding:14px !important;
-
   background:#fff !important;
-
 }
 
 
 #grid .product-code{
-
   color:#718096 !important;
-
   font-size:12px !important;
-
   font-weight:700 !important;
-
   margin-bottom:6px !important;
-
 }
 
 
 #grid .product-name{
-
   color:#071b3a !important;
-
   font-size:18px !important;
-
   line-height:1.25 !important;
-
   margin:0 0 7px 0 !important;
-
   font-weight:800 !important;
-
 }
 
 
 #grid .product-category{
-
   color:#5c6675 !important;
-
   font-size:13px !important;
-
   margin-bottom:8px !important;
-
 }
 
 
 #grid .stock-in,
 #grid .stock-coming,
 #grid .stock-out{
-
   display:inline-block !important;
-
   padding:6px 10px !important;
-
   border-radius:20px !important;
-
   font-size:12px !important;
-
   font-weight:700 !important;
-
   margin-bottom:8px !important;
-
 }
 
 
 #grid .stock-in{
-
   background:#dff6e5 !important;
-
   color:#16733a !important;
-
 }
 
 
 #grid .stock-coming{
-
   background:#fff1c9 !important;
-
   color:#956d00 !important;
-
 }
 
 
 #grid .stock-out{
-
   background:#ffdede !important;
-
   color:#a00000 !important;
-
 }
 
 
 #grid .product-moq{
-
   color:#c62828 !important;
-
   font-size:13px !important;
-
   font-weight:700 !important;
-
   margin-bottom:12px !important;
-
 }
 
 
 #grid .product-actions{
-
   display:flex !important;
-
   gap:9px !important;
-
   width:100% !important;
-
 }
 
 
 #grid .whatsapp-btn{
-
   flex:1 !important;
-
   border:0 !important;
-
   border-radius:10px !important;
-
   background:#1c9b50 !important;
-
   color:#fff !important;
-
   padding:12px 10px !important;
-
   font-size:14px !important;
-
   font-weight:700 !important;
-
   cursor:pointer !important;
-
 }
 
 
 #grid .select-btn{
-
   width:52px !important;
-
   min-width:52px !important;
-
   border:0 !important;
-
   border-radius:10px !important;
-
   background:#17375f !important;
-
   color:#fff !important;
-
   font-size:25px !important;
-
   font-weight:700 !important;
-
   cursor:pointer !important;
-
 }
 
 
 #grid .select-btn.selected{
-
   background:#1c9b50 !important;
-
 }
 
 
 #cats{
-
   display:flex !important;
-
   flex-wrap:wrap !important;
-
   gap:7px !important;
-
 }
 
 
 #cats button{
-
   border:1px solid #d7dce2 !important;
-
   background:#fff !important;
-
   color:#172033 !important;
-
   border-radius:20px !important;
-
   padding:8px 12px !important;
-
   font-size:12px !important;
-
   font-weight:700 !important;
-
   cursor:pointer !important;
-
 }
 
 
 #cats button.active{
-
   background:#071b3a !important;
-
   color:#fff !important;
-
   border-color:#071b3a !important;
-
 }
 
 
 .filters button{
-
   cursor:pointer !important;
-
 }
 
 
 .filters button.active{
-
   background:#071b3a !important;
-
   color:#fff !important;
-
 }
 
 
 @media(max-width:700px){
 
   #grid.grid{
-
-    grid-template-columns:
-      repeat(2,minmax(0,1fr)) !important;
-
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
     gap:10px !important;
-
   }
-
 
   #grid .product-image-wrap{
-
     height:170px !important;
-
   }
-
 
   #grid .product-body{
-
     padding:9px !important;
-
   }
-
 
   #grid .product-name{
-
     font-size:14px !important;
-
     line-height:1.25 !important;
-
   }
-
 
   #grid .product-code{
-
     font-size:10px !important;
-
   }
-
 
   #grid .product-category{
-
     font-size:10px !important;
-
   }
-
 
   #grid .product-moq{
-
     font-size:10px !important;
-
   }
-
 
   #grid .whatsapp-btn{
-
     font-size:10px !important;
-
     padding:9px 4px !important;
-
   }
 
-
   #grid .select-btn{
-
     width:38px !important;
-
     min-width:38px !important;
-
     font-size:20px !important;
-
   }
 
 }
@@ -795,9 +645,7 @@ style.textContent = `
 @media(max-width:430px){
 
   #grid .product-image-wrap{
-
     height:155px !important;
-
   }
 
 }
@@ -837,9 +685,9 @@ function renderCategories(){
               ? "active"
               : ""
           }"
-          data-category="${category}"
+          data-category="${escapeHTML(category)}"
         >
-          ${category}
+          ${escapeHTML(category)}
         </button>
 
       `)
@@ -939,27 +787,22 @@ function escapeHTML(value){
   return String(
     value ?? ""
   )
-
     .replace(
       /&/g,
       "&amp;"
     )
-
     .replace(
       /</g,
       "&lt;"
     )
-
     .replace(
       />/g,
       "&gt;"
     )
-
     .replace(
       /"/g,
       "&quot;"
     )
-
     .replace(
       /'/g,
       "&#039;"
@@ -1054,6 +897,7 @@ function renderProducts(){
       </div>
 
     `;
+
 
     updateBar();
 
@@ -1227,9 +1071,7 @@ function renderProducts(){
    SINGLE WHATSAPP
 ========================================================= */
 
-function sendSingleEnquiry(
-  product
-){
+function sendSingleEnquiry(product){
 
   const message =
 `Hi ONE STOP SOLUTION (OSS),
@@ -1255,4 +1097,13 @@ Please share details and rates.`;
 
 
 /* =========================================================
-   SELECT PROD
+   TOGGLE PRODUCT
+========================================================= */
+
+function toggleProduct(code){
+
+  if(
+    selectedProducts.has(code)
+  ){
+
+    se
