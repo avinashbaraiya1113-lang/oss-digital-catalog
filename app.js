@@ -403,7 +403,7 @@ const multiButton =
 
 
 /* =========================================================
-   EXTRA PRODUCT CARD CSS
+   PRODUCT CARD STYLE
 ========================================================= */
 
 const style =
@@ -420,7 +420,6 @@ style.textContent = `
   align-items:start !important;
 }
 
-
 #grid .product-card{
   width:100% !important;
   min-width:0 !important;
@@ -433,7 +432,6 @@ style.textContent = `
   flex-direction:column !important;
 }
 
-
 #grid .product-image-wrap{
   width:100% !important;
   height:260px !important;
@@ -444,7 +442,6 @@ style.textContent = `
   overflow:hidden !important;
 }
 
-
 #grid .product-image-wrap img{
   width:100% !important;
   height:100% !important;
@@ -452,12 +449,10 @@ style.textContent = `
   display:block !important;
 }
 
-
 #grid .product-body{
   padding:14px !important;
   background:#fff !important;
 }
-
 
 #grid .product-code{
   color:#718096 !important;
@@ -465,7 +460,6 @@ style.textContent = `
   font-weight:700 !important;
   margin-bottom:6px !important;
 }
-
 
 #grid .product-name{
   color:#071b3a !important;
@@ -475,13 +469,11 @@ style.textContent = `
   font-weight:800 !important;
 }
 
-
 #grid .product-category{
   color:#5c6675 !important;
   font-size:13px !important;
   margin-bottom:8px !important;
 }
-
 
 #grid .stock-in,
 #grid .stock-coming,
@@ -494,24 +486,20 @@ style.textContent = `
   margin-bottom:8px !important;
 }
 
-
 #grid .stock-in{
   background:#dff6e5 !important;
   color:#16733a !important;
 }
-
 
 #grid .stock-coming{
   background:#fff1c9 !important;
   color:#956d00 !important;
 }
 
-
 #grid .stock-out{
   background:#ffdede !important;
   color:#a00000 !important;
 }
-
 
 #grid .product-moq{
   color:#c62828 !important;
@@ -520,13 +508,11 @@ style.textContent = `
   margin-bottom:12px !important;
 }
 
-
 #grid .product-actions{
   display:flex !important;
   gap:9px !important;
   width:100% !important;
 }
-
 
 #grid .whatsapp-btn{
   flex:1 !important;
@@ -540,7 +526,6 @@ style.textContent = `
   cursor:pointer !important;
 }
 
-
 #grid .select-btn{
   width:52px !important;
   min-width:52px !important;
@@ -553,18 +538,15 @@ style.textContent = `
   cursor:pointer !important;
 }
 
-
 #grid .select-btn.selected{
   background:#1c9b50 !important;
 }
-
 
 #cats{
   display:flex !important;
   flex-wrap:wrap !important;
   gap:7px !important;
 }
-
 
 #cats button{
   border:1px solid #d7dce2 !important;
@@ -577,24 +559,20 @@ style.textContent = `
   cursor:pointer !important;
 }
 
-
 #cats button.active{
   background:#071b3a !important;
   color:#fff !important;
   border-color:#071b3a !important;
 }
 
-
 .filters button{
   cursor:pointer !important;
 }
-
 
 .filters button.active{
   background:#071b3a !important;
   color:#fff !important;
 }
-
 
 @media(max-width:700px){
 
@@ -641,7 +619,6 @@ style.textContent = `
 
 }
 
-
 @media(max-width:430px){
 
   #grid .product-image-wrap{
@@ -663,7 +640,6 @@ function renderCategories(){
 
   if(!cats) return;
 
-
   const categories = [
     "All",
     ...new Set(
@@ -672,7 +648,6 @@ function renderCategories(){
       )
     )
   ];
-
 
   cats.innerHTML =
     categories
@@ -692,7 +667,6 @@ function renderCategories(){
 
       `)
       .join("");
-
 
   cats
     .querySelectorAll(
@@ -745,16 +719,13 @@ document
 
           });
 
-
         button.classList.add(
           "active"
         );
 
-
         activeStock =
           button.dataset.filter ||
           "All";
-
 
         renderProducts();
 
@@ -787,22 +758,27 @@ function escapeHTML(value){
   return String(
     value ?? ""
   )
+
     .replace(
       /&/g,
       "&amp;"
     )
+
     .replace(
       /</g,
       "&lt;"
     )
+
     .replace(
       />/g,
       "&gt;"
     )
+
     .replace(
       /"/g,
       "&quot;"
     )
+
     .replace(
       /'/g,
       "&#039;"
@@ -819,14 +795,12 @@ function renderProducts(){
 
   if(!grid) return;
 
-
   const searchText =
     search
       ? search.value
           .toLowerCase()
           .trim()
       : "";
-
 
   const filtered =
     products.filter(product => {
@@ -840,25 +814,21 @@ function renderProducts(){
       )
         .toLowerCase();
 
-
       const searchMatch =
         !searchText ||
         searchable.includes(
           searchText
         );
 
-
       const categoryMatch =
         activeCategory === "All" ||
         product.category ===
           activeCategory;
 
-
       const stockMatch =
         activeStock === "All" ||
         product.status ===
           activeStock;
-
 
       return (
         searchMatch &&
@@ -897,7 +867,6 @@ function renderProducts(){
       </div>
 
     `;
-
 
     updateBar();
 
@@ -1071,7 +1040,9 @@ function renderProducts(){
    SINGLE WHATSAPP
 ========================================================= */
 
-function sendSingleEnquiry(product){
+function sendSingleEnquiry(
+  product
+){
 
   const message =
 `Hi ONE STOP SOLUTION (OSS),
@@ -1097,13 +1068,15 @@ Please share details and rates.`;
 
 
 /* =========================================================
-   TOGGLE PRODUCT
+   SELECT PRODUCT
 ========================================================= */
 
 function toggleProduct(code){
 
   if(
-    selectedProducts.has(code)
+    selectedProducts.has(
+      code
+    )
   ){
 
-    se
+    selectedProducts.dele
