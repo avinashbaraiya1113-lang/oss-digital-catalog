@@ -1,11 +1,9 @@
 /* =========================================================
    OSS DIGITAL CATALOG
-   FIRESTORE LIVE PRODUCTS + WHATSAPP
+   STABLE MASTER + FIRESTORE LIVE PRODUCTS
 ========================================================= */
 
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
   getFirestore,
@@ -44,11 +42,11 @@ const firebaseConfig = {
 };
 
 
-const firebaseApp =
+const app =
   initializeApp(firebaseConfig);
 
 const db =
-  getFirestore(firebaseApp);
+  getFirestore(app);
 
 
 /* =========================================================
@@ -60,366 +58,20 @@ const WA =
 
 
 /* =========================================================
-   MASTER PRODUCTS
-   DO NOT CHANGE ORDER / CODE / NAME / CATEGORY / IMAGE
+   DEFAULT MOQ
 ========================================================= */
 
-const MASTER_PRODUCTS = [
-
-  {
-    code:"OSS_001",
-    name:"DOUBLE GRID SOAP BOX",
-    category:"Bathroom Accessories",
-    image:"OSS_001.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_002",
-    name:"MINI POPCORN MAKER",
-    category:"Home & Kitchen",
-    image:"OSS_002.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_003",
-    name:"2L MOTIVATIONAL WATTER BOTTLE",
-    category:"Water Bottle",
-    image:"OSS_003.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_004",
-    name:"5M OUTDOOR CLOTHESLINE",
-    category:"Home & Kitchen",
-    image:"OSS_004.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_005",
-    name:"10M OUTDOOR CLOTHESLINE",
-    category:"Home & Kitchen",
-    image:"OSS_005.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_006",
-    name:"48PCS CAR CONTAINER",
-    category:"Toys",
-    image:"OSS_006.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_007",
-    name:"3PCS MOTIVATION WATER BOTTLE",
-    category:"Water Bottle",
-    image:"OSS_007.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_008",
-    name:"HOT AND COLD DORI BOTTLE",
-    category:"Water Bottle",
-    image:"OSS_008.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_009",
-    name:"1000ML STEEL WATER BOTTLE",
-    category:"Water Bottle",
-    image:"OSS_009.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_010",
-    name:"VACCUM FLASK SET WITH 3 CUPS",
-    category:"Home & Kitchen",
-    image:"OSS_010.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_011",
-    name:"PLUG MOSQUITO KILLER LAMP",
-    category:"Electric & Smart Gadgets",
-    image:"OSS_011.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_012",
-    name:"ELECTRIC GAS LIGHTER",
-    category:"Electric & Smart Gadgets",
-    image:"OSS_012.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_013",
-    name:"PORTABLE CAR AIR MATTRESS",
-    category:"Car Accessories",
-    image:"OSS_013.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_014",
-    name:"SOLAR RECHARGEABLE LED FLOOD LIGHT",
-    category:"Electric & Smart Gadgets",
-    image:"OSS_014.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_015",
-    name:"ANTI SLIP TAPE WITH GLOW IN DARK STRIPE",
-    category:"Tools And Hardware",
-    image:"OSS_015.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_016",
-    name:"PORTABLE INFLATABLE BED",
-    category:"Folding Furniture",
-    image:"OSS_016.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_017",
-    name:"4PCS MAGNETIC CAR WINDOW CURTAIN",
-    category:"Car Accessories",
-    image:"OSS_017.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_018",
-    name:"CLOTH DRYING ROPE WITH 12 CLIPS",
-    category:"Home & Kitchen",
-    image:"OSS_018.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_019",
-    name:"PORTABLE MESH NEBULIZER MACHINE",
-    category:"Health & Personal Care",
-    image:"OSS_019.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_020",
-    name:"30PCS SELF ADHESIVE TRANSPARENT BOOK COVER",
-    category:"Smart Stationery",
-    image:"OSS_020.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_021",
-    name:"7 INCH MOVING SAND ART",
-    category:"Gifts & Decor",
-    image:"OSS_021.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_022",
-    name:"ALL IN ONE 60W USB FAST CHARGING TRAVEL DATA CABLE SET",
-    category:"Smart Gadgets",
-    image:"OSS_022.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_023",
-    name:"PORTABLE FOLDING CHAIR",
-    category:"Folding Furniture",
-    image:"OSS_023.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_024",
-    name:"SLIM FLOOR WIPER MOP WITH SILICONE BLADE & TELESCOPIC HANDLE",
-    category:"Multipurpose Cleaning Tool",
-    image:"OSS_024.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_025",
-    name:"ANTI VIBRATION PADS",
-    category:"Smart Gadgets",
-    image:"OSS_025.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_026",
-    name:"DANCING JELLYFISH TOY WITH MUSIC & MOVEMENT",
-    category:"Toys",
-    image:"OSS_026.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_027",
-    name:"360°METAL DESKTOP MOBILE PHONE STAND",
-    category:"Mobile Accessories",
-    image:"OSS_027.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_028",
-    name:"ELECTRIC WATER HOT BAG",
-    category:"Health & Personal Care",
-    image:"OSS_028.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_029",
-    name:"2.5×6 NON ADJUSTABLE FOLDING BED",
-    category:"Folding Furniture",
-    image:"OSS_029.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_030",
-    name:"2.5×6 ADJUSTABLE FOLDING BED",
-    category:"Folding Furniture",
-    image:"OSS_030.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_031",
-    name:"HOT & COLD 1000ML STEEL WATER BOTTLE",
-    category:"Water Bottle",
-    image:"OSS_031.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_032",
-    name:"2PCS HD VISION DRIVING GLASSES",
-    category:"Car Accessories",
-    image:"OSS_032.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_033",
-    name:"PORTABLE 2 IN 1 CAMPING GAS STOVE",
-    category:"Travel Accessories",
-    image:"OSS_033.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_034",
-    name:"ELECTRIC KAPOOR DANI WITH NIGHT LAMP",
-    category:"Gifts & Decor",
-    image:"OSS_034.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_035",
-    name:"WATER-ABSORBING RUBBER DOORMAT",
-    category:"Home & Kitchen",
-    image:"OSS_035.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_036",
-    name:"MAGIC PRACTICE COPYBOOK",
-    category:"Smart Stationery",
-    image:"OSS_036.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_037",
-    name:"40×40 MICROFIBER CLOTH (ONLY YELLOW)",
-    category:"Multipurpose Cleaning Cloth",
-    image:"OSS_037.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  },
-
-  {
-    code:"OSS_038",
-    name:"Self Adhesive Door Bottom Sealing Strip Guard",
-    category:"Home & Kitchen",
-    image:"OSS_038.jpg",
-    status:"In Stock",
-    moq:"₹500 Minimum Order Quantity (MOQ)"
-  }
-
-];
+const MOQ_DEFAULT =
+  "₹500 Minimum Order Quantity (MOQ)";
 
 
 /* =========================================================
-   LIVE PRODUCTS
+   VARIABLES
 ========================================================= */
 
-let products =
-  MASTER_PRODUCTS.map(
-    product => ({ ...product })
-  );
+let masterProducts = [];
 
+let products = [];
 
 let selected =
   new Set();
@@ -427,194 +79,696 @@ let selected =
 let filter =
   "All";
 
-let cat =
+let category =
   "All";
 
 
 /* =========================================================
-   ELEMENTS
+   SHORT SELECTOR
 ========================================================= */
 
-const grid =
-  document.querySelector("#grid");
+const $ =
+  selector =>
+    document.querySelector(selector);
 
-const search =
-  document.querySelector("#search");
 
-const count =
-  document.querySelector("#count");
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
 
-const cats =
-  document.querySelector("#cats");
+function escapeHtml(value){
 
-const bar =
-  document.querySelector("#bar");
+  return String(
+    value ?? ""
+  ).replace(
+    /[&<>"']/g,
+    character => ({
 
-const selectedCount =
-  document.querySelector("#selectedCount");
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
 
-const filters =
-  document.querySelector(".filters");
+    }[character])
+  );
 
-const multiButton =
-  document.querySelector("#multi");
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function normalizeStatus(product){
+
+  return (
+    product.status ||
+    product.stock ||
+    "In Stock"
+  );
+
+}
+
+
+/* =========================================================
+   NORMALIZE PRODUCT
+========================================================= */
+
+function normalizeProduct(product){
+
+  return {
+
+    code:
+      String(
+        product.code || ""
+      ).trim(),
+
+    name:
+      String(
+        product.name || ""
+      ).trim(),
+
+    category:
+      String(
+        product.category ||
+        "Other"
+      ).trim(),
+
+    image:
+      String(
+        product.image || ""
+      ).trim(),
+
+    status:
+      normalizeStatus(product),
+
+    moq:
+      String(
+        product.moq ||
+        MOQ_DEFAULT
+      ).trim()
+
+  };
+
+}
+
+
+/* =========================================================
+   SORT PRODUCTS
+========================================================= */
+
+function sortProducts(list){
+
+  const masterOrder =
+    new Map(
+
+      masterProducts.map(
+        (item,index) => [
+          item.code.toUpperCase(),
+          index
+        ]
+      )
+
+    );
+
+
+  return [...list].sort(
+    (a,b) => {
+
+      const aKey =
+        a.code.toUpperCase();
+
+      const bKey =
+        b.code.toUpperCase();
+
+
+      const aMaster =
+        masterOrder.has(aKey);
+
+      const bMaster =
+        masterOrder.has(bKey);
+
+
+      if(
+        aMaster &&
+        bMaster
+      ){
+
+        return (
+          masterOrder.get(aKey) -
+          masterOrder.get(bKey)
+        );
+
+      }
+
+
+      if(aMaster){
+
+        return -1;
+
+      }
+
+
+      if(bMaster){
+
+        return 1;
+
+      }
+
+
+      const aNum =
+        Number(
+          a.code.match(
+            /\d+/
+          )?.[0] ||
+          999999
+        );
+
+
+      const bNum =
+        Number(
+          b.code.match(
+            /\d+/
+          )?.[0] ||
+          999999
+        );
+
+
+      return (
+        aNum - bNum ||
+        a.code.localeCompare(
+          b.code
+        )
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   REBUILD PRODUCTS
+========================================================= */
+
+function rebuildProducts(
+  firestoreProducts
+){
+
+  const liveByCode =
+    new Map(
+
+      firestoreProducts.map(
+        item => [
+          item.code.toUpperCase(),
+          item
+        ]
+      )
+
+    );
+
+
+  /* -------------------------------------------------------
+     MASTER PRODUCTS
+  ------------------------------------------------------- */
+
+  const master =
+    masterProducts.map(
+      base => {
+
+        const live =
+          liveByCode.get(
+            base.code.toUpperCase()
+          );
+
+
+        return normalizeProduct({
+
+          ...base,
+
+          status:
+            live
+              ? normalizeStatus(live)
+              : base.status,
+
+          moq:
+            live?.moq ||
+            base.moq
+
+        });
+
+      }
+    );
+
+
+  /* -------------------------------------------------------
+     EXTRA ADMIN PRODUCTS
+  ------------------------------------------------------- */
+
+  const masterCodes =
+    new Set(
+
+      masterProducts.map(
+        item =>
+          item.code.toUpperCase()
+      )
+
+    );
+
+
+  const extras =
+    firestoreProducts
+
+      .filter(
+        item =>
+          !masterCodes.has(
+            item.code.toUpperCase()
+          )
+      )
+
+      .map(
+        item =>
+          normalizeProduct(item)
+      )
+
+      .filter(
+        item =>
+          item.code &&
+          item.name
+      );
+
+
+  /* -------------------------------------------------------
+     FINAL PRODUCT LIST
+  ------------------------------------------------------- */
+
+  products =
+    sortProducts([
+      ...master,
+      ...extras
+    ]);
+
+
+  /* -------------------------------------------------------
+     REMOVE INVALID SELECTED PRODUCTS
+  ------------------------------------------------------- */
+
+  selected.forEach(
+    code => {
+
+      if(
+        !products.some(
+          item =>
+            item.code === code
+        )
+      ){
+
+        selected.delete(code);
+
+      }
+
+    }
+  );
+
+
+  renderCategories();
+
+  render();
+
+  updateBar();
+
+}
 
 
 /* =========================================================
    CATEGORY BUTTONS
-   DYNAMIC - NEW ADMIN CATEGORIES ALSO APPEAR
 ========================================================= */
 
 function renderCategories(){
 
-  const catsList = [
+  const cats =
+    $("#cats");
+
+
+  if(!cats){
+
+    return;
+
+  }
+
+
+  const list = [
+
     "All",
+
     ...new Set(
-      products.map(
-        product => product.category
-      )
+
+      products
+
+        .map(
+          item =>
+            item.category
+        )
+
+        .filter(Boolean)
+
     )
+
   ];
 
 
+  if(
+    !list.includes(category)
+  ){
+
+    category =
+      "All";
+
+  }
+
+
   cats.innerHTML =
-    catsList
+
+    list
+
       .map(
-        category => `
+        item => `
 
           <button
-            class="${category === cat ? "active" : ""}"
-            data-cat="${category}"
+            type="button"
+            class="${
+              item === category
+                ? "active"
+                : ""
+            }"
+            data-cat="${
+              escapeHtml(item)
+            }"
           >
-            ${category}
+            ${
+              escapeHtml(item)
+            }
           </button>
 
         `
       )
+
       .join("");
 
 }
 
 
 /* =========================================================
-   CATEGORY FILTER
+   RENDER PRODUCTS
 ========================================================= */
 
-cats.addEventListener(
-  "click",
-  event => {
+function render(){
 
-    const button =
-      event.target.closest(
-        "button[data-cat]"
-      );
+  const grid =
+    $("#grid");
 
-    if(!button) return;
+  const count =
+    $("#count");
 
-    cat =
-      button.dataset.cat;
+  const search =
+    $("#search");
 
-    renderCategories();
-
-    render();
-
-  }
-);
-
-
-/* =========================================================
-   STOCK FILTER
-========================================================= */
-
-filters.addEventListener(
-  "click",
-  event => {
-
-    const button =
-      event.target.closest(
-        "button[data-filter]"
-      );
-
-    if(!button) return;
-
-    filter =
-      button.dataset.filter;
-
-    filters
-      .querySelectorAll("button")
-      .forEach(
-        item => {
-
-          item.classList.toggle(
-            "active",
-            item.dataset.filter === filter
-          );
-
-        }
-      );
-
-    render();
-
-  }
-);
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-search.addEventListener(
-  "input",
-  render
-);
-
-
-/* =========================================================
-   SINGLE WHATSAPP ENQUIRY
-========================================================= */
-
-function waOne(product){
-
-  const message =
-`Hi ONE STOP SOLUTION (OSS),
-
-I'm interested in ${product.name} (${product.code}).
-
-Please share details and rates.`;
-
-
-  const url =
-    `https://wa.me/${WA}?text=${encodeURIComponent(message)}`;
-
-
-  window.location.href =
-    url;
-
-}
-
-
-/* =========================================================
-   MULTIPLE SELECT
-========================================================= */
-
-function toggleProduct(code){
 
   if(
-    selected.has(code)
+    !grid ||
+    !count ||
+    !search
   ){
 
-    selected.delete(code);
-
-  }
-  else{
-
-    selected.add(code);
+    return;
 
   }
 
-  updateBar();
 
-  render();
+  const query =
+    search.value
+      .trim()
+      .toLowerCase();
+
+
+  const visible =
+    products.filter(
+      product => {
+
+        const matchesStatus =
+
+          filter === "All" ||
+
+          product.status ===
+            filter;
+
+
+        const matchesCategory =
+
+          category === "All" ||
+
+          product.category ===
+            category;
+
+
+        const haystack =
+
+          `${product.name} ${product.code}`
+            .toLowerCase();
+
+
+        return (
+
+          matchesStatus &&
+
+          matchesCategory &&
+
+          (
+            !query ||
+            haystack.includes(query)
+          )
+
+        );
+
+      }
+    );
+
+
+  count.textContent =
+    `${visible.length} products`;
+
+
+  grid.innerHTML =
+
+    visible
+
+      .map(
+        product => {
+
+          const statusClass =
+
+            product.status ===
+              "Out of Stock"
+
+              ? "out"
+
+              : product.status ===
+                  "Coming Soon"
+
+                ? "coming"
+
+                : "";
+
+
+          const selectedClass =
+
+            selected.has(
+              product.code
+            )
+
+              ? "selected"
+
+              : "";
+
+
+          const image =
+
+            product.image ||
+            "538820.jpg";
+
+
+          const disabled =
+
+            product.status ===
+              "Out of Stock"
+
+              ? "disabled"
+
+              : "";
+
+
+          return `
+
+            <article class="card">
+
+              <div class="photo">
+
+                <img
+
+                  src="${
+                    escapeHtml(image)
+                  }"
+
+                  alt="${
+                    escapeHtml(
+                      product.name
+                    )
+                  }"
+
+                  loading="lazy"
+
+                  onerror="
+                    this.onerror=null;
+                    this.src='538820.jpg';
+                  "
+
+                >
+
+              </div>
+
+
+              <div class="body">
+
+                <div class="code">
+
+                  ${
+                    escapeHtml(
+                      product.code
+                    )
+                  }
+
+                  ·
+
+                  ${
+                    escapeHtml(
+                      product.category
+                    )
+                  }
+
+                </div>
+
+
+                <div class="name">
+
+                  ${
+                    escapeHtml(
+                      product.name
+                    )
+                  }
+
+                </div>
+
+
+                <span
+                  class="
+                    status
+                    ${statusClass}
+                  "
+                >
+
+                  ${
+                    escapeHtml(
+                      product.status
+                    )
+                  }
+
+                </span>
+
+
+                <div class="moq">
+
+                  ${
+                    escapeHtml(
+                      product.moq
+                    )
+                  }
+
+                </div>
+
+
+                <div class="actions">
+
+
+                  <button
+
+                    type="button"
+
+                    class="wa"
+
+                    data-wa-code="${
+                      escapeHtml(
+                        product.code
+                      )
+                    }"
+
+                    ${disabled}
+
+                  >
+
+                    WhatsApp Enquiry
+
+                  </button>
+
+
+                  <button
+
+                    type="button"
+
+                    class="
+                      plus
+                      ${selectedClass}
+                    "
+
+                    data-select-code="${
+                      escapeHtml(
+                        product.code
+                      )
+                    }"
+
+                    aria-label="
+                      Select ${
+                        escapeHtml(
+                          product.name
+                        )
+                      }
+                    "
+
+                  >
+
+                    ${
+                      selected.has(
+                        product.code
+                      )
+                        ? "✓"
+                        : "+"
+                    }
+
+                  </button>
+
+
+                </div>
+
+              </div>
+
+            </article>
+
+          `;
+
+        }
+      )
+
+      .join("");
 
 }
 
@@ -625,13 +779,62 @@ function toggleProduct(code){
 
 function updateBar(){
 
+  const bar =
+    $("#bar");
+
+  const selectedCount =
+    $("#selectedCount");
+
+
+  if(
+    !bar ||
+    !selectedCount
+  ){
+
+    return;
+
+  }
+
+
   selectedCount.textContent =
-    selected.size;
+    String(
+      selected.size
+    );
+
 
   bar.classList.toggle(
+
     "hidden",
+
     selected.size === 0
+
   );
+
+}
+
+
+/* =========================================================
+   SINGLE WHATSAPP
+========================================================= */
+
+function waOne(product){
+
+  const message =
+
+`Hi ONE STOP SOLUTION (OSS),
+
+I'm interested in ${product.name} (${product.code}).
+
+Please share details and rates.`;
+
+
+  window.location.href =
+
+    `https://wa.me/${WA}?text=${
+      encodeURIComponent(
+        message
+      )
+    }`;
 
 }
 
@@ -643,6 +846,7 @@ function updateBar(){
 function sendMultipleEnquiry(){
 
   const list =
+
     products.filter(
       product =>
         selected.has(
@@ -652,7 +856,7 @@ function sendMultipleEnquiry(){
 
 
   if(
-    list.length === 0
+    !list.length
   ){
 
     return;
@@ -661,246 +865,243 @@ function sendMultipleEnquiry(){
 
 
   const message =
+
 `Hi ONE STOP SOLUTION (OSS),
 
 I'm interested in the following products:
 
-${list
-  .map(
-    (product,index) =>
-      `${index + 1}. ${product.name} (${product.code})`
-  )
-  .join("\n")}
+${
+
+  list
+
+    .map(
+      (product,index) =>
+        `${index + 1}. ${product.name} (${product.code})`
+    )
+
+    .join("\n")
+
+}
 
 Please share details and rates.`;
 
 
-  const url =
-    `https://wa.me/${WA}?text=${encodeURIComponent(message)}`;
-
-
   window.location.href =
-    url;
+
+    `https://wa.me/${WA}?text=${
+      encodeURIComponent(
+        message
+      )
+    }`;
 
 }
 
 
 /* =========================================================
-   RENDER PRODUCTS
+   EVENTS
 ========================================================= */
 
-function render(){
+function initEvents(){
 
-  const q =
-    search.value
-      .trim()
-      .toLowerCase();
+  const cats =
+    $("#cats");
 
-
-  const list =
-    products.filter(
-      product =>
-
-        (
-          filter === "All" ||
-          product.status === filter
-        )
-
-        &&
-
-        (
-          cat === "All" ||
-          product.category === cat
-        )
-
-        &&
-
-        (
-          !q ||
-
-          product.name
-            .toLowerCase()
-            .includes(q)
-
-          ||
-
-          product.code
-            .toLowerCase()
-            .includes(q)
-        )
-
+  const filters =
+    document.querySelector(
+      ".filters"
     );
 
+  const search =
+    $("#search");
 
-  count.textContent =
-    `${list.length} products`;
+  const grid =
+    $("#grid");
 
-
-  grid.innerHTML =
-    list
-      .map(
-        product => `
-
-          <article class="card">
-
-            <div class="photo">
-
-              <img
-                src="${product.image}"
-                alt="${product.name}"
-                loading="lazy"
-              >
-
-            </div>
+  const multiButton =
+    $("#multi");
 
 
-            <div class="body">
+  /* -------------------------------------------------------
+     CATEGORY
+  ------------------------------------------------------- */
 
-              <div class="code">
-                ${product.code} · ${product.category}
-              </div>
+  cats?.addEventListener(
+    "click",
+    event => {
 
-
-              <div class="name">
-                ${product.name}
-              </div>
-
-
-              <span
-                class="
-                  status
-                  ${
-                    product.status === "Out of Stock"
-                      ? "out"
-                      : product.status === "Coming Soon"
-                      ? "coming"
-                      : ""
-                  }
-                "
-              >
-                ${product.status}
-              </span>
-
-
-              <div class="moq">
-                ${product.moq}
-              </div>
-
-
-              <div class="actions">
-
-                <button
-                  class="wa"
-                  data-wa-code="${product.code}"
-                  ${
-                    product.status === "Out of Stock"
-                      ? "disabled"
-                      : ""
-                  }
-                >
-                  WhatsApp Enquiry
-                </button>
-
-
-                <button
-                  class="
-                    plus
-                    ${
-                      selected.has(product.code)
-                        ? "selected"
-                        : ""
-                    }
-                  "
-                  data-select-code="${product.code}"
-                >
-                  ${
-                    selected.has(product.code)
-                      ? "✓"
-                      : "+"
-                  }
-                </button>
-
-              </div>
-
-            </div>
-
-          </article>
-
-        `
-      )
-      .join("");
-
-
-  /* =======================================================
-     WHATSAPP BUTTONS
-  ======================================================= */
-
-  grid
-    .querySelectorAll(
-      "[data-wa-code]"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const code =
-              button.dataset.waCode;
-
-            const product =
-              products.find(
-                item =>
-                  item.code === code
-              );
-
-            if(!product) return;
-
-            waOne(product);
-
-          }
+      const button =
+        event.target.closest(
+          "button[data-cat]"
         );
 
+
+      if(!button){
+
+        return;
+
       }
-    );
 
 
-  /* =======================================================
-     PLUS BUTTONS
-  ======================================================= */
+      category =
+        button.dataset.cat ||
+        "All";
 
-  grid
-    .querySelectorAll(
-      "[data-select-code]"
-    )
-    .forEach(
-      button => {
 
-        button.addEventListener(
-          "click",
-          () => {
+      renderCategories();
 
-            toggleProduct(
-              button.dataset.selectCode
+      render();
+
+    }
+  );
+
+
+  /* -------------------------------------------------------
+     STOCK FILTER
+  ------------------------------------------------------- */
+
+  filters?.addEventListener(
+    "click",
+    event => {
+
+      const button =
+        event.target.closest(
+          "button[data-filter]"
+        );
+
+
+      if(!button){
+
+        return;
+
+      }
+
+
+      filter =
+        button.dataset.filter ||
+        "All";
+
+
+      filters
+
+        .querySelectorAll(
+          "button[data-filter]"
+        )
+
+        .forEach(
+          item => {
+
+            item.classList.toggle(
+
+              "active",
+
+              item.dataset.filter ===
+                filter
+
             );
 
           }
         );
 
+
+      render();
+
+    }
+  );
+
+
+  /* -------------------------------------------------------
+     SEARCH
+  ------------------------------------------------------- */
+
+  search?.addEventListener(
+    "input",
+    render
+  );
+
+
+  /* -------------------------------------------------------
+     PRODUCT BUTTONS
+  ------------------------------------------------------- */
+
+  grid?.addEventListener(
+    "click",
+    event => {
+
+      const waButton =
+        event.target.closest(
+          "[data-wa-code]"
+        );
+
+
+      if(
+        waButton &&
+        !waButton.disabled
+      ){
+
+        const product =
+          products.find(
+            item =>
+              item.code ===
+              waButton.dataset.waCode
+          );
+
+
+        if(product){
+
+          waOne(product);
+
+        }
+
+
+        return;
+
       }
-    );
-
-}
 
 
-/* =========================================================
-   MULTIPLE ENQUIRY BUTTON
-========================================================= */
+      const selectButton =
+        event.target.closest(
+          "[data-select-code]"
+        );
 
-if(multiButton){
 
-  multiButton.addEventListener(
+      if(!selectButton){
+
+        return;
+
+      }
+
+
+      const code =
+        selectButton.dataset.selectCode;
+
+
+      if(
+        selected.has(code)
+      ){
+
+        selected.delete(code);
+
+      }
+      else{
+
+        selected.add(code);
+
+      }
+
+
+      updateBar();
+
+      render();
+
+    }
+  );
+
+
+  /* -------------------------------------------------------
+     MULTIPLE WHATSAPP
+  ------------------------------------------------------- */
+
+  multiButton?.addEventListener(
     "click",
     sendMultipleEnquiry
   );
@@ -909,146 +1110,281 @@ if(multiButton){
 
 
 /* =========================================================
-   INITIAL RENDER
+   LOAD MASTER PRODUCTS
 ========================================================= */
 
-renderCategories();
+async function loadMasterProducts(){
 
-render();
+  const response =
 
-updateBar();
-
-
-/* =========================================================
-   FIRESTORE LIVE PRODUCTS
-   MASTER + ADMIN PRODUCTS
-========================================================= */
-
-try{
-
-  const productsRef =
-    collection(
-      db,
-      "products"
+    await fetch(
+      "./products.json",
+      {
+        cache:
+          "no-store"
+      }
     );
 
 
-  onSnapshot(
+  if(
+    !response.ok
+  ){
 
-    productsRef,
+    throw new Error(
 
-    snapshot => {
+      `products.json could not be loaded (${response.status})`
 
-      /* =====================================================
-         READ ALL FIRESTORE PRODUCTS
-      ===================================================== */
+    );
 
-      const firestoreProducts = [];
-
-
-      snapshot.forEach(
-        docSnapshot => {
-
-          const data =
-            docSnapshot.data() || {};
+  }
 
 
-          const code =
-            String(
-              data.code ||
-              docSnapshot.id ||
-              ""
-            ).trim();
+  const data =
+    await response.json();
 
 
-          if(!code){
-            return;
-          }
+  if(
+    !Array.isArray(data) ||
+    !data.length
+  ){
+
+    throw new Error(
+      "products.json is empty or invalid."
+    );
+
+  }
 
 
-          firestoreProducts.push({
+  masterProducts =
 
-            ...data,
-
-            code: code,
-
-            id:
-              docSnapshot.id
-
-          });
-
-        }
-      );
+    data.map(
+      normalizeProduct
+    );
 
 
-      /* =====================================================
-         MASTER PRODUCTS
-         
-         MASTER CODE / NAME / CATEGORY / IMAGE
-         ALWAYS REMAIN THE MASTER VALUES.
-
-         ADMIN CAN LIVE-CONTROL:
-         STATUS / STOCK / MOQ
-      ===================================================== */
-
-      const masterProducts =
-
-        MASTER_PRODUCTS.map(
-          master => {
-
-            const firestoreProduct =
-
-              firestoreProducts.find(
-                item =>
-                  String(
-                    item.code
-                  ).toUpperCase() ===
-
-                  String(
-                    master.code
-                  ).toUpperCase()
-              );
+  products =
+    sortProducts(
+      masterProducts
+    );
 
 
-            if(firestoreProduct){
+  renderCategories();
 
-              return {
+  render();
 
-                ...master,
+  updateBar();
 
-                /* Master identity stays locked */
+}
 
-                code:
-                  master.code,
 
-                name:
-                  master.name,
+/* =========================================================
+   ERROR DISPLAY
+========================================================= */
 
-                category:
-                  master.category,
+function showFatalError(error){
 
-                image:
-                  master.image,
+  console.error(
+    "OSS Catalog Error:",
+    error
+  );
 
-                /* Editable Admin fields */
 
-                moq:
-                  firestoreProduct.moq ||
-                  master.moq,
+  const grid =
+    $("#grid");
 
-                status:
-                  firestoreProduct.status ||
-                  firestoreProduct.stock ||
-                  master.status
+  const count =
+    $("#count");
 
-              };
+
+  if(count){
+
+    count.textContent =
+      "Catalog error";
+
+  }
+
+
+  if(grid){
+
+    grid.innerHTML = `
+
+      <div
+        style="
+          grid-column:1/-1;
+          padding:30px;
+          text-align:center
+        "
+      >
+
+        <strong>
+          Catalogue could not load.
+        </strong>
+
+        <br>
+
+        Please refresh the page.
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   FIRESTORE LIVE SYNC
+========================================================= */
+
+function startFirestoreSync(){
+
+  try{
+
+    onSnapshot(
+
+      collection(
+        db,
+        "products"
+      ),
+
+      snapshot => {
+
+        const firestoreProducts =
+          [];
+
+
+        snapshot.forEach(
+          docSnapshot => {
+
+            const data =
+              docSnapshot.data() ||
+              {};
+
+
+            const code =
+              String(
+
+                data.code ||
+                docSnapshot.id ||
+                ""
+
+              ).trim();
+
+
+            if(!code){
+
+              return;
 
             }
 
 
-            /* No Firestore document:
-               keep master default */
+            firestoreProducts.push({
 
-            return {
+              ...data,
 
-       
+              code
+
+            });
+
+          }
+        );
+
+
+        rebuildProducts(
+          firestoreProducts
+        );
+
+      },
+
+
+      error => {
+
+        console.error(
+
+          "Firestore Live Sync Error:",
+
+          error
+
+        );
+
+
+        /* Keep master catalogue visible */
+
+        renderCategories();
+
+        render();
+
+      }
+
+    );
+
+  }
+  catch(error){
+
+    console.error(
+
+      "Firestore initialization error:",
+
+      error
+
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+async function init(){
+
+  initEvents();
+
+
+  try{
+
+    await loadMasterProducts();
+
+  }
+  catch(error){
+
+    showFatalError(
+      error
+    );
+
+    return;
+
+  }
+
+
+  startFirestoreSync();
+
+}
+
+
+/* =========================================================
+   DOM READY
+========================================================= */
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    init,
+    {
+      once:true
+    }
+  );
+
+}
+else{
+
+  init();
+
+}
