@@ -3,11 +3,7 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>OSS Admin Panel</title>
 
@@ -24,9 +20,7 @@ body{
   color:#172033;
 }
 
-button,
-input,
-select{
+button,input,select{
   font:inherit;
 }
 
@@ -38,9 +32,7 @@ button{
   display:none!important;
 }
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
 #loginPage{
   min-height:100vh;
@@ -48,12 +40,7 @@ button{
   justify-content:center;
   align-items:center;
   padding:20px;
-  background:
-    linear-gradient(
-      135deg,
-      #071a36,
-      #102d59
-    );
+  background:linear-gradient(135deg,#071a36,#102d59);
 }
 
 .loginBox{
@@ -131,9 +118,7 @@ button{
   text-align:center;
 }
 
-/* =========================
-   ADMIN
-========================= */
+/* TOPBAR */
 
 #adminPage{
   min-height:100vh;
@@ -183,13 +168,7 @@ button{
   border-radius:8px;
 }
 
-.logoutBtn:hover{
-  background:rgba(255,255,255,.1);
-}
-
-/* =========================
-   CONTENT
-========================= */
+/* CONTENT */
 
 .container{
   max-width:1400px;
@@ -215,18 +194,11 @@ button{
   font-weight:700;
 }
 
-.addBtn:hover{
-  background:#123b72;
-}
-
-/* =========================
-   STATS
-========================= */
+/* STATS */
 
 .stats{
   display:grid;
-  grid-template-columns:
-    repeat(5,minmax(0,1fr));
+  grid-template-columns:repeat(5,minmax(0,1fr));
   gap:14px;
   margin-bottom:20px;
 }
@@ -249,9 +221,7 @@ button{
   margin-top:5px;
 }
 
-/* =========================
-   TOOLBAR
-========================= */
+/* TOOLBAR */
 
 .toolbar{
   background:#fff;
@@ -277,9 +247,7 @@ button{
   min-width:220px;
 }
 
-/* =========================
-   FIREBASE STATUS
-========================= */
+/* FIREBASE STATUS */
 
 .firebaseStatus{
   background:#fff;
@@ -298,14 +266,11 @@ button{
   color:#c62828;
 }
 
-/* =========================
-   PRODUCTS
-========================= */
+/* PRODUCTS */
 
 .productList{
   display:grid;
-  grid-template-columns:
-    repeat(auto-fill,minmax(290px,1fr));
+  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
   gap:18px;
 }
 
@@ -403,17 +368,7 @@ button{
   color:#c62828;
 }
 
-.editBtn:hover{
-  background:#123b72;
-}
-
-.deleteBtn:hover{
-  background:#f8cccc;
-}
-
-/* =========================
-   MODAL
-========================= */
+/* MODAL */
 
 .modal{
   position:fixed;
@@ -462,8 +417,7 @@ button{
 
 .modalGrid{
   display:grid;
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:14px;
 }
 
@@ -487,23 +441,22 @@ button{
   margin-top:20px;
 }
 
-.saveBtn{
-  flex:1;
-  border:0;
-  padding:12px;
-  border-radius:9px;
-  background:#0b2852;
-  color:#fff;
-  font-weight:700;
-}
-
+.saveBtn,
 .cancelBtn{
   flex:1;
   border:0;
   padding:12px;
   border-radius:9px;
-  background:#eceff3;
   font-weight:700;
+}
+
+.saveBtn{
+  background:#0b2852;
+  color:#fff;
+}
+
+.cancelBtn{
+  background:#eceff3;
 }
 
 .helpText{
@@ -512,11 +465,19 @@ button{
   margin-top:5px;
 }
 
+.loading,
+.empty{
+  background:#fff;
+  padding:40px;
+  border-radius:12px;
+  text-align:center;
+  color:#777;
+}
+
 @media(max-width:800px){
 
   .stats{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
 }
@@ -543,32 +504,10 @@ button{
     grid-column:auto;
   }
 
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
-
   .productList{
     grid-template-columns:1fr;
   }
 
-}
-
-/* =========================
-   LOADING
-========================= */
-
-.loading{
-  padding:40px;
-  text-align:center;
-  color:#777;
-}
-
-.empty{
-  background:#fff;
-  padding:40px;
-  border-radius:12px;
-  text-align:center;
-  color:#777;
 }
 
 </style>
@@ -577,9 +516,8 @@ button{
 
 <body>
 
-<!-- =========================
-     LOGIN PAGE
-========================= -->
+
+<!-- LOGIN -->
 
 <div id="loginPage">
 
@@ -638,9 +576,7 @@ button{
 </div>
 
 
-<!-- =========================
-     ADMIN PAGE
-========================= -->
+<!-- ADMIN -->
 
 <div
   id="adminPage"
@@ -687,9 +623,7 @@ button{
           Product Management
         </h2>
 
-        <div
-          style="color:#777;font-size:13px;margin-top:4px"
-        >
+        <div style="color:#777;font-size:13px;margin-top:4px">
           All products are editable
         </div>
 
@@ -705,97 +639,39 @@ button{
     </div>
 
 
-    <!-- =========================
-         STATS
-    ========================= -->
+    <!-- STATS -->
 
     <div class="stats">
 
       <div class="stat">
-
-        <div class="statTitle">
-          TOTAL PRODUCTS
-        </div>
-
-        <div
-          id="totalCount"
-          class="statValue"
-        >
-          0
-        </div>
-
+        <div class="statTitle">TOTAL PRODUCTS</div>
+        <div id="totalCount" class="statValue">0</div>
       </div>
 
-
       <div class="stat">
-
-        <div class="statTitle">
-          IN STOCK
-        </div>
-
-        <div
-          id="inStockCount"
-          class="statValue"
-        >
-          0
-        </div>
-
+        <div class="statTitle">IN STOCK</div>
+        <div id="inStockCount" class="statValue">0</div>
       </div>
 
-
       <div class="stat">
-
-        <div class="statTitle">
-          COMING SOON
-        </div>
-
-        <div
-          id="comingCount"
-          class="statValue"
-        >
-          0
-        </div>
-
+        <div class="statTitle">COMING SOON</div>
+        <div id="comingCount" class="statValue">0</div>
       </div>
 
-
       <div class="stat">
-
-        <div class="statTitle">
-          OUT OF STOCK
-        </div>
-
-        <div
-          id="outStockCount"
-          class="statValue"
-        >
-          0
-        </div>
-
+        <div class="statTitle">OUT OF STOCK</div>
+        <div id="outStockCount" class="statValue">0</div>
       </div>
 
-
       <div class="stat">
-
-        <div class="statTitle">
-          CATEGORIES
-        </div>
-
-        <div
-          id="categoryCount"
-          class="statValue"
-        >
-          0
-        </div>
-
+        <div class="statTitle">CATEGORIES</div>
+        <div id="categoryCount" class="statValue">0</div>
       </div>
 
     </div>
 
 
-    <!-- =========================
-         FIREBASE STATUS
-    ========================= -->
+    <!-- FIREBASE STATUS -->
 
     <div
       id="firebaseStatus"
@@ -805,9 +681,7 @@ button{
     </div>
 
 
-    <!-- =========================
-         TOOLBAR
-    ========================= -->
+    <!-- SEARCH -->
 
     <div class="toolbar">
 
@@ -817,7 +691,6 @@ button{
         placeholder="Search by code, product name or category..."
         oninput="renderProducts()"
       >
-
 
       <select
         id="stockFilter"
@@ -845,9 +718,7 @@ button{
     </div>
 
 
-    <!-- =========================
-         PRODUCT LIST
-    ========================= -->
+    <!-- PRODUCTS -->
 
     <div
       id="productList"
@@ -865,9 +736,7 @@ button{
 </div>
 
 
-<!-- =========================
-     PRODUCT MODAL
-========================= -->
+<!-- PRODUCT MODAL -->
 
 <div
   id="productModal"
@@ -894,13 +763,9 @@ button{
 
     <div class="modalGrid">
 
-      <!-- CODE -->
-
       <div class="formGroup">
 
-        <label>
-          Product Code
-        </label>
+        <label>Product Code</label>
 
         <input
           id="pCode"
@@ -911,13 +776,9 @@ button{
       </div>
 
 
-      <!-- STATUS -->
-
       <div class="formGroup">
 
-        <label>
-          Stock Status
-        </label>
+        <label>Stock Status</label>
 
         <select id="pStatus">
 
@@ -938,13 +799,9 @@ button{
       </div>
 
 
-      <!-- NAME -->
-
       <div class="formGroup full">
 
-        <label>
-          Product Name
-        </label>
+        <label>Product Name</label>
 
         <input
           id="pName"
@@ -955,13 +812,9 @@ button{
       </div>
 
 
-      <!-- CATEGORY -->
-
       <div class="formGroup full">
 
-        <label>
-          Category
-        </label>
+        <label>Category</label>
 
         <input
           id="pCategory"
@@ -972,13 +825,9 @@ button{
       </div>
 
 
-      <!-- IMAGE -->
-
       <div class="formGroup full">
 
-        <label>
-          Image
-        </label>
+        <label>Image</label>
 
         <input
           id="pImage"
@@ -988,8 +837,7 @@ button{
         >
 
         <div class="helpText">
-          Example: OSS_039.jpg
-          અથવા કોઈ image path/URL
+          Example: OSS_039.jpg or image URL
         </div>
 
         <img
@@ -1001,13 +849,9 @@ button{
       </div>
 
 
-      <!-- MOQ -->
-
       <div class="formGroup full">
 
-        <label>
-          MOQ
-        </label>
+        <label>MOQ</label>
 
         <input
           id="pMOQ"
@@ -1043,9 +887,7 @@ button{
 </div>
 
 
-<!-- =========================
-     FIREBASE
-========================= -->
+<!-- FIREBASE -->
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 
@@ -1104,7 +946,7 @@ const ADMIN_UID =
 
 
 /* =========================================
-   GLOBAL DATA
+   GLOBAL
 ========================================= */
 
 let products = [];
@@ -1117,11 +959,11 @@ let unsubscribeProducts = null;
 
 
 /* =========================================
-   LOGIN STATE
+   AUTH STATE
 ========================================= */
 
 auth.onAuthStateChanged(
-  async user => {
+  function(user){
 
     if(
       user &&
@@ -1185,6 +1027,7 @@ async function login(){
 
   errorBox.textContent = "";
 
+
   if(!email || !password){
 
     errorBox.textContent =
@@ -1193,6 +1036,7 @@ async function login(){
     return;
 
   }
+
 
   try{
 
@@ -1240,8 +1084,7 @@ async function logout(){
 function startFirebase(){
 
   const status =
-    document
-      .getElementById("firebaseStatus");
+    document.getElementById("firebaseStatus");
 
   status.textContent =
     "Connecting to Firebase...";
@@ -1262,19 +1105,21 @@ function startFirebase(){
       .collection("products")
       .onSnapshot(
 
-        snapshot => {
+        function(snapshot){
 
           products = [];
 
+
           snapshot.forEach(
-            doc => {
+            function(doc){
 
               const data =
                 doc.data() || {};
 
+
               products.push({
 
-                id: doc.id,
+                id:doc.id,
 
                 code:
                   data.code ||
@@ -1308,11 +1153,14 @@ function startFirebase(){
 
 
           products.sort(
-            (a,b) =>
-              naturalCodeSort(
+            function(a,b){
+
+              return naturalCodeSort(
                 a.code,
                 b.code
-              )
+              );
+
+            }
           );
 
 
@@ -1329,7 +1177,8 @@ function startFirebase(){
 
         },
 
-        error => {
+
+        function(error){
 
           console.error(error);
 
@@ -1348,18 +1197,16 @@ function startFirebase(){
 
 
 /* =========================================
-   CODE SORT
+   SORT
 ========================================= */
 
 function naturalCodeSort(a,b){
 
   const aa =
-    String(a || "")
-      .toUpperCase();
+    String(a || "").toUpperCase();
 
   const bb =
-    String(b || "")
-      .toUpperCase();
+    String(b || "").toUpperCase();
 
   const na =
     parseInt(
@@ -1373,6 +1220,7 @@ function naturalCodeSort(a,b){
       10
     );
 
+
   if(
     !Number.isNaN(na) &&
     !Number.isNaN(nb)
@@ -1382,13 +1230,14 @@ function naturalCodeSort(a,b){
 
   }
 
+
   return aa.localeCompare(bb);
 
 }
 
 
 /* =========================================
-   ESCAPE HTML
+   ESCAPE
 ========================================= */
 
 function escapeHTML(value){
@@ -1403,8 +1252,153 @@ function escapeHTML(value){
 }
 
 
+function escapeAttr(value){
+
+  return String(value ?? "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
+
+}
+
+
 /* =========================================
-   ESCAPE JS ATTRIBUTE
+   IMAGE
 ========================================= */
 
-function escapeAttr(v
+function getImagePath(product){
+
+  if(product.image){
+
+    return product.image;
+
+  }
+
+  if(product.code){
+
+    return product.code + ".jpg";
+
+  }
+
+  return "538820.jpg";
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+function normalizeStatus(status){
+
+  const value =
+    String(status || "")
+      .trim()
+      .toLowerCase();
+
+
+  if(
+    value === "coming soon" ||
+    value === "coming"
+  ){
+
+    return "Coming Soon";
+
+  }
+
+
+  if(
+    value === "out of stock" ||
+    value === "out"
+  ){
+
+    return "Out of Stock";
+
+  }
+
+
+  return "In Stock";
+
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+function updateStats(){
+
+  const total =
+    products.length;
+
+
+  const inStock =
+    products.filter(
+      function(p){
+
+        return normalizeStatus(p.status)
+          === "In Stock";
+
+      }
+    ).length;
+
+
+  const coming =
+    products.filter(
+      function(p){
+
+        return normalizeStatus(p.status)
+          === "Coming Soon";
+
+      }
+    ).length;
+
+
+  const out =
+    products.filter(
+      function(p){
+
+        return normalizeStatus(p.status)
+          === "Out of Stock";
+
+      }
+    ).length;
+
+
+  const categories =
+    new Set(
+      products
+        .map(
+          function(p){
+            return String(p.category || "").trim();
+          }
+        )
+        .filter(Boolean)
+    ).size;
+
+
+  document.getElementById("totalCount")
+    .textContent = total;
+
+  document.getElementById("inStockCount")
+    .textContent = inStock;
+
+  document.getElementById("comingCount")
+    .textContent = coming;
+
+  document.getElementById("outStockCount")
+    .textContent = out;
+
+  document.getElementById("categoryCount")
+    .textContent = categories;
+
+}
+
+
+/* =========================================
+   RENDER
+========================================= */
+
+function renderProducts(){
+
+  const list =
+    document.getElementById("productLi
