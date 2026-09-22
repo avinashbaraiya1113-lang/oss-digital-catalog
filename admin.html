@@ -11,421 +11,564 @@
 
 <title>OSS Admin Panel</title>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-
 <style>
 
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
 }
 
 body{
+  margin:0;
   font-family:Arial,Helvetica,sans-serif;
   background:#f4f6f9;
   color:#172033;
 }
 
-header{
-  background:#071b3a;
-  color:white;
-  padding:16px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-
-.logo-title{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.logo-title img{
-  width:52px;
-  height:52px;
-  object-fit:contain;
-  border-radius:50%;
-  background:white;
-}
-
-.logo-title h1{
-  font-size:21px;
-}
-
-.logo-title p{
-  font-size:12px;
-  color:#e8bd42;
-  margin-top:4px;
+button,
+input,
+select{
+  font:inherit;
 }
 
 button{
-  border:none;
   cursor:pointer;
-  border-radius:8px;
-  font-weight:bold;
 }
 
-.logout{
-  background:#c62828;
-  color:white;
-  padding:10px 15px;
+.hidden{
+  display:none!important;
 }
+
+/* =========================
+   LOGIN
+========================= */
+
+#loginPage{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  background:
+    linear-gradient(
+      135deg,
+      #071a36,
+      #102d59
+    );
+}
+
+.loginBox{
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  border-radius:18px;
+  padding:30px;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.loginLogo{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+  display:block;
+  margin:0 auto 15px;
+}
+
+.loginBox h1{
+  text-align:center;
+  margin:5px 0;
+  color:#0b2852;
+}
+
+.loginBox p{
+  text-align:center;
+  color:#777;
+  margin-bottom:25px;
+}
+
+.formGroup{
+  margin-bottom:15px;
+}
+
+.formGroup label{
+  display:block;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.formGroup input,
+.formGroup select{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd3df;
+  border-radius:9px;
+  outline:none;
+  background:#fff;
+}
+
+.formGroup input:focus,
+.formGroup select:focus{
+  border-color:#0b4c9c;
+}
+
+.primaryBtn{
+  width:100%;
+  border:0;
+  padding:13px;
+  border-radius:10px;
+  background:#0b2852;
+  color:#fff;
+  font-weight:700;
+}
+
+.primaryBtn:hover{
+  background:#123b72;
+}
+
+.errorText{
+  color:#c62828;
+  font-size:14px;
+  margin-top:12px;
+  text-align:center;
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+#adminPage{
+  min-height:100vh;
+}
+
+.topbar{
+  background:#071a36;
+  color:#fff;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.topbarLeft{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.topbarLogo{
+  width:48px;
+  height:48px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:8px;
+}
+
+.topbar h2{
+  margin:0;
+  font-size:20px;
+}
+
+.topbar small{
+  opacity:.75;
+}
+
+.logoutBtn{
+  border:1px solid rgba(255,255,255,.35);
+  background:transparent;
+  color:#fff;
+  padding:9px 15px;
+  border-radius:8px;
+}
+
+.logoutBtn:hover{
+  background:rgba(255,255,255,.1);
+}
+
+/* =========================
+   CONTENT
+========================= */
 
 .container{
-  max-width:1200px;
+  max-width:1400px;
   margin:auto;
   padding:20px;
 }
 
-.card{
-  background:white;
-  border-radius:14px;
-  padding:20px;
+.actionRow{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
   margin-bottom:20px;
-  box-shadow:0 3px 15px rgba(0,0,0,.08);
+  flex-wrap:wrap;
 }
 
-.login-box{
-  max-width:430px;
-  margin:70px auto;
-}
-
-.login-box h2{
-  text-align:center;
-  color:#071b3a;
-  margin-bottom:20px;
-}
-
-input,
-select{
-  width:100%;
-  padding:12px;
-  border:1px solid #d5d9df;
-  border-radius:8px;
-  margin-top:7px;
-  margin-bottom:15px;
-  font-size:15px;
-  background:white;
-}
-
-input:disabled{
-  background:#eef1f5;
-  color:#667085;
-  cursor:not-allowed;
-}
-
-label{
-  font-size:13px;
-  font-weight:bold;
-  color:#4a5568;
-}
-
-.primary{
-  width:100%;
-  background:#071b3a;
-  color:white;
-  padding:13px;
-  font-size:15px;
-}
-
-.gold{
-  background:#d7a928;
-  color:#071b3a;
+.addBtn{
+  border:0;
+  background:#0b2852;
+  color:#fff;
   padding:12px 18px;
+  border-radius:9px;
+  font-weight:700;
 }
 
-.red{
-  background:#c62828;
-  color:white;
-  padding:10px 15px;
+.addBtn:hover{
+  background:#123b72;
 }
 
-.green{
-  color:#16803a;
-  font-weight:bold;
-}
-
-.error{
-  color:#c62828;
-  font-size:14px;
-  margin-top:10px;
-}
-
-.success{
-  color:#16803a;
-  font-weight:bold;
-  margin-top:10px;
-}
-
-.info{
-  background:#eef5ff;
-  color:#174ea6;
-  border:1px solid #c8dcff;
-  padding:10px 12px;
-  border-radius:8px;
-  font-size:13px;
-  margin-bottom:15px;
-}
-
-.warning{
-  background:#fff7df;
-  color:#806000;
-  border:1px solid #f1d47b;
-  padding:10px 12px;
-  border-radius:8px;
-  font-size:13px;
-  margin-bottom:15px;
-}
+/* =========================
+   STATS
+========================= */
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
+  grid-template-columns:
+    repeat(5,minmax(0,1fr));
+  gap:14px;
+  margin-bottom:20px;
 }
 
 .stat{
-  background:#071b3a;
-  color:white;
-  padding:18px;
+  background:#fff;
   border-radius:12px;
+  padding:18px;
+  box-shadow:0 3px 12px rgba(0,0,0,.07);
 }
 
-.stat strong{
-  display:block;
-  font-size:26px;
-  color:#e8bd42;
-  margin-top:6px;
+.statTitle{
+  color:#777;
+  font-size:13px;
 }
+
+.statValue{
+  font-size:27px;
+  font-weight:800;
+  margin-top:5px;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
 
 .toolbar{
+  background:#fff;
+  padding:15px;
+  border-radius:12px;
   display:flex;
-  gap:10px;
+  gap:12px;
   flex-wrap:wrap;
+  margin-bottom:20px;
+  box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+.toolbar input,
+.toolbar select{
+  padding:11px;
+  border:1px solid #ccd3df;
+  border-radius:8px;
+  outline:none;
 }
 
 .toolbar input{
   flex:1;
-  min-width:200px;
+  min-width:220px;
 }
 
-.product-list{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
+/* =========================
+   FIREBASE STATUS
+========================= */
 
-.product{
-  border:1px solid #e1e5eb;
-  border-radius:12px;
-  padding:15px;
+.firebaseStatus{
   background:#fff;
-}
-
-.product.master{
-  border-left:4px solid #d7a928;
-}
-
-.product.new-product{
-  border-left:4px solid #16803a;
-}
-
-.product-top{
-  display:flex;
-  gap:14px;
-}
-
-.product-img{
-  width:90px;
-  height:90px;
   border-radius:10px;
-  object-fit:cover;
-  border:1px solid #ddd;
-  background:#f5f5f5;
-  flex-shrink:0;
+  padding:12px 15px;
+  margin-bottom:20px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+  font-weight:700;
 }
 
-.product-info{
-  flex:1;
-  min-width:0;
+.statusOnline{
+  color:#188038;
 }
 
-.product-info h3{
-  font-size:16px;
-  color:#071b3a;
+.statusOffline{
+  color:#c62828;
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.productList{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fill,minmax(290px,1fr));
+  gap:18px;
+}
+
+.productCard{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 4px 16px rgba(0,0,0,.08);
+  border:1px solid #e6e9ef;
+}
+
+.productImage{
+  width:100%;
+  height:220px;
+  object-fit:contain;
+  background:#f8f9fb;
+  display:block;
+}
+
+.productBody{
+  padding:16px;
+}
+
+.productCode{
+  font-size:13px;
+  font-weight:800;
+  color:#0b4c9c;
   margin-bottom:5px;
 }
 
-.product-info p{
+.productName{
+  font-size:17px;
+  font-weight:800;
+  line-height:1.3;
+  margin-bottom:7px;
+}
+
+.productCategory{
   font-size:13px;
-  margin:4px 0;
-  color:#555;
+  color:#666;
+  margin-bottom:9px;
 }
 
-.master-label{
-  display:inline-block;
-  background:#fff1c9;
-  color:#806000;
-  padding:4px 8px;
-  border-radius:20px;
-  font-size:10px;
-  font-weight:bold;
-  margin-bottom:7px;
-}
-
-.new-label{
-  display:inline-block;
-  background:#d9f7df;
-  color:#14752d;
-  padding:4px 8px;
-  border-radius:20px;
-  font-size:10px;
-  font-weight:bold;
-  margin-bottom:7px;
+.productMOQ{
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:10px;
 }
 
 .badge{
   display:inline-block;
-  padding:5px 8px;
+  padding:5px 9px;
   border-radius:20px;
-  font-size:11px;
-  font-weight:bold;
-  margin-top:5px;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:12px;
 }
 
-.in{
-  background:#d9f7df;
-  color:#14752d;
+.badgeIn{
+  background:#e7f6ec;
+  color:#137333;
 }
 
-.coming{
-  background:#fff1c9;
-  color:#956d00;
+.badgeComing{
+  background:#fff3cd;
+  color:#856404;
 }
 
-.out{
-  background:#ffdcdc;
-  color:#a40000;
+.badgeOut{
+  background:#fde8e8;
+  color:#c62828;
 }
 
-.actions{
+.cardButtons{
   display:flex;
   gap:8px;
-  margin-top:14px;
 }
 
-.actions button{
+.editBtn,
+.deleteBtn{
   flex:1;
+  border:0;
   padding:10px;
+  border-radius:8px;
+  font-weight:700;
 }
 
-.edit{
-  background:#071b3a;
-  color:white;
+.editBtn{
+  background:#0b2852;
+  color:#fff;
 }
 
-.delete{
-  background:#c62828;
-  color:white;
+.deleteBtn{
+  background:#fde8e8;
+  color:#c62828;
 }
+
+.editBtn:hover{
+  background:#123b72;
+}
+
+.deleteBtn:hover{
+  background:#f8cccc;
+}
+
+/* =========================
+   MODAL
+========================= */
 
 .modal{
-  display:none;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.65);
-  z-index:99;
-  overflow:auto;
+  display:none;
+  justify-content:center;
+  align-items:center;
   padding:20px;
+  z-index:100;
 }
 
-.modal-box{
-  background:white;
+.modal.show{
+  display:flex;
+}
+
+.modalBox{
+  width:100%;
   max-width:650px;
-  margin:20px auto;
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:16px;
   padding:22px;
-  border-radius:15px;
 }
 
-.modal-box h2{
-  color:#071b3a;
+.modalHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   margin-bottom:18px;
 }
 
-.modal-actions{
+.modalHeader h2{
+  margin:0;
+}
+
+.closeBtn{
+  border:0;
+  background:#f0f2f5;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  font-size:20px;
+}
+
+.modalGrid{
+  display:grid;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.imagePreview{
+  width:100%;
+  height:220px;
+  object-fit:contain;
+  background:#f6f7f9;
+  border-radius:10px;
+  margin-top:10px;
+  display:none;
+}
+
+.modalActions{
   display:flex;
   gap:10px;
+  margin-top:20px;
 }
 
-.modal-actions button{
+.saveBtn{
   flex:1;
-  padding:13px;
+  border:0;
+  padding:12px;
+  border-radius:9px;
+  background:#0b2852;
+  color:#fff;
+  font-weight:700;
 }
 
-.preview{
-  width:120px;
-  height:120px;
-  object-fit:cover;
-  border-radius:10px;
-  border:1px solid #ddd;
-  display:none;
-  margin-bottom:15px;
+.cancelBtn{
+  flex:1;
+  border:0;
+  padding:12px;
+  border-radius:9px;
+  background:#eceff3;
+  font-weight:700;
 }
 
-.hidden{
-  display:none !important;
-}
-
-.master-lock{
-  color:#806000;
+.helpText{
   font-size:12px;
-  margin-top:-8px;
-  margin-bottom:15px;
+  color:#777;
+  margin-top:5px;
 }
 
-@media(max-width:750px){
+@media(max-width:800px){
 
   .stats{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
   }
 
-  .product-list{
-    grid-template-columns:1fr;
-  }
+}
 
-  header{
-    align-items:flex-start;
-  }
-
-  .logo-title h1{
-    font-size:17px;
-  }
-
-  .logo-title p{
-    font-size:10px;
-  }
+@media(max-width:550px){
 
   .container{
     padding:12px;
   }
 
-  .card{
-    padding:15px;
+  .topbar{
+    padding:10px 12px;
   }
 
-  .product-top{
-    align-items:flex-start;
+  .topbar h2{
+    font-size:16px;
   }
 
-  .product-img{
-    width:75px;
-    height:75px;
+  .modalGrid{
+    grid-template-columns:1fr;
   }
 
+  .full{
+    grid-column:auto;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .productList{
+    grid-template-columns:1fr;
+  }
+
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+  padding:40px;
+  text-align:center;
+  color:#777;
+}
+
+.empty{
+  background:#fff;
+  padding:40px;
+  border-radius:12px;
+  text-align:center;
+  color:#777;
 }
 
 </style>
@@ -434,35 +577,52 @@ label{
 
 <body>
 
-<!-- ================================
-     LOGIN
-================================ -->
+<!-- =========================
+     LOGIN PAGE
+========================= -->
 
 <div id="loginPage">
 
-  <div class="card login-box">
+  <div class="loginBox">
 
-    <h2>OSS ADMIN PANEL</h2>
-
-    <label>Email</label>
-
-    <input
-      id="email"
-      type="email"
-      value="onestopsolution4325@gmail.com"
-      placeholder="Admin Email"
+    <img
+      src="538820.jpg"
+      class="loginLogo"
+      alt="OSS"
     >
 
-    <label>Password</label>
+    <h1>OSS ADMIN</h1>
 
-    <input
-      id="password"
-      type="password"
-      placeholder="Enter Password"
-    >
+    <p>ONE STOP SOLUTION</p>
+
+    <div class="formGroup">
+
+      <label>Email</label>
+
+      <input
+        type="email"
+        id="loginEmail"
+        autocomplete="username"
+        placeholder="Admin Email"
+      >
+
+    </div>
+
+    <div class="formGroup">
+
+      <label>Password</label>
+
+      <input
+        type="password"
+        id="loginPassword"
+        autocomplete="current-password"
+        placeholder="Password"
+      >
+
+    </div>
 
     <button
-      class="primary"
+      class="primaryBtn"
       onclick="login()"
     >
       LOGIN
@@ -470,7 +630,7 @@ label{
 
     <div
       id="loginError"
-      class="error"
+      class="errorText"
     ></div>
 
   </div>
@@ -478,316 +638,420 @@ label{
 </div>
 
 
-<!-- ================================
-     ADMIN
-================================ -->
-
-<div id="adminPage" class="hidden">
-
-<header>
-
-  <div class="logo-title">
-
-    <img
-      src="538820.jpg"
-      onerror="this.style.display='none'"
-    >
-
-    <div>
-
-      <h1>OSS Product Management</h1>
-
-      <p>
-        ONE STOP SOLUTION — EVERY PROBLEM ONE SOLUTION
-      </p>
-
-    </div>
-
-  </div>
-
-  <button
-    class="logout"
-    onclick="logout()"
-  >
-    Logout
-  </button>
-
-</header>
-
-
-<div class="container">
-
-
-<!-- ================================
-     STATS
-================================ -->
-
-<div class="card">
-
-  <div class="stats">
-
-    <div class="stat">
-      Total Products
-      <strong id="totalCount">0</strong>
-    </div>
-
-    <div class="stat">
-      In Stock
-      <strong id="inStockCount">0</strong>
-    </div>
-
-    <div class="stat">
-      Coming Soon
-      <strong id="comingCount">0</strong>
-    </div>
-
-    <div class="stat">
-      Out of Stock
-      <strong id="outCount">0</strong>
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ================================
-     ADD
-================================ -->
-
-<div class="card">
-
-  <button
-    class="gold"
-    onclick="openAdd()"
-  >
-    ＋ ADD NEW PRODUCT
-  </button>
-
-</div>
-
-
-<!-- ================================
-     SEARCH
-================================ -->
-
-<div class="card">
-
-  <div class="toolbar">
-
-    <input
-      id="search"
-      placeholder="Search product code, name or category..."
-      oninput="renderProducts()"
-    >
-
-    <select
-      id="filterStock"
-      onchange="renderProducts()"
-    >
-
-      <option value="ALL">
-        All Stock
-      </option>
-
-      <option value="In Stock">
-        In Stock
-      </option>
-
-      <option value="Coming Soon">
-        Coming Soon
-      </option>
-
-      <option value="Out of Stock">
-        Out of Stock
-      </option>
-
-    </select>
-
-  </div>
-
-</div>
-
-
-<!-- ================================
-     FIREBASE STATUS
-================================ -->
-
-<div class="card">
-
-  <b>Firebase Connection:</b>
-
-  <span
-    id="firebaseStatus"
-    class="green"
-  >
-    Connecting...
-  </span>
-
-</div>
-
-
-<!-- ================================
-     PRODUCTS
-================================ -->
-
-<div class="card">
-
-  <h2
-    style="margin-bottom:15px;color:#071b3a;"
-  >
-    All Products
-  </h2>
-
-  <div
-    id="productList"
-    class="product-list"
-  ></div>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<!-- ================================
-     EDIT MODAL
-================================ -->
+<!-- =========================
+     ADMIN PAGE
+========================= -->
 
 <div
-  id="modal"
+  id="adminPage"
+  class="hidden"
+>
+
+  <div class="topbar">
+
+    <div class="topbarLeft">
+
+      <img
+        src="538820.jpg"
+        class="topbarLogo"
+        alt="OSS"
+      >
+
+      <div>
+
+        <h2>ONE STOP SOLUTION</h2>
+
+        <small>Wholesale Catalogue Admin</small>
+
+      </div>
+
+    </div>
+
+    <button
+      class="logoutBtn"
+      onclick="logout()"
+    >
+      Logout
+    </button>
+
+  </div>
+
+
+  <div class="container">
+
+    <div class="actionRow">
+
+      <div>
+
+        <h2 style="margin:0">
+          Product Management
+        </h2>
+
+        <div
+          style="color:#777;font-size:13px;margin-top:4px"
+        >
+          All products are editable
+        </div>
+
+      </div>
+
+      <button
+        class="addBtn"
+        onclick="openAdd()"
+      >
+        + ADD NEW PRODUCT
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         STATS
+    ========================= -->
+
+    <div class="stats">
+
+      <div class="stat">
+
+        <div class="statTitle">
+          TOTAL PRODUCTS
+        </div>
+
+        <div
+          id="totalCount"
+          class="statValue"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="statTitle">
+          IN STOCK
+        </div>
+
+        <div
+          id="inStockCount"
+          class="statValue"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="statTitle">
+          COMING SOON
+        </div>
+
+        <div
+          id="comingCount"
+          class="statValue"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="statTitle">
+          OUT OF STOCK
+        </div>
+
+        <div
+          id="outStockCount"
+          class="statValue"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="statTitle">
+          CATEGORIES
+        </div>
+
+        <div
+          id="categoryCount"
+          class="statValue"
+        >
+          0
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         FIREBASE STATUS
+    ========================= -->
+
+    <div
+      id="firebaseStatus"
+      class="firebaseStatus"
+    >
+      Connecting to Firebase...
+    </div>
+
+
+    <!-- =========================
+         TOOLBAR
+    ========================= -->
+
+    <div class="toolbar">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search by code, product name or category..."
+        oninput="renderProducts()"
+      >
+
+
+      <select
+        id="stockFilter"
+        onchange="renderProducts()"
+      >
+
+        <option value="ALL">
+          All Status
+        </option>
+
+        <option value="In Stock">
+          In Stock
+        </option>
+
+        <option value="Coming Soon">
+          Coming Soon
+        </option>
+
+        <option value="Out of Stock">
+          Out of Stock
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- =========================
+         PRODUCT LIST
+    ========================= -->
+
+    <div
+      id="productList"
+      class="productList"
+    >
+
+      <div class="loading">
+        Loading products...
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     PRODUCT MODAL
+========================= -->
+
+<div
+  id="productModal"
   class="modal"
 >
 
-  <div class="modal-box">
+  <div class="modalBox">
 
-    <h2 id="modalTitle">
-      Edit Product
-    </h2>
+    <div class="modalHeader">
 
-
-    <div
-      id="masterNotice"
-      class="warning hidden"
-    >
-      🔒 This is an OSS Master Product.
-      Code, Name, Category and Image are locked.
-      Only Stock Status and MOQ can be changed.
-    </div>
-
-
-    <label>
-      Product Code
-    </label>
-
-    <input
-      id="pCode"
-      placeholder="OSS_001"
-    >
-
-
-    <div
-      id="codeLock"
-      class="master-lock hidden"
-    >
-      🔒 Master Product Code Locked
-    </div>
-
-
-    <label>
-      Product Name
-    </label>
-
-    <input
-      id="pName"
-      placeholder="Product Name"
-    >
-
-
-    <label>
-      Category
-    </label>
-
-    <input
-      id="pCategory"
-      placeholder="Category"
-    >
-
-
-    <label>
-      Image Filename / URL
-    </label>
-
-    <input
-      id="pImage"
-      placeholder="OSS_001.jpg or image URL"
-      oninput="previewImage()"
-    >
-
-
-    <img
-      id="imagePreview"
-      class="preview"
-    >
-
-
-    <label>
-      Stock Status
-    </label>
-
-    <select id="pStock">
-
-      <option value="In Stock">
-        In Stock
-      </option>
-
-      <option value="Coming Soon">
-        Coming Soon
-      </option>
-
-      <option value="Out of Stock">
-        Out of Stock
-      </option>
-
-    </select>
-
-
-    <label>
-      MOQ
-    </label>
-
-    <input
-      id="pMOQ"
-      value="₹500 Minimum Order Quantity (MOQ)"
-    >
-
-
-    <div id="saveMessage"></div>
-
-
-    <div class="modal-actions">
+      <h2 id="modalTitle">
+        Add New Product
+      </h2>
 
       <button
-        class="primary"
-        onclick="saveProduct()"
+        class="closeBtn"
+        onclick="closeModal()"
       >
-        SAVE PRODUCT
+        ×
       </button>
 
+    </div>
+
+
+    <div class="modalGrid">
+
+      <!-- CODE -->
+
+      <div class="formGroup">
+
+        <label>
+          Product Code
+        </label>
+
+        <input
+          id="pCode"
+          type="text"
+          placeholder="OSS_039"
+        >
+
+      </div>
+
+
+      <!-- STATUS -->
+
+      <div class="formGroup">
+
+        <label>
+          Stock Status
+        </label>
+
+        <select id="pStatus">
+
+          <option value="In Stock">
+            In Stock
+          </option>
+
+          <option value="Coming Soon">
+            Coming Soon
+          </option>
+
+          <option value="Out of Stock">
+            Out of Stock
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- NAME -->
+
+      <div class="formGroup full">
+
+        <label>
+          Product Name
+        </label>
+
+        <input
+          id="pName"
+          type="text"
+          placeholder="Product Name"
+        >
+
+      </div>
+
+
+      <!-- CATEGORY -->
+
+      <div class="formGroup full">
+
+        <label>
+          Category
+        </label>
+
+        <input
+          id="pCategory"
+          type="text"
+          placeholder="Category"
+        >
+
+      </div>
+
+
+      <!-- IMAGE -->
+
+      <div class="formGroup full">
+
+        <label>
+          Image
+        </label>
+
+        <input
+          id="pImage"
+          type="text"
+          placeholder="OSS_039.jpg"
+          oninput="previewImage()"
+        >
+
+        <div class="helpText">
+          Example: OSS_039.jpg
+          અથવા કોઈ image path/URL
+        </div>
+
+        <img
+          id="imagePreview"
+          class="imagePreview"
+          alt="Preview"
+        >
+
+      </div>
+
+
+      <!-- MOQ -->
+
+      <div class="formGroup full">
+
+        <label>
+          MOQ
+        </label>
+
+        <input
+          id="pMOQ"
+          type="text"
+          value="₹500 Minimum Order Quantity (MOQ)"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="modalActions">
+
       <button
-        class="red"
+        class="cancelBtn"
         onclick="closeModal()"
       >
         CANCEL
       </button>
 
+      <button
+        class="saveBtn"
+        onclick="saveProduct()"
+      >
+        SAVE PRODUCT
+      </button>
+
     </div>
 
   </div>
 
 </div>
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 
 
 <script>
@@ -824,7 +1088,6 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-
 const auth =
   firebase.auth();
 
@@ -841,35 +1104,7 @@ const ADMIN_UID =
 
 
 /* =========================================
-   MASTER PRODUCT RANGE
-========================================= */
-
-const MASTER_START = 1;
-const MASTER_END = 38;
-
-
-function isMasterProduct(code){
-
-  const match =
-    String(code || "")
-      .toUpperCase()
-      .match(/^OSS_(\d+)$/);
-
-  if(!match) return false;
-
-  const number =
-    parseInt(match[1],10);
-
-  return (
-    number >= MASTER_START &&
-    number <= MASTER_END
-  );
-
-}
-
-
-/* =========================================
-   VARIABLES
+   GLOBAL DATA
 ========================================= */
 
 let products = [];
@@ -878,98 +1113,103 @@ let editingId = null;
 
 let isAdding = false;
 
-let editingMaster = false;
+let unsubscribeProducts = null;
 
 
 /* =========================================
-   AUTH
+   LOGIN STATE
 ========================================= */
 
-auth.onAuthStateChanged(function(user){
+auth.onAuthStateChanged(
+  async user => {
 
-  if(user){
-
-    if(user.uid !== ADMIN_UID){
+    if(
+      user &&
+      user.uid === ADMIN_UID
+    ){
 
       document
-        .getElementById("loginError")
-        .textContent =
-        "This account is not authorized.";
+        .getElementById("loginPage")
+        .classList.add("hidden");
 
-      auth.signOut();
+      document
+        .getElementById("adminPage")
+        .classList.remove("hidden");
 
-      return;
+      startFirebase();
+
+    }else{
+
+      document
+        .getElementById("loginPage")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("adminPage")
+        .classList.add("hidden");
+
+      if(unsubscribeProducts){
+
+        unsubscribeProducts();
+
+        unsubscribeProducts = null;
+
+      }
+
     }
 
-
-    document
-      .getElementById("loginPage")
-      .classList.add("hidden");
-
-
-    document
-      .getElementById("adminPage")
-      .classList.remove("hidden");
-
-
-    startFirebase();
-
   }
-
-  else{
-
-    document
-      .getElementById("loginPage")
-      .classList.remove("hidden");
-
-
-    document
-      .getElementById("adminPage")
-      .classList.add("hidden");
-
-  }
-
-});
+);
 
 
 /* =========================================
    LOGIN
 ========================================= */
 
-function login(){
+async function login(){
 
   const email =
     document
-      .getElementById("email")
+      .getElementById("loginEmail")
       .value
       .trim();
 
-
   const password =
     document
-      .getElementById("password")
+      .getElementById("loginPassword")
       .value;
 
+  const errorBox =
+    document
+      .getElementById("loginError");
 
-  document
-    .getElementById("loginError")
-    .textContent =
-    "Logging in...";
+  errorBox.textContent = "";
 
+  if(!email || !password){
 
-  auth
-    .signInWithEmailAndPassword(
+    errorBox.textContent =
+      "Please enter email and password.";
+
+    return;
+
+  }
+
+  try{
+
+    await auth.signInWithEmailAndPassword(
       email,
       password
-    )
-    .catch(function(error){
+    );
 
-      document
-        .getElementById("loginError")
-        .textContent =
-        error.message;
+  }catch(error){
 
-    });
+    console.error(error);
+
+    errorBox.textContent =
+      error.message ||
+      "Login failed.";
+
+  }
 
 }
 
@@ -978,474 +1218,193 @@ function login(){
    LOGOUT
 ========================================= */
 
-function logout(){
+async function logout(){
 
-  auth.signOut();
+  try{
+
+    await auth.signOut();
+
+  }catch(error){
+
+    console.error(error);
+
+  }
 
 }
 
 
 /* =========================================
-   FIREBASE LIVE DATA
+   FIREBASE LISTENER
 ========================================= */
 
 function startFirebase(){
 
-  document
-    .getElementById("firebaseStatus")
-    .textContent =
-    "Connected — Live";
+  const status =
+    document
+      .getElementById("firebaseStatus");
+
+  status.textContent =
+    "Connecting to Firebase...";
+
+  status.className =
+    "firebaseStatus";
 
 
-  db.collection("products")
-    .onSnapshot(
+  if(unsubscribeProducts){
 
-      function(snapshot){
+    unsubscribeProducts();
 
-        products = [];
-
-
-        snapshot.forEach(function(doc){
-
-          products.push({
-
-            id: doc.id,
-
-            ...doc.data()
-
-          });
-
-        });
+  }
 
 
-        products.sort(function(a,b){
+  unsubscribeProducts =
+    db
+      .collection("products")
+      .onSnapshot(
 
-          return compareCodes(
-            a.code || a.id,
-            b.code || b.id
+        snapshot => {
+
+          products = [];
+
+          snapshot.forEach(
+            doc => {
+
+              const data =
+                doc.data() || {};
+
+              products.push({
+
+                id: doc.id,
+
+                code:
+                  data.code ||
+                  doc.id,
+
+                name:
+                  data.name ||
+                  "",
+
+                category:
+                  data.category ||
+                  "",
+
+                image:
+                  data.image ||
+                  "",
+
+                status:
+                  data.status ||
+                  data.stock ||
+                  "In Stock",
+
+                moq:
+                  data.moq ||
+                  "₹500 Minimum Order Quantity (MOQ)"
+
+              });
+
+            }
           );
 
-        });
+
+          products.sort(
+            (a,b) =>
+              naturalCodeSort(
+                a.code,
+                b.code
+              )
+          );
 
 
-        renderProducts();
+          status.textContent =
+            "● Firebase Connected — Live";
 
-        updateStats();
-
-
-        document
-          .getElementById("firebaseStatus")
-          .textContent =
-          "Connected — Live";
-
-      },
+          status.className =
+            "firebaseStatus statusOnline";
 
 
-      function(error){
+          updateStats();
 
-        document
-          .getElementById("firebaseStatus")
-          .textContent =
-          "Connection Error";
+          renderProducts();
 
-        console.error(error);
+        },
 
-      }
+        error => {
 
-    );
+          console.error(error);
+
+          status.textContent =
+            "● Firebase Error: " +
+            error.message;
+
+          status.className =
+            "firebaseStatus statusOffline";
+
+        }
+
+      );
 
 }
 
 
 /* =========================================
-   SORT
+   CODE SORT
 ========================================= */
 
-function compareCodes(a,b){
+function naturalCodeSort(a,b){
+
+  const aa =
+    String(a || "")
+      .toUpperCase();
+
+  const bb =
+    String(b || "")
+      .toUpperCase();
 
   const na =
     parseInt(
-      String(a).replace(/\D/g,"")
-    ) || 999999;
-
+      aa.replace(/\D/g,""),
+      10
+    );
 
   const nb =
     parseInt(
-      String(b).replace(/\D/g,"")
-    ) || 999999;
-
-
-  return na - nb;
-
-}
-
-
-/* =========================================
-   IMAGE PATH
-========================================= */
-
-function getImagePath(image, code){
-
-  let value =
-    String(image || "").trim();
-
-
-  if(!value && code){
-
-    value =
-      String(code) + ".jpg";
-
-  }
-
+      bb.replace(/\D/g,""),
+      10
+    );
 
   if(
-    value &&
-    !/^https?:\/\//i.test(value) &&
-    !value.startsWith("/") &&
-    !value.startsWith("./")
+    !Number.isNaN(na) &&
+    !Number.isNaN(nb)
   ){
 
-    value =
-      value
-        .replace(/^assets\//i,"");
+    return na - nb;
 
   }
 
-
-  return value;
+  return aa.localeCompare(bb);
 
 }
 
 
 /* =========================================
-   RENDER PRODUCTS
+   ESCAPE HTML
 ========================================= */
 
-function renderProducts(){
-
-  const list =
-    document
-      .getElementById("productList");
-
-
-  const search =
-    document
-      .getElementById("search")
-      .value
-      .toLowerCase()
-      .trim();
-
-
-  const filter =
-    document
-      .getElementById("filterStock")
-      .value;
-
-
-  list.innerHTML = "";
-
-
-  let filtered =
-    products.filter(function(p){
-
-      const text =
-        (
-          (p.code || "") +
-          " " +
-          (p.name || "") +
-          " " +
-          (p.category || "")
-        ).toLowerCase();
-
-
-      const matchSearch =
-        !search ||
-        text.includes(search);
-
-
-      const stock =
-        p.stock ||
-        p.status ||
-        "In Stock";
-
-
-      const matchStock =
-        filter === "ALL" ||
-        stock === filter;
-
-
-      return (
-        matchSearch &&
-        matchStock
-      );
-
-    });
-
-
-  if(filtered.length === 0){
-
-    list.innerHTML =
-      "<p>No products found.</p>";
-
-    return;
-
-  }
-
-
-  filtered.forEach(function(p){
-
-    const stock =
-      p.stock ||
-      p.status ||
-      "In Stock";
-
-
-    const master =
-      isMasterProduct(
-        p.code || p.id
-      );
-
-
-    let badgeClass =
-      "in";
-
-
-    if(stock === "Coming Soon")
-      badgeClass = "coming";
-
-
-    if(stock === "Out of Stock")
-      badgeClass = "out";
-
-
-    const div =
-      document.createElement("div");
-
-
-    div.className =
-      master
-        ? "product master"
-        : "product new-product";
-
-
-    const image =
-      getImagePath(
-        p.image,
-        p.code || p.id
-      );
-
-
-    div.innerHTML = `
-
-      <div class="product-top">
-
-        <img
-          class="product-img"
-          src="${escapeAttr(image)}"
-          onerror="this.src='538820.jpg';"
-        >
-
-        <div class="product-info">
-
-          ${
-            master
-              ? `<span class="master-label">
-                   🔒 MASTER PRODUCT
-                 </span>`
-              : `<span class="new-label">
-                   NEW PRODUCT
-                 </span>`
-          }
-
-          <h3>
-            ${escapeHTML(
-              p.name ||
-              "Unnamed Product"
-            )}
-          </h3>
-
-          <p>
-            <b>Code:</b>
-            ${escapeHTML(
-              p.code ||
-              p.id
-            )}
-          </p>
-
-          <p>
-            <b>Category:</b>
-            ${escapeHTML(
-              p.category ||
-              "-"
-            )}
-          </p>
-
-          <p>
-            <b>MOQ:</b>
-            ${escapeHTML(
-              p.moq ||
-              "₹500 Minimum Order Quantity (MOQ)"
-            )}
-          </p>
-
-          <span class="badge ${badgeClass}">
-            ${escapeHTML(stock)}
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <div class="actions">
-
-        <button
-          class="edit"
-          onclick="openEdit('${escapeAttr(p.id)}')"
-        >
-          EDIT
-        </button>
-
-
-        ${
-          master
-            ? ""
-            : `
-              <button
-                class="delete"
-                onclick="deleteProduct('${escapeAttr(p.id)}')"
-              >
-                DELETE
-              </button>
-            `
-        }
-
-      </div>
-
-    `;
-
-
-    list.appendChild(div);
-
-  });
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
 /* =========================================
-   STATS
+   ESCAPE JS ATTRIBUTE
 ========================================= */
 
-function updateStats(){
-
-  let inStock = 0;
-
-  let coming = 0;
-
-  let out = 0;
-
-
-  products.forEach(function(p){
-
-    const stock =
-      p.stock ||
-      p.status ||
-      "In Stock";
-
-
-    if(stock === "In Stock")
-      inStock++;
-
-
-    if(stock === "Coming Soon")
-      coming++;
-
-
-    if(stock === "Out of Stock")
-      out++;
-
-  });
-
-
-  document
-    .getElementById("totalCount")
-    .textContent =
-    products.length;
-
-
-  document
-    .getElementById("inStockCount")
-    .textContent =
-    inStock;
-
-
-  document
-    .getElementById("comingCount")
-    .textContent =
-    coming;
-
-
-  document
-    .getElementById("outCount")
-    .textContent =
-    out;
-
-}
-
-
-/* =========================================
-   ADD NEW PRODUCT
-========================================= */
-
-function openAdd(){
-
-  isAdding = true;
-
-  editingId = null;
-
-  editingMaster = false;
-
-
-  document
-    .getElementById("modalTitle")
-    .textContent =
-    "Add New Product";
-
-
-  setMasterFields(false);
-
-
-  document
-    .getElementById("pCode")
-    .value = "";
-
-
-  document
-    .getElementById("pName")
-    .value = "";
-
-
-  document
-    .getElementById("pCategory")
-    .value = "";
-
-
-  document
-    .getElementById("pImage")
-    .value = "";
-
-
-  document
-    .getElementById("pStock")
-    .value =
-    "In Stock";
-
-
-  document
-    .getElementById("pMOQ")
-    .value =
-    "₹500 Minimum Order Quantity (MOQ)";
-
-
-  document
-    .getEle
+function escapeAttr(v
